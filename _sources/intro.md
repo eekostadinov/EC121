@@ -1,4 +1,7 @@
-Welcome to EC121's ebook on numerical methods
+Welcome to EC121's lecture notes on numerical methods with R
 ============================
 
-This is a small e-book covering the material on numerical analysis for EC121. 
+This is a small e-book on numerical methods using R. 
+
+The covered topics are
+
