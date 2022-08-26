@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Basics of R &#8212; Numerical methods for EC121</title>
+    <title>1. Basics of R &#8212; Numerical methods for EC121</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -20,8 +20,8 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -29,22 +29,25 @@
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
@@ -52,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Plotting in R" href="ch2RPlotting.html" />
+    <link rel="next" title="2. Plotting in R" href="ch2RPlotting.html" />
     <link rel="prev" title="Welcome to EC121’s lecture notes on numerical methods with R" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -116,12 +119,12 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Basics of R
+   1. Basics of R
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch2RPlotting.html">
-   Plotting in R
+   2. Plotting in R
   </a>
  </li>
 </ul>
@@ -183,7 +186,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ch1Rbasics.ipynb"
+        <a href="https://mybinder.org/v2/gh/eekostadinov/EC121/master?urlpath=tree/ch1Rbasics.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -217,6 +220,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/eekostadinov/EC121"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/eekostadinov/EC121/issues/new?title=Issue%20on%20page%20%2Fch1Rbasics.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -287,17 +335,17 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-r-as-a-calculator">
-   Using R as a calculator
+   1.1. Using R as a calculator
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#assigning-values-to-variables">
-   Assigning values to variables
+   1.2. Assigning values to variables
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-vectors">
-   Creating vectors
+   1.3. Creating vectors
   </a>
  </li>
 </ul>
@@ -321,17 +369,17 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-r-as-a-calculator">
-   Using R as a calculator
+   1.1. Using R as a calculator
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#assigning-values-to-variables">
-   Assigning values to variables
+   1.2. Assigning values to variables
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#creating-vectors">
-   Creating vectors
+   1.3. Creating vectors
   </a>
  </li>
 </ul>
@@ -344,10 +392,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="basics-of-r">
-<h1>Basics of R<a class="headerlink" href="#basics-of-r" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="basics-of-r">
+<h1><span class="section-number">1. </span>Basics of R<a class="headerlink" href="#basics-of-r" title="Permalink to this headline">#</a></h1>
 <section id="using-r-as-a-calculator">
-<h2>Using R as a calculator<a class="headerlink" href="#using-r-as-a-calculator" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Using R as a calculator<a class="headerlink" href="#using-r-as-a-calculator" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">1+3</span>
@@ -395,7 +443,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="assigning-values-to-variables">
-<h2>Assigning values to variables<a class="headerlink" href="#assigning-values-to-variables" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Assigning values to variables<a class="headerlink" href="#assigning-values-to-variables" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="m">3</span>
@@ -430,7 +478,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="creating-vectors">
-<h2>Creating vectors<a class="headerlink" href="#creating-vectors" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Creating vectors<a class="headerlink" href="#creating-vectors" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
@@ -604,7 +652,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="ch2RPlotting.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Plotting in R</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Plotting in R</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -617,7 +665,7 @@ title="Print to PDF"
   
     By Emil Kostadinov<br/>
   
-      &copy; Copyright 2020.<br/>
+      &copy; Copyright 2022.<br/>
 </p>
         </footer>
     </div>

@@ -1,0 +1,1797 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Plotting in R &#8212; Numerical methods for EC121</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Plotting in R" href="ch2RPlotting.html" />
+    <link rel="prev" title="Welcome to EC121’s lecture notes on numerical methods with R" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical methods for EC121</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to EC121’s lecture notes on numerical methods with R
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Plotting in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch2RPlotting.html">
+   Plotting in R
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/ch1RPlotting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fch1RPlotting.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch1RPlotting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-basics-of-plotting-in-r">
+   The basics of plotting in R
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-plot-function">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       plot()
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-point">
+     Plotting a point
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-set-of-points">
+     Plotting a set of points
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-function-of-one-variable">
+     Plotting a function of one variable
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-1">
+       Step 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-2">
+       Step 2
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-3">
+       Step 3
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-a-cubic-function">
+       Example: A cubic function
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customizing-the-look-of-a-simple-graph">
+   Customizing the look of a simple graph
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-optional-arguments">
+     Using optional arguments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-latex-text">
+     Using LaTeX text
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-additional-plots-to-the-same-graph">
+     Adding additional plots to the same graph
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-a-grid">
+       Adding a grid
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-several-functions-on-the-same-graph">
+       Plotting several functions on the same graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-a-legend">
+       Adding a legend
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-additional-points-to-the-graph">
+       Adding additional points to the graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-text-annotations-to-a-graph">
+       Adding text annotations to a graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-vertical-and-horizontal-lines-to-your-plots">
+       Adding vertical and horizontal lines to your plots
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#customizing-the-axes">
+       Customizing the axes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-multiple-graphs-into-a-single-figure">
+     Combining multiple graphs into a single figure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-examples">
+   Additional examples
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Plotting in R</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-basics-of-plotting-in-r">
+   The basics of plotting in R
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-plot-function">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       plot()
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-point">
+     Plotting a point
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-set-of-points">
+     Plotting a set of points
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plotting-a-function-of-one-variable">
+     Plotting a function of one variable
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-1">
+       Step 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-2">
+       Step 2
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-3">
+       Step 3
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-a-cubic-function">
+       Example: A cubic function
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customizing-the-look-of-a-simple-graph">
+   Customizing the look of a simple graph
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-optional-arguments">
+     Using optional arguments
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-latex-text">
+     Using LaTeX text
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-additional-plots-to-the-same-graph">
+     Adding additional plots to the same graph
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-a-grid">
+       Adding a grid
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#plotting-several-functions-on-the-same-graph">
+       Plotting several functions on the same graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-a-legend">
+       Adding a legend
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-additional-points-to-the-graph">
+       Adding additional points to the graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-text-annotations-to-a-graph">
+       Adding text annotations to a graph
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adding-vertical-and-horizontal-lines-to-your-plots">
+       Adding vertical and horizontal lines to your plots
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#customizing-the-axes">
+       Customizing the axes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-multiple-graphs-into-a-single-figure">
+     Combining multiple graphs into a single figure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-examples">
+   Additional examples
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-in-r">
+<h1>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this headline">#</a></h1>
+<p>This notebook is a quick guide to plotting univariate functions in R. All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
+<p>It is intended that you go through the notebook by reading through the discussion and reproducing all codes in your own R/RStudio installation. For this</p>
+<ul class="simple">
+<li><p>just copy the sections of code from the notebook to your R script and run them there <strong>line by line</strong></p></li>
+<li><p>or run the code in the provided RStudio script <strong>line by line</strong></p></li>
+</ul>
+<p>Following the discussion you should be able to plot any simple univariate function and customise your graph to look as intended.</p>
+<p>You may find it useful to refer to the official documentation of the R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package <a class="reference external" href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2">here</a>. In addition, you can always access R’s documentation regarding any particular function by typing <code class="docutils literal notranslate"><span class="pre">?</span></code> followed by the name of the function in the R command prompt. For example, <code class="docutils literal notranslate"><span class="pre">?plot</span></code> will return the documentation for the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function.</p>
+<section id="the-basics-of-plotting-in-r">
+<h2>The basics of plotting in R<a class="headerlink" href="#the-basics-of-plotting-in-r" title="Permalink to this headline">#</a></h2>
+<section id="the-plot-function">
+<h3>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function<a class="headerlink" href="#the-plot-function" title="Permalink to this headline">#</a></h3>
+<p>The most generic (but powerful) function for plotting in R is the function <code class="docutils literal notranslate"><span class="pre">plot()</span></code> which is invoked by typing</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(x,y,...)</span></code></p>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> is an <span class="math notranslate nohighlight">\(x\)</span>-coordinate (or a vector of <span class="math notranslate nohighlight">\(x\)</span>-coordinates)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> is the corresponding <span class="math notranslate nohighlight">\(y\)</span>-coordinate (or corresponding vector of <span class="math notranslate nohighlight">\(y\)</span>-coordinates)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> are additional <strong>optional</strong> arguments, discussed below.</p></li>
+</ul>
+</section>
+<section id="plotting-a-point">
+<h3>Plotting a point<a class="headerlink" href="#plotting-a-point" title="Permalink to this headline">#</a></h3>
+<p>We start with something very simple - plotting a point.</p>
+<p>To plot a point simply type</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the x-coordinate and <code class="docutils literal notranslate"><span class="pre">y</span></code> the y-coordinate of the point.</p>
+<p>For example to plot the point <span class="math notranslate nohighlight">\(x=1,y=3\)</span> simply type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_5_0.png" src="_images/ch1RPlotting_5_0.png" />
+</div>
+</div>
+<p>Notice that when <code class="docutils literal notranslate"><span class="pre">plot()</span></code> is called (without certain optional arguments)</p>
+<ul class="simple">
+<li><p>it automatically decides on a <em>plot region</em> which it finds appropriate for the plot. In this case (of a very basic and uninformative graph) the plotting region is set to be <span class="math notranslate nohighlight">\(x\)</span> from 0.6 to 1.4 and <span class="math notranslate nohighlight">\(y\)</span> from 2 to 4.</p>
+<ul>
+<li><p>the plotting region, however, can be set manually with the optional arguments <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code>.</p></li>
+<li><p>For example, <code class="docutils literal notranslate"><span class="pre">xlim=c(0,3)</span></code> will set the x limits of the plotting region to 0 (left) and 3 (right)</p></li>
+</ul>
+</li>
+<li><p>it assigns axes labels automatically based on the “names” with which the x and y argument were given. In the above example these were 1 and 2 correspondingly, and this is also how the axes are labeled.</p>
+<ul>
+<li><p>the axes labels, however, can be set manually with the optional arguments <code class="docutils literal notranslate"><span class="pre">xlab</span></code> and <code class="docutils literal notranslate"><span class="pre">ylab</span></code> which take strings as values.</p></li>
+<li><p>For example, by passing <code class="docutils literal notranslate"><span class="pre">xlab=&quot;x&quot;</span></code> as optional argument to <code class="docutils literal notranslate"><span class="pre">plot()</span></code> the new x label will be x</p></li>
+</ul>
+</li>
+<li><p>it encloses the graph in a box</p>
+<ul>
+<li><p>the box can be removed by passing <code class="docutils literal notranslate"><span class="pre">frame=FALSE</span></code></p></li>
+</ul>
+</li>
+<li><p>the graph (naturally) appears without a title</p>
+<ul>
+<li><p>a title can be set by using <code class="docutils literal notranslate"><span class="pre">main=&quot;some</span> <span class="pre">text</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">title&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p>it plots the point in black.</p>
+<ul>
+<li><p>the color of the plotted object can be set with the argument <code class="docutils literal notranslate"><span class="pre">col</span></code> and can be assigned either by using the “name” of the color as a string (e.g. <code class="docutils literal notranslate"><span class="pre">col=&quot;blue&quot;</span></code>) or the “number” of the color (e.g. <code class="docutils literal notranslate"><span class="pre">col=2</span></code> which turns out to correspond to red)</p></li>
+</ul>
+</li>
+<li><p>other optional arguments can be used to set the size of the point (<code class="docutils literal notranslate"><span class="pre">cex</span></code>), shape of point (<code class="docutils literal notranslate"><span class="pre">pch</span></code>), etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">main</span><span class="o">=</span><span class="s">&quot;Plot of a point&quot;</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">6</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>
+     <span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">,</span>
+     <span class="n">pch</span> <span class="o">=</span> <span class="m">17</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_7_0.png" src="_images/ch1RPlotting_7_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">main</span><span class="o">=</span><span class="s">&quot;Plot of a point&quot;</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">6</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
+     <span class="n">cex</span><span class="o">=</span><span class="m">1</span><span class="p">,</span>
+     <span class="n">pch</span> <span class="o">=</span> <span class="m">19</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_8_0.png" src="_images/ch1RPlotting_8_0.png" />
+</div>
+</div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Create the plot below in your RStudio by setting appropriately <code class="docutils literal notranslate"><span class="pre">main</span></code>,<code class="docutils literal notranslate"><span class="pre">xlim</span></code>, <code class="docutils literal notranslate"><span class="pre">ylim</span></code>,<code class="docutils literal notranslate"><span class="pre">xlab</span></code>,<code class="docutils literal notranslate"><span class="pre">ylab</span></code>,<code class="docutils literal notranslate"><span class="pre">col</span></code> and <code class="docutils literal notranslate"><span class="pre">pch</span></code>.</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_10_0.png" src="_images/ch1RPlotting_10_0.png" />
+</div>
+</div>
+<div class="dropdown hint admonition">
+<p class="admonition-title">Solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span> 
+     <span class="n">main</span><span class="o">=</span><span class="s2">&quot;Plot of a point&quot;</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> 
+     <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;x-axis&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">&quot;y-axis&quot;</span><span class="p">,</span>
+     <span class="n">col</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+     <span class="n">pch</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="plotting-a-set-of-points">
+<h3>Plotting a set of points<a class="headerlink" href="#plotting-a-set-of-points" title="Permalink to this headline">#</a></h3>
+<p>We continue with a small step forward - plotting a set of points.</p>
+<p>To plot a set of points instead we again need to type</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code></p>
+<p>but now we need</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> to be a <strong>vector</strong> of x-coordinates; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> to be a <strong>vector</strong> of the corresponding y-coordinates</p></li>
+<li><p><strong>Note</strong>: the vectors <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>should be of the same length (have the same number of elements)</p></li>
+</ul>
+<p>Also recall that a vector of specified numbers <span class="math notranslate nohighlight">\([x_1,x_2,...,x_n]\)</span> can be created in R by typing <code class="docutils literal notranslate"><span class="pre">c(x_1,x_2,...,x_n)</span></code>.</p>
+<p>For example, o plot the four points <span class="math notranslate nohighlight">\((x=2,y=3)\)</span>, <span class="math notranslate nohighlight">\((x=4,y=7)\)</span>, <span class="math notranslate nohighlight">\((x=6,y=6)\)</span>, <span class="math notranslate nohighlight">\((x=8,y=10)\)</span> simply type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">8</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_13_0.png" src="_images/ch1RPlotting_13_0.png" />
+</div>
+</div>
+<p>We can again customize the look of the plot by using optional arguments.</p>
+<p>The arguments like <code class="docutils literal notranslate"><span class="pre">col</span></code>, <code class="docutils literal notranslate"><span class="pre">pch</span></code>, <code class="docutils literal notranslate"><span class="pre">cex</span></code> discussed before work here as well, however, note that they can be used in two different ways</p>
+<ul>
+<li><p>As before, they can be called with a single (scalar) value than the property is assigned to all points.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">plot(c(2,4,6,8),c(3,7,6,10),</span> <span class="pre">col=&quot;red&quot;)</span></code> will produce a plot as the above where all points are red.</p>
+</li>
+<li><p>However, now they can be called with a vector of values, in which case the different properties from this vector are assigned sequentially to the distinct points</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">plot(c(2,4,6,8),c(3,7,6,10),</span> <span class="pre">col=c(&quot;red&quot;,</span> <span class="pre">&quot;blue&quot;,</span> <span class="pre">&quot;green&quot;,</span> <span class="pre">&quot;magenta&quot;))</span></code> will produce a plot with four points of different colours.</p>
+</li>
+</ul>
+<p>See the examples below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">8</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+     <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of points&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_15_0.png" src="_images/ch1RPlotting_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">8</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> 
+     <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+     <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of points&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_16_0.png" src="_images/ch1RPlotting_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">8</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> 
+     <span class="n">col</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> 
+     <span class="n">pch</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> 
+     <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">12</span><span class="p">),</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span> 
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+     <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of points&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_17_0.png" src="_images/ch1RPlotting_17_0.png" />
+</div>
+</div>
+</section>
+<section id="plotting-a-function-of-one-variable">
+<h3>Plotting a function of one variable<a class="headerlink" href="#plotting-a-function-of-one-variable" title="Permalink to this headline">#</a></h3>
+<p>Once we know how to plot individual points, we are conceptually ready to extend the idea to the context of graphs of functions. This turns out to be very easy in R and conceptually very similar to plotting points.</p>
+<p>The idea is as follows:</p>
+<section id="step-1">
+<h4>Step 1<a class="headerlink" href="#step-1" title="Permalink to this headline">#</a></h4>
+<p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of <strong>evenly spaced</strong> x coordinates over the domain on which you want to plot.</p>
+<p>For example, to plot <span class="math notranslate nohighlight">\(y=5x+4\)</span> over the domain <span class="math notranslate nohighlight">\(x\in[-5,5]\)</span>, first define the x coordinates as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="m">-5</span><span class="o">:</span><span class="m">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2">
+<h4>Step 2<a class="headerlink" href="#step-2" title="Permalink to this headline">#</a></h4>
+<p>Define a vector, <code class="docutils literal notranslate"><span class="pre">y</span></code>, of the corresponding y coordinates.</p>
+<p>For example, given <span class="math notranslate nohighlight">\(y=5x+4\)</span> and the already defined vector <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">&lt;-</span> <span class="m">5</span><span class="o">*</span><span class="n">x</span><span class="m">+4</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3">
+<h4>Step 3<a class="headerlink" href="#step-3" title="Permalink to this headline">#</a></h4>
+<p>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>, using the optional argument <code class="docutils literal notranslate"><span class="pre">type</span></code> and setting it to <code class="docutils literal notranslate"><span class="pre">l</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type=&quot;l&quot;)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_24_0.png" src="_images/ch1RPlotting_24_0.png" />
+</div>
+</div>
+<p>And this is it.</p>
+<p>This procedure works for every univariate function defined through expression that you might want to plot.</p>
+<p>Note that if we had not set the <code class="docutils literal notranslate"><span class="pre">type</span></code> argument, it would have taken its default value (<code class="docutils literal notranslate"><span class="pre">type=&quot;p&quot;</span></code>) and we would have plotted a set of points on the graph of the function corresponding to the defined coordinates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_26_0.png" src="_images/ch1RPlotting_26_0.png" />
+</div>
+</div>
+<p>Instead, by using <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> R suppresses the plotting of the point circles at the coordinates, but instead draws line segments connecting the coordinates.</p>
+<p>Note that we can also use <code class="docutils literal notranslate"><span class="pre">type=&quot;b&quot;</span></code> for both, which will produce a graph with the points and with the line segments connectiong them,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_29_0.png" src="_images/ch1RPlotting_29_0.png" />
+</div>
+</div>
+<p>We can further customize the way the graph looks but we will return to this later.</p>
+<p>Now instead let’s consider plotting a more interesting function.</p>
+</section>
+<section id="example-a-cubic-function">
+<h4>Example: A cubic function<a class="headerlink" href="#example-a-cubic-function" title="Permalink to this headline">#</a></h4>
+<p>Plot <span class="math notranslate nohighlight">\(y=x^3-4x\)</span> for <span class="math notranslate nohighlight">\(x\in[-3,3]\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the vectors of coordinates as before</span>
+
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="m">-3</span><span class="o">:</span><span class="m">3</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_33_0.png" src="_images/ch1RPlotting_33_0.png" />
+</div>
+</div>
+<p>Notice the problem: when we set <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> what R actually does is draw line segments connecting the points on the graph of the function.</p>
+<p>Previously this was not a problem because the function we plotted was a straight line. In this case, however, the function is non-linear and the graph of the function appear too jumpy.</p>
+<p>The problem can be visualized clearly if we were to plot both the line segments and the points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_35_0.png" src="_images/ch1RPlotting_35_0.png" />
+</div>
+</div>
+<p>The solution is very simple - we need a finer grid for the coordinates (basically, we want the distance between elements of the vector <code class="docutils literal notranslate"><span class="pre">x</span></code> to be smaller).</p>
+<p>This can be achieved by using the <code class="docutils literal notranslate"><span class="pre">seq()</span></code> funcion instead of the colon operator, <code class="docutils literal notranslate"><span class="pre">:</span></code>, and setting the distance between elements in <code class="docutils literal notranslate"><span class="pre">x</span></code> sufficiently small. For example, let’s make the distance between elements only 0.25 instead of 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_38_0.png" src="_images/ch1RPlotting_38_0.png" />
+</div>
+</div>
+<p>And now we have a smooth (to the eye) graph.</p>
+<p>Even though R still plots line segments between the points, the number of points on the graph plotted is sufficiently large that to the eye the graph appears smooth. This can be visualized by plotting both the points and the lines as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_40_0.png" src="_images/ch1RPlotting_40_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At this stage, this might look like cheating. Surely, if we magnify the image sufficiently what we will see is a set of connected straight line segments rather than a proper curve.</p>
+<p>While this is true, this is the case with even the most sophisticated program for computer graphics. In maths we are accustomed with the idea that in any interval there are infinitely many real numbers and therefore if we were to plot “properly” we could have a “perfect” curve and as much as we magnify the image we won’t see segments connecting points.</p>
+<p>However, the notion of “infinitely” many points is not something with which computers can deal with. All computer graphics is based on finite numbers of points and segments.</p>
+</div>
+<p>Enough philosophy. The important point is that in exactly the same way you can plot any univariate function you like.</p>
+</section>
+</section>
+</section>
+<section id="customizing-the-look-of-a-simple-graph">
+<h2>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this headline">#</a></h2>
+<section id="using-optional-arguments">
+<h3>Using optional arguments<a class="headerlink" href="#using-optional-arguments" title="Permalink to this headline">#</a></h3>
+<p>As before we can use optional arguments to customize the appearance of the line plot</p>
+<p>Optional arguments, as before for points, include</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> for setting the plotting region</p>
+<ul>
+<li><p>altough this is usually unnecessary as the default plotting region is especially appropriate for showing the graph of the particular function on the specified domain.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xlab</span></code> and <code class="docutils literal notranslate"><span class="pre">ylab</span></code> for setting the axes labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">col</span></code> for setting the colour of the line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frame</span></code> to enable/disable to box.</p></li>
+</ul>
+<p>When plotting lines/curves as here we can additionally use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lwd</span></code> to set the width of the plotted line. Default is <code class="docutils literal notranslate"><span class="pre">lwd=1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lty</span></code> to set the type of the plotted line.</p>
+<ul>
+<li><p>the default is <code class="docutils literal notranslate"><span class="pre">lty=1</span></code> or equivalently <code class="docutils literal notranslate"><span class="pre">lty=&quot;solid&quot;</span></code>, producing a solid line</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lty=2</span></code> or <code class="docutils literal notranslate"><span class="pre">lty=&quot;dashed&quot;</span></code> produces a dashed line</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lty=3</span></code> or <code class="docutils literal notranslate"><span class="pre">lty=&quot;dotted&quot;</span></code> produces a dotted line</p></li>
+<li><p>etc</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span>
+    <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of a function&quot;</span><span class="p">,</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+    <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span>
+    <span class="n">lty</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s">&quot;magenta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_45_0.png" src="_images/ch1RPlotting_45_0.png" />
+</div>
+</div>
+<p>If we use <code class="docutils literal notranslate"><span class="pre">type=b</span></code> plotting both lines and points, we can also set the graphical properties of the points with the familiar <code class="docutils literal notranslate"><span class="pre">cex</span></code>, <code class="docutils literal notranslate"><span class="pre">pch</span></code>, etc arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span>
+    <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of a function&quot;</span><span class="p">,</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>
+    <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span>
+    <span class="n">lty</span><span class="o">=</span><span class="s">&quot;solid&quot;</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s">&quot;magenta&quot;</span><span class="p">,</span>
+    <span class="n">pch</span><span class="o">=</span><span class="m">3</span><span class="p">,</span>
+    <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_47_0.png" src="_images/ch1RPlotting_47_0.png" />
+</div>
+</div>
+</section>
+<section id="using-latex-text">
+<h3>Using LaTeX text<a class="headerlink" href="#using-latex-text" title="Permalink to this headline">#</a></h3>
+<p>In some cases we would like to add mathematical text to our graphs, e.g. in titles, labels, text annotations, etc.</p>
+<p>However, by default, all text objects under the default functionality of <code class="docutils literal notranslate"><span class="pre">graphics</span></code> are set and visualized as strings.</p>
+<p>For example, if we want to add a title “Plot of x^3-4x” to the graph, the title string will be typeset as below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span>
+    <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Plot of x^3 - 4x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_49_0.png" src="_images/ch1RPlotting_49_0.png" />
+</div>
+</div>
+<p>However, by using the additional R package <code class="docutils literal notranslate"><span class="pre">latex2exp</span></code> we can add mathematical text to our graphs.</p>
+<p>To install and loand the package, type</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;latex2exp&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, to set any text object use the following syntax</p>
+<p><code class="docutils literal notranslate"><span class="pre">TeX(r&quot;(YOUR</span> <span class="pre">TEXT</span> <span class="pre">IN</span> <span class="pre">LATEX)&quot;)</span></code></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">YOUR</span> <span class="pre">TEXT</span> <span class="pre">IN</span> <span class="pre">LATEX</span></code> is anything typed in LaTeX. Note that the string is inclosed in parentheses and brackets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span>
+    <span class="n">main</span> <span class="o">=</span> <span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;(Plot of $x^3 - 4x$)&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_53_0.png" src="_images/ch1RPlotting_53_0.png" />
+</div>
+</div>
+</section>
+<section id="adding-additional-plots-to-the-same-graph">
+<h3>Adding additional plots to the same graph<a class="headerlink" href="#adding-additional-plots-to-the-same-graph" title="Permalink to this headline">#</a></h3>
+<p>Once we have called <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and opened an initial graph we can add additional objects to the graph by additionally calling functions such as</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">points(x,y,...)</span></code> which adds points at the specified (x,y)-coordinates of the initial plot.</p>
+<ul>
+<li><p>all optional arguments related to plotting points from before can be used in the place of <code class="docutils literal notranslate"><span class="pre">...</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lines(x,y,...)</span></code> which adds “lines” (i.e. does the same as <code class="docutils literal notranslate"><span class="pre">plot(x,y,type=&quot;l&quot;)</span></code> but uses the plotting region set by the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text(x,y,text,...)</span></code> which adds text annotations at the specified coordinates, with the specific text annotations set in <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grid()</span></code> to add a grid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis(side,...)</span></code> to add axes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">legend()</span></code> to add legend</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrows(x0,y0,x1,x2,...)</span></code> to add an arrow pointing from (x0,y0) to (x1,y1)</p></li>
+<li><p>etc</p></li>
+</ul>
+<p><strong>Note:</strong> You should keep in mind that the plotting region is set with the call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and does not change when we add additional objects to the plot.</p>
+<section id="adding-a-grid">
+<h4>Adding a grid<a class="headerlink" href="#adding-a-grid" title="Permalink to this headline">#</a></h4>
+<p>For example, we can add a grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_56_0.png" src="_images/ch1RPlotting_56_0.png" />
+</div>
+</div>
+</section>
+<section id="plotting-several-functions-on-the-same-graph">
+<h4>Plotting several functions on the same graph<a class="headerlink" href="#plotting-several-functions-on-the-same-graph" title="Permalink to this headline">#</a></h4>
+<p>It is straightforward to plot more than one functions on the same graph.</p>
+<p>First, given a vector of <code class="docutils literal notranslate"><span class="pre">x</span></code> coordinates, define one new vector of y coordinates for each additional function, say <code class="docutils literal notranslate"><span class="pre">y1</span></code>, <code class="docutils literal notranslate"><span class="pre">y2</span></code>, <code class="docutils literal notranslate"><span class="pre">y3</span></code>, etc.</p>
+<p>Then run <code class="docutils literal notranslate"><span class="pre">plot(x,y1,</span> <span class="pre">type=&quot;l&quot;)</span></code> to plot the first function. This opens a graph and sets the plotting region which remains constant henceforth.</p>
+<p>Now</p>
+<ul class="simple">
+<li><p>add <code class="docutils literal notranslate"><span class="pre">lines(x,y2)</span></code> to add the graph of the second function to the plotting region.</p></li>
+<li><p>add <code class="docutils literal notranslate"><span class="pre">lines(x,y3)</span></code> to add the graph of the third function  to the plotting region.</p></li>
+<li><p>and so forth</p></li>
+</ul>
+<p>The code will look like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y3</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">...</span></code> are optional arguments at each round.</p>
+<p>For example, to plot both <span class="math notranslate nohighlight">\(y=x^3-4x\)</span> and <span class="math notranslate nohighlight">\(y=8x^2+16x\)</span> on the same graph:</p>
+<ol class="simple">
+<li><p>First, create a set of y coordinates for each of the two functions</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+<span class="n">y2</span> <span class="o">&lt;-</span> <span class="m">8</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2+16</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Next type</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span>
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_60_0.png" src="_images/ch1RPlotting_60_0.png" />
+</div>
+</div>
+<p>It is a good idea to plot the different functions with different graphical properties to make it easier to distinguish.</p>
+<p>Say different colors</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_62_0.png" src="_images/ch1RPlotting_62_0.png" />
+</div>
+</div>
+<p>Or different line types</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_64_0.png" src="_images/ch1RPlotting_64_0.png" />
+</div>
+</div>
+<p>Or both</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_66_0.png" src="_images/ch1RPlotting_66_0.png" />
+</div>
+</div>
+<p>Note that the plotting region is defined at the point one calls <code class="docutils literal notranslate"><span class="pre">plot()</span></code>. Therefore, if we use defaults (that is, if we don’t set <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> manually) R will choose a plotting region which is more natural for the function used in <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
+<p>For example, if we first plotted the second function, and then the first, the graph would look like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_68_0.png" src="_images/ch1RPlotting_68_0.png" />
+</div>
+</div>
+</section>
+<section id="adding-a-legend">
+<h4>Adding a legend<a class="headerlink" href="#adding-a-legend" title="Permalink to this headline">#</a></h4>
+<p>When we plot more than one function it makes sense to use a legend to show which curve is which function. This can be achieved by using the function <code class="docutils literal notranslate"><span class="pre">legend()</span></code>.</p>
+<p>The usage is as follows</p>
+<p><code class="docutils literal notranslate"><span class="pre">legend(position,</span> <span class="pre">legend,</span> <span class="pre">properties,...)</span></code></p>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> is</p>
+<ul>
+<li><p>either a pair of x and y coordinate for where the legend to appear</p></li>
+<li><p>or a keyword such as “topleft”, “topright”, “bottomleft”, “top”, etc</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">legend</span></code> (argument) is a vector of labels, one for each item that needs to be labeled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">properties</span></code> include a corresponding list of graphical properties of the items labeled. These should be set to be the same as the actual graphical properties used in plotting.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+     <span class="p">)</span>
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> 
+      <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">legend</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">-10</span><span class="p">,</span> 
+       <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($x^3+2x$)&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($8x^2+3x$)&quot;</span><span class="p">)),</span> 
+       <span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> 
+       <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> 
+       <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_71_0.png" src="_images/ch1RPlotting_71_0.png" />
+</div>
+</div>
+</section>
+<section id="adding-additional-points-to-the-graph">
+<h4>Adding additional points to the graph<a class="headerlink" href="#adding-additional-points-to-the-graph" title="Permalink to this headline">#</a></h4>
+<p>we can add points to the graph by using the <code class="docutils literal notranslate"><span class="pre">points()</span></code> function. It’s usage is the same as the usage of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> in the context of plotting points, above, but the only difference is that now the plot region is defined by the original call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
+<p>For example, we can add points at the intersections of the two curves above which occur at <span class="math notranslate nohighlight">\((x=-2, y=0)\)</span> and <span class="math notranslate nohighlight">\((x=0, y=0)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+     <span class="p">)</span>
+
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> 
+      <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="nf">points</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;magenta&quot;</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_74_0.png" src="_images/ch1RPlotting_74_0.png" />
+</div>
+</div>
+</section>
+<section id="adding-text-annotations-to-a-graph">
+<h4>Adding text annotations to a graph<a class="headerlink" href="#adding-text-annotations-to-a-graph" title="Permalink to this headline">#</a></h4>
+<p>We can use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to add annotation where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the x and y coordinates for the location at which the text annotation is to appear</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> is the text to appear at these coordinates (note it should be included in parenthesis as it is a string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> are optional arguments</p></li>
+</ul>
+<p>An important optional argument is <code class="docutils literal notranslate"><span class="pre">pos</span></code> which determines where the text should appear relative to the specified coordinates.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pos=1</span></code> will make the text appear <em>below</em> the coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos=2</span></code> will make the text appear <em>to the left</em> of the coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos=3</span></code> will make the text appear <em>above</em> the coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pos=4</span></code> will make the text appear <em>to the right</em> of the coordinate</p></li>
+</ul>
+<p>For example, we can add text labels to the right of the two points above by using</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+     <span class="p">)</span>
+
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> 
+      <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="nf">points</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;magenta&quot;</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">)</span>
+
+<span class="nf">text</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="s">&quot;B&quot;</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_76_0.png" src="_images/ch1RPlotting_76_0.png" />
+</div>
+</div>
+</section>
+<section id="adding-vertical-and-horizontal-lines-to-your-plots">
+<h4>Adding vertical and horizontal lines to your plots<a class="headerlink" href="#adding-vertical-and-horizontal-lines-to-your-plots" title="Permalink to this headline">#</a></h4>
+<p>In general, lines can be added to a graph using the <code class="docutils literal notranslate"><span class="pre">abline()</span></code> function.</p>
+<p>To add a horizontal line at some value, c, of y, call <code class="docutils literal notranslate"><span class="pre">abline(h=c)</span></code></p>
+<p>To add a vertical line at some value, d, of x, call <code class="docutils literal notranslate"><span class="pre">abline(h=d)</span></code></p>
+<p>For example, let’s add dashed vertical lines going through the points A and B above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> 
+     <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">,</span>
+     <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span>
+     <span class="p">)</span>
+
+
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> 
+      <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="nf">points</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;magenta&quot;</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">)</span>
+
+<span class="nf">text</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="s">&quot;B&quot;</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="s">&quot;dashed&quot;</span><span class="p">)</span>
+
+<span class="nf">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_78_0.png" src="_images/ch1RPlotting_78_0.png" />
+</div>
+</div>
+<p>This is not necessarily a good use of lines, but the point is to demonstrate what is possible.</p>
+</section>
+<section id="customizing-the-axes">
+<h4>Customizing the axes<a class="headerlink" href="#customizing-the-axes" title="Permalink to this headline">#</a></h4>
+<p>By default axes are plotted at the edges of the plotting region.</p>
+<p>In some cases we might want to have them plotted elsewhere. For example, we might want axes to pass through the origin <span class="math notranslate nohighlight">\((x=0,y=0)\)</span>.</p>
+<p>The way to do this is a bit cumbersome but not too difficult.</p>
+<p>To draw custom axes following the use of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, use the function <code class="docutils literal notranslate"><span class="pre">axis()</span></code> with the following syntax</p>
+<p><code class="docutils literal notranslate"><span class="pre">axis(side,</span> <span class="pre">...)</span></code></p>
+<p>where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">side</span></code> is set to 1 for horizontal and 2 for vertical axis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> are graphical parameters</p></li>
+<li><p>one important graphical parameter is <code class="docutils literal notranslate"><span class="pre">pos</span></code> which determines the “position” of the axis. Set <code class="docutils literal notranslate"><span class="pre">pos=0</span></code> to make axis go through zero.</p></li>
+</ul>
+<p>Let’s start by just adding a new horizontal and vertical axes through zero:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span> 
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_83_0.png" src="_images/ch1RPlotting_83_0.png" />
+</div>
+</div>
+<p>However, this is not what we want, as the original axes remain. To disable them, use option <code class="docutils literal notranslate"><span class="pre">axes=FALSE</span></code> inside the initial <code class="docutils literal notranslate"><span class="pre">plot()</span></code> command</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span> 
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_85_0.png" src="_images/ch1RPlotting_85_0.png" />
+</div>
+</div>
+<p>We may want the tick labels on the vertical axes to be rotated. Use <code class="docutils literal notranslate"><span class="pre">las=2</span></code> argument inside <code class="docutils literal notranslate"><span class="pre">axis(2,...)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span> 
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_87_0.png" src="_images/ch1RPlotting_87_0.png" />
+</div>
+</div>
+<p>Perhaps we don’t want all these ticks. We can disable the ticks by setting their width to zero, and also turn off the labes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lwd.ticks</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> 
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd.ticks</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_89_0.png" src="_images/ch1RPlotting_89_0.png" />
+</div>
+</div>
+<p>Or we can add manual “ticks” (by plotting points) and labels (by using text annotation)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">lwd.ticks</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> 
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lwd.ticks</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> 
+<span class="nf">points</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="n">pch</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="s">&quot;-2&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_91_0.png" src="_images/ch1RPlotting_91_0.png" />
+</div>
+</div>
+<p>In more schematics graphs, axes are often plotted with arrows in the direction of increase.</p>
+<p>We can use the function <code class="docutils literal notranslate"><span class="pre">arrows()</span></code> to plot an arrow. The usage is as follows</p>
+<p><code class="docutils literal notranslate"><span class="pre">arrows(x0,</span> <span class="pre">y0,</span> <span class="pre">x1,</span> <span class="pre">y1)</span></code></p>
+<p>plots a line with an arrow, from the point <span class="math notranslate nohighlight">\((x=x0, y=y0)\)</span> to the point <span class="math notranslate nohighlight">\((x=x1, y=y1)\)</span>.</p>
+<p>Setting these equal to the x-y limits of the plotting region we can get</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">-3</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">-15</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_93_0.png" src="_images/ch1RPlotting_93_0.png" />
+</div>
+</div>
+<p>To reduce the size of the arrows use the argument <code class="docutils literal notranslate"><span class="pre">length</span></code> which sets the length of the arrow head in inches</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">-3</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">-15</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">15</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_95_0.png" src="_images/ch1RPlotting_95_0.png" />
+</div>
+</div>
+<p>We can also “move” the axes labels to the arrows by using text annotation (while also disabling the original labels in the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function by setting them to empty strings)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">-3</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y0</span><span class="o">=</span><span class="m">-15</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="m">0</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="m">15</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">pch</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;-2&quot;</span><span class="p">,</span><span class="s">&quot;2&quot;</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.7</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">15</span><span class="p">,</span><span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_97_0.png" src="_images/ch1RPlotting_97_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="combining-multiple-graphs-into-a-single-figure">
+<h3>Combining multiple graphs into a single figure<a class="headerlink" href="#combining-multiple-graphs-into-a-single-figure" title="Permalink to this headline">#</a></h3>
+<p>We can cobine multiple graphs into a single figure.</p>
+<p>First, tell R that the next figure should be a “plotting matrix” of plots with <code class="docutils literal notranslate"><span class="pre">number_of_rows</span></code> rows and <code class="docutils literal notranslate"><span class="pre">number_of_columns</span></code> columns</p>
+<p><code class="docutils literal notranslate"><span class="pre">par(mfrow=c(number_of_rows,number_of_columns))</span></code></p>
+<p>After this, the next <code class="docutils literal notranslate"><span class="pre">number_of_rows</span></code> x <code class="docutils literal notranslate"><span class="pre">number_of_columns</span></code> times you pass <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, each resulting plot will be placed into this “plotting matrix”.</p>
+<p>For example, to plot a figure with the graph of <span class="math notranslate nohighlight">\(y=x^3-4x\)</span> on the left and <span class="math notranslate nohighlight">\(y=8x^2+16x\)</span> on the right, set</p>
+<p><code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,2))</span></code></p>
+<p>to create a “plotting matrix” of one row and two columns.</p>
+<p>Next call <code class="docutils literal notranslate"><span class="pre">plot()</span></code> two times, once for each plot.</p>
+<p>It is a good idea to finally reset the “plotting matrix” to only plotting a single graph next time by using <code class="docutils literal notranslate"><span class="pre">par(mfrow=c(1,1))</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="m">3</span> <span class="o">-</span> <span class="m">4</span><span class="o">*</span><span class="n">x</span>
+<span class="n">y2</span> <span class="o">&lt;-</span> <span class="m">8</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">2+16</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;Graph of $y=x^3-4x$&quot;</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;Graph of $y=8x^2+16x$&quot;</span><span class="p">),</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_101_0.png" src="_images/ch1RPlotting_101_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="additional-examples">
+<h2>Additional examples<a class="headerlink" href="#additional-examples" title="Permalink to this headline">#</a></h2>
+<p>Below is a list of some more complicated examples without explanation.</p>
+<p>You can reproduce these as an exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">-2</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">&lt;-</span> <span class="m">3</span><span class="o">^</span><span class="n">x</span>
+<span class="n">y2</span> <span class="o">&lt;-</span> <span class="m">2</span><span class="o">^</span><span class="n">x</span>
+<span class="n">y3</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">^</span><span class="n">x</span>
+<span class="n">y4</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y5</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">5</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">5</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">5</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y5</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">6</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">6</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">6</span><span class="p">)</span>
+<span class="nf">grid</span><span class="p">()</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$3^x$&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$2^x$&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$1^x$&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$2^{-x}$&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$3^{-x}$&quot;</span><span class="p">)),</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="m">2</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">2</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="s">&quot;Graphs of exponential functions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_105_0.png" src="_images/ch1RPlotting_105_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="m">-1</span><span class="o">:</span><span class="m">10</span>
+<span class="n">y1</span> <span class="o">&lt;-</span> <span class="m">5</span><span class="o">-</span><span class="n">x</span>
+<span class="n">y2</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="m">-3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">11</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-6</span><span class="p">,</span><span class="m">8</span><span class="p">),</span> <span class="n">lwd</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">-4</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">7</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">at</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">)</span>
+<span class="nf">axis</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">at</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">5</span><span class="p">),</span> <span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">)</span>
+<span class="nf">segments</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">segments</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Legend&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$y=5-x$&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$y=x-3$&quot;</span><span class="p">)),</span><span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">),</span> <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="s">&quot;Graphical solution to a system of two linear equations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_108_0.png" src="_images/ch1RPlotting_108_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="nf">seq</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">-</span> <span class="m">2</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="m">2</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="m">2</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">+</span> <span class="m">2</span>
+<span class="n">y5</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="m">2</span>
+<span class="n">y6</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">-</span> <span class="m">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D=0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D&lt;0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-6</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y5</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-6</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y6</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">-6</span><span class="p">,</span> <span class="m">3</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+<span class="nf">grid</span><span class="p">()</span>
+
+<span class="nf">mtext</span><span class="p">(</span><span class="s">&quot;Graphs of quadratic functions, 1&quot;</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">,</span><span class="n">outer</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_111_0.png" src="_images/ch1RPlotting_111_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D=0$&quot;</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&gt;0$ and $D&lt;0$&quot;</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y5</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y6</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="nf">arrows</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="nf">text</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">title</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="s">&quot;$a&lt;0$ and $D&gt;0$&quot;</span><span class="p">))</span>
+
+<span class="nf">mtext</span><span class="p">(</span><span class="s">&quot;Graphs of quadratic functions, 2&quot;</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="m">1</span><span class="p">,</span><span class="n">line</span><span class="o">=</span><span class="m">-2</span><span class="p">,</span><span class="n">outer</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch1RPlotting_112_0.png" src="_images/ch1RPlotting_112_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Welcome to EC121’s lecture notes on numerical methods with R</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch2RPlotting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plotting in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Emil Kostadinov<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
