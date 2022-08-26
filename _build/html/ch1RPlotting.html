@@ -4,9 +4,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Plotting in R &#8212; Nunmerical methods for EC121</title>
+    <title>Plotting in R &#8212; Numerical methods for EC121</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -20,40 +20,45 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to EC121’s ebook on numerical methods" href="intro.html" />
+    <link rel="next" title="Plotting in R" href="ch2RPlotting.html" />
+    <link rel="prev" title="Welcome to EC121’s lecture notes on numerical methods with R" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,7 +102,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Nunmerical methods for EC121</h1>
+      <h1 class="site-logo" id="site-title">Numerical methods for EC121</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -109,13 +114,18 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to EC121’s ebook on numerical methods
+                    Welcome to EC121’s lecture notes on numerical methods with R
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   Plotting in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch2RPlotting.html">
    Plotting in R
   </a>
  </li>
@@ -602,8 +612,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="plotting-in-r">
-<h1>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-in-r">
+<h1>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this headline">#</a></h1>
 <p>This notebook is a quick guide to plotting univariate functions in R. All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
 <p>It is intended that you go through the notebook by reading through the discussion and reproducing all codes in your own R/RStudio installation. For this</p>
 <ul class="simple">
@@ -613,9 +623,9 @@ title="Print to PDF"
 <p>Following the discussion you should be able to plot any simple univariate function and customise your graph to look as intended.</p>
 <p>You may find it useful to refer to the official documentation of the R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package <a class="reference external" href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2">here</a>. In addition, you can always access R’s documentation regarding any particular function by typing <code class="docutils literal notranslate"><span class="pre">?</span></code> followed by the name of the function in the R command prompt. For example, <code class="docutils literal notranslate"><span class="pre">?plot</span></code> will return the documentation for the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function.</p>
 <section id="the-basics-of-plotting-in-r">
-<h2>The basics of plotting in R<a class="headerlink" href="#the-basics-of-plotting-in-r" title="Permalink to this headline">¶</a></h2>
+<h2>The basics of plotting in R<a class="headerlink" href="#the-basics-of-plotting-in-r" title="Permalink to this headline">#</a></h2>
 <section id="the-plot-function">
-<h3>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function<a class="headerlink" href="#the-plot-function" title="Permalink to this headline">¶</a></h3>
+<h3>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function<a class="headerlink" href="#the-plot-function" title="Permalink to this headline">#</a></h3>
 <p>The most generic (but powerful) function for plotting in R is the function <code class="docutils literal notranslate"><span class="pre">plot()</span></code> which is invoked by typing</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,y,...)</span></code></p>
 <p>where</p>
@@ -626,7 +636,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="plotting-a-point">
-<h3>Plotting a point<a class="headerlink" href="#plotting-a-point" title="Permalink to this headline">¶</a></h3>
+<h3>Plotting a point<a class="headerlink" href="#plotting-a-point" title="Permalink to this headline">#</a></h3>
 <p>We start with something very simple - plotting a point.</p>
 <p>To plot a point simply type</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code></p>
@@ -712,7 +722,7 @@ title="Print to PDF"
 <div class="admonition-exercise admonition">
 <p class="admonition-title">Exercise</p>
 <p>Create the plot below in your RStudio by setting appropriately <code class="docutils literal notranslate"><span class="pre">main</span></code>,<code class="docutils literal notranslate"><span class="pre">xlim</span></code>, <code class="docutils literal notranslate"><span class="pre">ylim</span></code>,<code class="docutils literal notranslate"><span class="pre">xlab</span></code>,<code class="docutils literal notranslate"><span class="pre">ylab</span></code>,<code class="docutils literal notranslate"><span class="pre">col</span></code> and <code class="docutils literal notranslate"><span class="pre">pch</span></code>.</p>
-</aside>
+</div>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="_images/ch1RPlotting_10_0.png" src="_images/ch1RPlotting_10_0.png" />
@@ -730,10 +740,10 @@ title="Print to PDF"
     <span class="p">)</span>
 </pre></div>
 </div>
-</aside>
+</div>
 </section>
 <section id="plotting-a-set-of-points">
-<h3>Plotting a set of points<a class="headerlink" href="#plotting-a-set-of-points" title="Permalink to this headline">¶</a></h3>
+<h3>Plotting a set of points<a class="headerlink" href="#plotting-a-set-of-points" title="Permalink to this headline">#</a></h3>
 <p>We continue with a small step forward - plotting a set of points.</p>
 <p>To plot a set of points instead we again need to type</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code></p>
@@ -819,11 +829,11 @@ title="Print to PDF"
 </div>
 </section>
 <section id="plotting-a-function-of-one-variable">
-<h3>Plotting a function of one variable<a class="headerlink" href="#plotting-a-function-of-one-variable" title="Permalink to this headline">¶</a></h3>
+<h3>Plotting a function of one variable<a class="headerlink" href="#plotting-a-function-of-one-variable" title="Permalink to this headline">#</a></h3>
 <p>Once we know how to plot individual points, we are conceptually ready to extend the idea to the context of graphs of functions. This turns out to be very easy in R and conceptually very similar to plotting points.</p>
 <p>The idea is as follows:</p>
 <section id="step-1">
-<h4>Step 1<a class="headerlink" href="#step-1" title="Permalink to this headline">¶</a></h4>
+<h4>Step 1<a class="headerlink" href="#step-1" title="Permalink to this headline">#</a></h4>
 <p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of <strong>evenly spaced</strong> x coordinates over the domain on which you want to plot.</p>
 <p>For example, to plot <span class="math notranslate nohighlight">\(y=5x+4\)</span> over the domain <span class="math notranslate nohighlight">\(x\in[-5,5]\)</span>, first define the x coordinates as</p>
 <div class="cell docutils container">
@@ -835,7 +845,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="step-2">
-<h4>Step 2<a class="headerlink" href="#step-2" title="Permalink to this headline">¶</a></h4>
+<h4>Step 2<a class="headerlink" href="#step-2" title="Permalink to this headline">#</a></h4>
 <p>Define a vector, <code class="docutils literal notranslate"><span class="pre">y</span></code>, of the corresponding y coordinates.</p>
 <p>For example, given <span class="math notranslate nohighlight">\(y=5x+4\)</span> and the already defined vector <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
 <div class="cell docutils container">
@@ -847,7 +857,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="step-3">
-<h4>Step 3<a class="headerlink" href="#step-3" title="Permalink to this headline">¶</a></h4>
+<h4>Step 3<a class="headerlink" href="#step-3" title="Permalink to this headline">#</a></h4>
 <p>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>, using the optional argument <code class="docutils literal notranslate"><span class="pre">type</span></code> and setting it to <code class="docutils literal notranslate"><span class="pre">l</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type=&quot;l&quot;)</span></code></p>
 <div class="cell docutils container">
@@ -889,7 +899,7 @@ title="Print to PDF"
 <p>Now instead let’s consider plotting a more interesting function.</p>
 </section>
 <section id="example-a-cubic-function">
-<h4>Example: A cubic function<a class="headerlink" href="#example-a-cubic-function" title="Permalink to this headline">¶</a></h4>
+<h4>Example: A cubic function<a class="headerlink" href="#example-a-cubic-function" title="Permalink to this headline">#</a></h4>
 <p>Plot <span class="math notranslate nohighlight">\(y=x^3-4x\)</span> for <span class="math notranslate nohighlight">\(x\in[-3,3]\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -961,15 +971,15 @@ title="Print to PDF"
 <p>At this stage, this might look like cheating. Surely, if we magnify the image sufficiently what we will see is a set of connected straight line segments rather than a proper curve.</p>
 <p>While this is true, this is the case with even the most sophisticated program for computer graphics. In maths we are accustomed with the idea that in any interval there are infinitely many real numbers and therefore if we were to plot “properly” we could have a “perfect” curve and as much as we magnify the image we won’t see segments connecting points.</p>
 <p>However, the notion of “infinitely” many points is not something with which computers can deal with. All computer graphics is based on finite numbers of points and segments.</p>
-</aside>
+</div>
 <p>Enough philosophy. The important point is that in exactly the same way you can plot any univariate function you like.</p>
 </section>
 </section>
 </section>
 <section id="customizing-the-look-of-a-simple-graph">
-<h2>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this headline">¶</a></h2>
+<h2>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this headline">#</a></h2>
 <section id="using-optional-arguments">
-<h3>Using optional arguments<a class="headerlink" href="#using-optional-arguments" title="Permalink to this headline">¶</a></h3>
+<h3>Using optional arguments<a class="headerlink" href="#using-optional-arguments" title="Permalink to this headline">#</a></h3>
 <p>As before we can use optional arguments to customize the appearance of the line plot</p>
 <p>Optional arguments, as before for points, include</p>
 <ul class="simple">
@@ -1037,7 +1047,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="using-latex-text">
-<h3>Using LaTeX text<a class="headerlink" href="#using-latex-text" title="Permalink to this headline">¶</a></h3>
+<h3>Using LaTeX text<a class="headerlink" href="#using-latex-text" title="Permalink to this headline">#</a></h3>
 <p>In some cases we would like to add mathematical text to our graphs, e.g. in titles, labels, text annotations, etc.</p>
 <p>However, by default, all text objects under the default functionality of <code class="docutils literal notranslate"><span class="pre">graphics</span></code> are set and visualized as strings.</p>
 <p>For example, if we want to add a title “Plot of x^3-4x” to the graph, the title string will be typeset as below.</p>
@@ -1079,7 +1089,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="adding-additional-plots-to-the-same-graph">
-<h3>Adding additional plots to the same graph<a class="headerlink" href="#adding-additional-plots-to-the-same-graph" title="Permalink to this headline">¶</a></h3>
+<h3>Adding additional plots to the same graph<a class="headerlink" href="#adding-additional-plots-to-the-same-graph" title="Permalink to this headline">#</a></h3>
 <p>Once we have called <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and opened an initial graph we can add additional objects to the graph by additionally calling functions such as</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">points(x,y,...)</span></code> which adds points at the specified (x,y)-coordinates of the initial plot.</p>
@@ -1097,7 +1107,7 @@ title="Print to PDF"
 </ul>
 <p><strong>Note:</strong> You should keep in mind that the plotting region is set with the call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and does not change when we add additional objects to the plot.</p>
 <section id="adding-a-grid">
-<h4>Adding a grid<a class="headerlink" href="#adding-a-grid" title="Permalink to this headline">¶</a></h4>
+<h4>Adding a grid<a class="headerlink" href="#adding-a-grid" title="Permalink to this headline">#</a></h4>
 <p>For example, we can add a grid.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1112,7 +1122,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="plotting-several-functions-on-the-same-graph">
-<h4>Plotting several functions on the same graph<a class="headerlink" href="#plotting-several-functions-on-the-same-graph" title="Permalink to this headline">¶</a></h4>
+<h4>Plotting several functions on the same graph<a class="headerlink" href="#plotting-several-functions-on-the-same-graph" title="Permalink to this headline">#</a></h4>
 <p>It is straightforward to plot more than one functions on the same graph.</p>
 <p>First, given a vector of <code class="docutils literal notranslate"><span class="pre">x</span></code> coordinates, define one new vector of y coordinates for each additional function, say <code class="docutils literal notranslate"><span class="pre">y1</span></code>, <code class="docutils literal notranslate"><span class="pre">y2</span></code>, <code class="docutils literal notranslate"><span class="pre">y3</span></code>, etc.</p>
 <p>Then run <code class="docutils literal notranslate"><span class="pre">plot(x,y1,</span> <span class="pre">type=&quot;l&quot;)</span></code> to plot the first function. This opens a graph and sets the plotting region which remains constant henceforth.</p>
@@ -1217,7 +1227,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="adding-a-legend">
-<h4>Adding a legend<a class="headerlink" href="#adding-a-legend" title="Permalink to this headline">¶</a></h4>
+<h4>Adding a legend<a class="headerlink" href="#adding-a-legend" title="Permalink to this headline">#</a></h4>
 <p>When we plot more than one function it makes sense to use a legend to show which curve is which function. This can be achieved by using the function <code class="docutils literal notranslate"><span class="pre">legend()</span></code>.</p>
 <p>The usage is as follows</p>
 <p><code class="docutils literal notranslate"><span class="pre">legend(position,</span> <span class="pre">legend,</span> <span class="pre">properties,...)</span></code></p>
@@ -1258,7 +1268,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="adding-additional-points-to-the-graph">
-<h4>Adding additional points to the graph<a class="headerlink" href="#adding-additional-points-to-the-graph" title="Permalink to this headline">¶</a></h4>
+<h4>Adding additional points to the graph<a class="headerlink" href="#adding-additional-points-to-the-graph" title="Permalink to this headline">#</a></h4>
 <p>we can add points to the graph by using the <code class="docutils literal notranslate"><span class="pre">points()</span></code> function. It’s usage is the same as the usage of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> in the context of plotting points, above, but the only difference is that now the plot region is defined by the original call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
 <p>For example, we can add points at the intersections of the two curves above which occur at <span class="math notranslate nohighlight">\((x=-2, y=0)\)</span> and <span class="math notranslate nohighlight">\((x=0, y=0)\)</span></p>
 <div class="cell docutils container">
@@ -1284,7 +1294,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="adding-text-annotations-to-a-graph">
-<h4>Adding text annotations to a graph<a class="headerlink" href="#adding-text-annotations-to-a-graph" title="Permalink to this headline">¶</a></h4>
+<h4>Adding text annotations to a graph<a class="headerlink" href="#adding-text-annotations-to-a-graph" title="Permalink to this headline">#</a></h4>
 <p>We can use</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
@@ -1328,7 +1338,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="adding-vertical-and-horizontal-lines-to-your-plots">
-<h4>Adding vertical and horizontal lines to your plots<a class="headerlink" href="#adding-vertical-and-horizontal-lines-to-your-plots" title="Permalink to this headline">¶</a></h4>
+<h4>Adding vertical and horizontal lines to your plots<a class="headerlink" href="#adding-vertical-and-horizontal-lines-to-your-plots" title="Permalink to this headline">#</a></h4>
 <p>In general, lines can be added to a graph using the <code class="docutils literal notranslate"><span class="pre">abline()</span></code> function.</p>
 <p>To add a horizontal line at some value, c, of y, call <code class="docutils literal notranslate"><span class="pre">abline(h=c)</span></code></p>
 <p>To add a vertical line at some value, d, of x, call <code class="docutils literal notranslate"><span class="pre">abline(h=d)</span></code></p>
@@ -1362,7 +1372,7 @@ title="Print to PDF"
 <p>This is not necessarily a good use of lines, but the point is to demonstrate what is possible.</p>
 </section>
 <section id="customizing-the-axes">
-<h4>Customizing the axes<a class="headerlink" href="#customizing-the-axes" title="Permalink to this headline">¶</a></h4>
+<h4>Customizing the axes<a class="headerlink" href="#customizing-the-axes" title="Permalink to this headline">#</a></h4>
 <p>By default axes are plotted at the edges of the plotting region.</p>
 <p>In some cases we might want to have them plotted elsewhere. For example, we might want axes to pass through the origin <span class="math notranslate nohighlight">\((x=0,y=0)\)</span>.</p>
 <p>The way to do this is a bit cumbersome but not too difficult.</p>
@@ -1508,7 +1518,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="combining-multiple-graphs-into-a-single-figure">
-<h3>Combining multiple graphs into a single figure<a class="headerlink" href="#combining-multiple-graphs-into-a-single-figure" title="Permalink to this headline">¶</a></h3>
+<h3>Combining multiple graphs into a single figure<a class="headerlink" href="#combining-multiple-graphs-into-a-single-figure" title="Permalink to this headline">#</a></h3>
 <p>We can cobine multiple graphs into a single figure.</p>
 <p>First, tell R that the next figure should be a “plotting matrix” of plots with <code class="docutils literal notranslate"><span class="pre">number_of_rows</span></code> rows and <code class="docutils literal notranslate"><span class="pre">number_of_columns</span></code> columns</p>
 <p><code class="docutils literal notranslate"><span class="pre">par(mfrow=c(number_of_rows,number_of_columns))</span></code></p>
@@ -1548,7 +1558,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="additional-examples">
-<h2>Additional examples<a class="headerlink" href="#additional-examples" title="Permalink to this headline">¶</a></h2>
+<h2>Additional examples<a class="headerlink" href="#additional-examples" title="Permalink to this headline">#</a></h2>
 <p>Below is a list of some more complicated examples without explanation.</p>
 <p>You can reproduce these as an exercise.</p>
 <div class="cell docutils container">
@@ -1749,8 +1759,15 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to EC121’s ebook on numerical methods</p>
+            <p class="prev-next-title">Welcome to EC121’s lecture notes on numerical methods with R</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch2RPlotting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plotting in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
@@ -1761,7 +1778,7 @@ title="Print to PDF"
   
     By Emil Kostadinov<br/>
   
-      &copy; Copyright 2020.<br/>
+      &copy; Copyright 2022.<br/>
 </p>
         </footer>
     </div>

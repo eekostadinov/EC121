@@ -1,6 +1,7 @@
-# Table of content
-# Learn more at https://jupyterbook.org/customize/toc.html
-#
-- file: intro
-  sections:
-    - file: ch1RPlotting
+format: jb-book
+root: intro
+options: 
+  numbered: True
+chapters:
+- file: ch1Rbasics
+- file: ch2RPlotting
