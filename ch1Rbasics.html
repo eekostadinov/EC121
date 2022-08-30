@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 <!DOCTYPE html>
 
@@ -681,4 +682,1263 @@ title="Print to PDF"
 
 
   </body>
+=======
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Basics of R &#8212; Numerical methods for EC121</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Plotting in R" href="ch2RPlotting.html" />
+    <link rel="prev" title="Welcome to EC121’s lecture notes on numerical methods with R" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical methods for EC121</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to EC121’s lecture notes on numerical methods with R
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Basics of R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch2RPlotting.html">
+   2. Plotting in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch3Functions.html">
+   3. Writing your own functions in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch4Loops.html">
+   4. Title 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch5R3Dplotting.html">
+   5. Title 3
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/eekostadinov/EC121/master?urlpath=tree/ch1Rbasics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/eekostadinov/EC121"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/eekostadinov/EC121/issues/new?title=Issue%20on%20page%20%2Fch1Rbasics.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch1Rbasics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-r-as-a-calculator">
+   1.1. Using R as a calculator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-arithmetic-operations">
+     1.1.1. Basic arithmetic operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#respecting-the-order-of-operations">
+     1.1.2. Respecting the order of operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-important-mathematical-functions">
+     1.1.3. Some important mathematical functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluating-complex-arithmetic-expressions">
+     1.1.4. Evaluating complex arithmetic expressions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-comments-to-your-code">
+   1.2. Adding comments to your code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assigning-values-to-variables">
+   1.3. Assigning values to variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectors">
+   1.4. Vectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-by-using-the-c-function">
+     1.4.1. Constructing vectors by using the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       c()
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-of-evenly-spaced-numbers">
+     1.4.2. Constructing vectors of evenly spaced numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-of-evenly-spaced-numbers-using-the-operator">
+     1.4.3. Constructing vectors of evenly spaced numbers using the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       :
+      </span>
+     </code>
+     operator
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basics of R</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-r-as-a-calculator">
+   1.1. Using R as a calculator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-arithmetic-operations">
+     1.1.1. Basic arithmetic operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#respecting-the-order-of-operations">
+     1.1.2. Respecting the order of operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-important-mathematical-functions">
+     1.1.3. Some important mathematical functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluating-complex-arithmetic-expressions">
+     1.1.4. Evaluating complex arithmetic expressions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-comments-to-your-code">
+   1.2. Adding comments to your code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assigning-values-to-variables">
+   1.3. Assigning values to variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectors">
+   1.4. Vectors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-by-using-the-c-function">
+     1.4.1. Constructing vectors by using the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       c()
+      </span>
+     </code>
+     function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-of-evenly-spaced-numbers">
+     1.4.2. Constructing vectors of evenly spaced numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-vectors-of-evenly-spaced-numbers-using-the-operator">
+     1.4.3. Constructing vectors of evenly spaced numbers using the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       :
+      </span>
+     </code>
+     operator
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="basics-of-r">
+<span id="chapter-basics-of-r"></span><h1><span class="section-number">1. </span>Basics of R<a class="headerlink" href="#basics-of-r" title="Permalink to this headline">#</a></h1>
+<p>This chapter is an introduction to some basic capabilities of R. After going through the chapter you will be able to</p>
+<ul class="simple">
+<li><p>use R to evaluate arithmetic expressions (use R as a calculator)</p></li>
+<li><p>add comments to your code</p></li>
+<li><p>assign values to variables</p></li>
+<li><p>create vectors</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To explore the codes below yourself make sure you have a working R installation on your machine. In addition, it is recommended to run the codes in RStudio (rather than the R GUI).</p>
+</div>
+<p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
+<ul class="simple">
+<li><p>copying code from this notebook to your R script and run it there</p></li>
+<li><p>running the codes in the RStudio script provided on the Moodle page</p></li>
+</ul>
+<p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
+<section id="using-r-as-a-calculator">
+<h2><span class="section-number">1.1. </span>Using R as a calculator<a class="headerlink" href="#using-r-as-a-calculator" title="Permalink to this headline">#</a></h2>
+<p>R can be used as a powerful calculator.</p>
+<p>In order to evaluate an arithmetic expression</p>
+<ul class="simple">
+<li><p>enter the expression at the prompt in the command console and press Enter.</p></li>
+<li><p>or enter the expression into a line of your R script and run the line.</p></li>
+</ul>
+<p>In order to enter expressions we need to know some basic syntax.</p>
+<section id="basic-arithmetic-operations">
+<h3><span class="section-number">1.1.1. </span>Basic arithmetic operations<a class="headerlink" href="#basic-arithmetic-operations" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code>  Addition</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-</span></code>  Subtraction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code>  Multiplication</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code>  Division</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">^</span></code>  Exponentiation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(...)</span></code>  Brackets</p></li>
+</ul>
+<p>For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">1+3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">4</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">3</span><span class="o">/</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">1.5</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">5</span><span class="o">*</span><span class="m">6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">30</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">3</span><span class="o">^</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">27</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="m">2+3</span><span class="p">)</span><span class="o">^</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">25</div></div>
+</div>
+</section>
+<section id="respecting-the-order-of-operations">
+<h3><span class="section-number">1.1.2. </span>Respecting the order of operations<a class="headerlink" href="#respecting-the-order-of-operations" title="Permalink to this headline">#</a></h3>
+<p>The above syntax can be extended to arbitrarily complex arithmetic expressions.</p>
+<p>However, make sure to respect the order of operations when entering your expression.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">9^(1/2)</span></code> will evaluate <span class="math notranslate nohighlight">\(9^\frac{1}{2}\)</span> while <code class="docutils literal notranslate"><span class="pre">9^1/2</span></code> will evaluate <span class="math notranslate nohighlight">\(9^1/2\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">9</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">9</span><span class="o">^</span><span class="m">1</span><span class="o">/</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">4.5</div></div>
+</div>
+<p>As another example, <code class="docutils literal notranslate"><span class="pre">(4+5)*3</span></code> will evaluate <span class="math notranslate nohighlight">\((4+5)\times 3\)</span>, while <code class="docutils literal notranslate"><span class="pre">4+5*3</span></code> will evaluate <span class="math notranslate nohighlight">\(4+5\times 3\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="m">4+5</span><span class="p">)</span><span class="o">*</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">27</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">4+5</span><span class="o">*</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">19</div></div>
+</div>
+<p>Here are some more complicated examples:</p>
+<p>To evaluate <span class="math notranslate nohighlight">\(2(1+3)^{1/2}+5^3\)</span> type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="m">2</span><span class="o">*</span><span class="p">(</span><span class="m">1+3</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="m">+5</span><span class="o">^</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">129</div></div>
+</div>
+<p>To evaluate <span class="math notranslate nohighlight">\([2(1+3)^{1/2}+5]^3\)</span> type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="p">(</span><span class="m">1+3</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="m">+5</span><span class="p">)</span><span class="o">^</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">729</div></div>
+</div>
+<p>To evaluate <span class="math notranslate nohighlight">\([2(1+3)]^{1/2}+5^3\)</span> type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="m">2</span><span class="o">*</span><span class="p">(</span><span class="m">1+3</span><span class="p">))</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="m">+5</span><span class="o">^</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">127.828427124746</div></div>
+</div>
+</section>
+<section id="some-important-mathematical-functions">
+<h3><span class="section-number">1.1.3. </span>Some important mathematical functions<a class="headerlink" href="#some-important-mathematical-functions" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Square roots:</strong> <code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code> returns the square root of <span class="math notranslate nohighlight">\(x\)</span></p>
+<ul>
+<li><p>Note that roots can be equivalently stated as powers.</p></li>
+<li><p>For example, the square root of <span class="math notranslate nohighlight">\(x\)</span> can be equivalently stated as <span class="math notranslate nohighlight">\(x^{1/2}\)</span> and evaluated as <code class="docutils literal notranslate"><span class="pre">x^(1/2)</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Natural exponential:</strong> <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code> returns <span class="math notranslate nohighlight">\(e^x\)</span></p>
+<ul>
+<li><p>For exponential functions to a base different than <span class="math notranslate nohighlight">\(e\)</span> simply use power notation.</p></li>
+<li><p>For example, for <span class="math notranslate nohighlight">\(2^3\)</span> simply type <code class="docutils literal notranslate"><span class="pre">2^3</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Natural logarithm:</strong> <code class="docutils literal notranslate"><span class="pre">log(x)</span></code> returns <span class="math notranslate nohighlight">\(\ln(x)\)</span></p>
+<ul>
+<li><p>Note that R uses <code class="docutils literal notranslate"><span class="pre">log(...)</span></code> to call the natural logarithm, i.e. <span class="math notranslate nohighlight">\(\ln(...)\)</span> or the logarithm to the base <span class="math notranslate nohighlight">\(e\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>Logarithms to other bases:</strong> <code class="docutils literal notranslate"><span class="pre">log(x,a)</span></code> returns <span class="math notranslate nohighlight">\(\log_a x\)</span>, the “logarithm to the base <span class="math notranslate nohighlight">\(a\)</span> of <span class="math notranslate nohighlight">\(x\)</span>.”</p>
+<ul>
+<li><p>For example, <code class="docutils literal notranslate"><span class="pre">log(8,2)</span></code> returns <span class="math notranslate nohighlight">\(\log_2 8 = 3\)</span>, the “logarithm to the base 2 of 8”.</p></li>
+</ul>
+</li>
+</ul>
+<p>For example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="m">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>as <span class="math notranslate nohighlight">\(\sqrt{9}=3\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">20.0855369231877</div></div>
+</div>
+<p>as <span class="math notranslate nohighlight">\(e^3\approx 20.0855\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">1.09861228866811</div></div>
+</div>
+<p>as <span class="math notranslate nohighlight">\(\ln 3 \approx 1.0986\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>as <span class="math notranslate nohighlight">\(\ln e^3 = \log_e e^3 = 3\log_e e = 3\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>as <span class="math notranslate nohighlight">\(\log_2 8 = 3\)</span> (we need to raise the <em>base</em> 2 to the power 3 to get 8)</p>
+</section>
+<section id="evaluating-complex-arithmetic-expressions">
+<h3><span class="section-number">1.1.4. </span>Evaluating complex arithmetic expressions<a class="headerlink" href="#evaluating-complex-arithmetic-expressions" title="Permalink to this headline">#</a></h3>
+<p>By using the above syntax correctly we can evaluate arbitrarily complex arithmetic expressions.</p>
+<p>For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">4</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="o">^</span><span class="m">5</span> <span class="o">+</span> <span class="nf">log</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> <span class="o">-</span> <span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">-10.2656246752053</div></div>
+</div>
+<p>evaluates <span class="math notranslate nohighlight">\(\sqrt{3\times(4/2)^5} + \log_5 2 - e^5\)</span></p>
+<div class="exercise admonition" id="ex-arithmetic">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.1 </span></p>
+<section id="exercise-content">
+<p>Evaluate the following arithmetic expressions in R</p>
+<p>a)</p>
+<div class="math notranslate nohighlight">
+\[ 
+    7\times\frac{5^2}{(3-1)^3} + 2 
+\]</div>
+<p>b)</p>
+<div class="math notranslate nohighlight">
+\[ 
+    \log_2 (3+2\times5) 
+\]</div>
+<p>c)</p>
+<div class="math notranslate nohighlight">
+\[ 
+    1 + e^{3-\sqrt{2}} 
+\]</div>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ch1Rbasics-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-arithmetic"> Exercise 1.1</a></p>
+<section id="solution-content">
+<p>Example R codes that correctly evaluate the expressions are</p>
+<p>a)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">7</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>b)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>c)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+<section id="adding-comments-to-your-code">
+<h2><span class="section-number">1.2. </span>Adding comments to your code<a class="headerlink" href="#adding-comments-to-your-code" title="Permalink to this headline">#</a></h2>
+<p>As you progress with programming you will often have to write and work through long pieces of code. Unfortunately long codes can become very messy and it is useful to have a way to add comments to your code - pieces of text that are not executed but help the coder explain the code (often to herself) and make it more readable.</p>
+<p>To start a comment in R, type <code class="docutils literal notranslate"><span class="pre">#</span></code> somewhere on a line of code and anything that follows on the line will not be executed, but will remain on the script as a comment.</p>
+<p>For example, we can add a comment before a line of code. The comment in itself is not executed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># The below code evaluates the log to the base 2 of 8</span>
+
+<span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>The code can also be added on the end of a line of executable code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span> <span class="c1"># this evaluates the log to the base 2 of 8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>While the examples of code encountered so far are not sufficiently complex to need explanation, it is a good idea to get into the habit of writing comments in your code. These notes will often use comments to explain pieces of code.</p>
+</section>
+<section id="assigning-values-to-variables">
+<h2><span class="section-number">1.3. </span>Assigning values to variables<a class="headerlink" href="#assigning-values-to-variables" title="Permalink to this headline">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The concept of a <strong>variable</strong> has distinct (although related) meanings in the contexts of mathematics and programming.</p>
+<p>For the following discussion, adopt a programming perspective, and think of a variable as a named storage of value.</p>
+</div>
+<p>We can use variables to store values of interest, allowing us to access these values by calling the name of the variable.</p>
+<p>In R we can assign a value to a variable by using the <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> or <code class="docutils literal notranslate"><span class="pre">=</span></code> operators.</p>
+<p>For example, the code <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;-</span> <span class="pre">2</span></code> creates a variable named <code class="docutils literal notranslate"><span class="pre">a</span></code> whose value is the number <span class="math notranslate nohighlight">\(2\)</span>. The same assignment can be equivalently done by using the code <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">2</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While both <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> and <code class="docutils literal notranslate"><span class="pre">=</span></code> can be used to assign values to variables, the <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> syntax is preferred (partly for historical reasons) and henceforth these notes will follow this syntax.</p>
+</div>
+<p>For example, the following code assigns the value <code class="docutils literal notranslate"><span class="pre">3</span></code> to a new variable called <code class="docutils literal notranslate"><span class="pre">a</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="m">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now a call to <code class="docutils literal notranslate"><span class="pre">a</span></code> retuns the assigned value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">3</div></div>
+</div>
+<p>Furthermore, we can use the variable in the place of it’s value in any operation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="m">+3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">6</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">^</span><span class="m">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">9</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">^</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">27</div></div>
+</div>
+<p>We can assign the value of arbitrarily complex arithmetic expression to a variable. For example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span> <span class="o">+</span> <span class="nf">sqrt</span><span class="p">(</span><span class="m">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">5</div></div>
+</div>
+<p>Henceforth, any arithmetic expression involving <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> will use their values to evaluate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">8</div></div>
+</div>
+<div class="exercise admonition" id="ex-vars">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.2 </span></p>
+<section id="exercise-content">
+<p>Assing the value <span class="math notranslate nohighlight">\(2\)</span> to a new variable called <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<p>Then assign the value of the expression <span class="math notranslate nohighlight">\(4r^2\)</span> to a new variable called <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p>Then call <code class="docutils literal notranslate"><span class="pre">b</span></code> to see its value.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ch1Rbasics-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-vars"> Exercise 1.2</a></p>
+<section id="solution-content">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">&lt;-</span> <span class="mi">2</span><span class="p">;</span>             <span class="c1"># create a variable `r` with value equal to 2</span>
+<span class="n">b</span> <span class="o">&lt;-</span> <span class="mi">4</span><span class="o">*</span><span class="n">r</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>         <span class="c1"># create a variable `b` with value equal to 4*r^2</span>
+<span class="n">b</span>                   <span class="c1"># call `b` to see its value </span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="vectors">
+<span id="section-vectors"></span><h2><span class="section-number">1.4. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h2>
+<p>For the purpose of the following discussion think of a vector (naively) as a data structure representing an ordered list of numbers.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The concept of a <strong>vector</strong> has distinct (although related) meanings in the contexts of mathematics and programming.</p>
+<p>We will learn about the precise mathematical meaning of vectors later in the course.</p>
+<p>However, at this stage we emphasise the programming-context meaning of vectors as a <em>data structure</em>, which will be needed for many of the topics discussed in these notes.</p>
+</div>
+<p>For example, the ordered list of numbers <span class="math notranslate nohighlight">\([1,2,5,7]\)</span> is a vector of four elements, with the first element <span class="math notranslate nohighlight">\(1\)</span>, the second element <span class="math notranslate nohighlight">\(2\)</span>, the third element <span class="math notranslate nohighlight">\(5\)</span> and fourth element <span class="math notranslate nohighlight">\(7\)</span>. Note that this is a different vector from the vector <span class="math notranslate nohighlight">\([1,2,7,5]\)</span> as even though they both contain the same elements, these elements appear in different order. <em>The order matters in a vector.</em></p>
+<section id="constructing-vectors-by-using-the-c-function">
+<h3><span class="section-number">1.4.1. </span>Constructing vectors by using the <code class="docutils literal notranslate"><span class="pre">c()</span></code> function<a class="headerlink" href="#constructing-vectors-by-using-the-c-function" title="Permalink to this headline">#</a></h3>
+<p>In general, a vector of the form <span class="math notranslate nohighlight">\([x1,x2,...,xn]\)</span>,</p>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(x1,x2,...,xn\)</span> are some specific numbers</p></li>
+<li><p>can be constructed by typing <code class="docutils literal notranslate"><span class="pre">c(x1,x2,...,xn)</span></code>.</p></li>
+</ul>
+<p>For example, to construct the vector <span class="math notranslate nohighlight">\([1,2,5,7]\)</span> simply type <code class="docutils literal notranslate"><span class="pre">c(1,2,5,7)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>5</li><li>7</li></ol>
+</div></div>
+</div>
+<p>We can also assign the value of a vector to a variable.</p>
+<p>For example, to assign the above vector to a variable called <code class="docutils literal notranslate"><span class="pre">a</span></code> type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>5</li><li>7</li></ol>
+</div></div>
+</div>
+<p>We can obtain the number of elements in a vector by using the <code class="docutils literal notranslate"><span class="pre">length()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">4</div></div>
+</div>
+<p>We can access the different elements of a vector by calling the vector followed by the element’s index in square brackets. In general, given a vector named <code class="docutils literal notranslate"><span class="pre">vec</span></code>, then the code <code class="docutils literal notranslate"><span class="pre">vec[n]</span></code> returns the <span class="math notranslate nohighlight">\(n\)</span>-th element of the vector.</p>
+<p>For example, to call the 4th element of the vector <code class="docutils literal notranslate"><span class="pre">a</span></code> above, type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="m">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">7</div></div>
+</div>
+</section>
+<section id="constructing-vectors-of-evenly-spaced-numbers">
+<h3><span class="section-number">1.4.2. </span>Constructing vectors of evenly spaced numbers<a class="headerlink" href="#constructing-vectors-of-evenly-spaced-numbers" title="Permalink to this headline">#</a></h3>
+<p>In some context (especially in <a class="reference internal" href="ch2RPlotting.html#section-plotting"><span class="std std-ref">Plotting in R</span></a>) we will need to construct vectors of evenly spaced numbers.</p>
+<p>This can be done by using the <code class="docutils literal notranslate"><span class="pre">seq()</span></code> function (for <em>sequence</em>). In general, the code <code class="docutils literal notranslate"><span class="pre">seq(from=a,</span> <span class="pre">to=b,</span> <span class="pre">by=d)</span></code> creates a vector with first element <code class="docutils literal notranslate"><span class="pre">a</span></code>, last element <code class="docutils literal notranslate"><span class="pre">b</span></code> and distance <code class="docutils literal notranslate"><span class="pre">d</span></code> between consecutive elements.</p>
+<p>For example, to create the vector <span class="math notranslate nohighlight">\([1,2,3,4,5,6,7,8,9,10]\)</span> and assign it to a variable named <code class="docutils literal notranslate"><span class="pre">a</span></code> we can type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ol>
+</div></div>
+</div>
+<p>As another example, to create the vector <span class="math notranslate nohighlight">\([1,1.5,2,2.5,3,...,9,9.5,10]\)</span> and assign it to a variable named <code class="docutils literal notranslate"><span class="pre">a</span></code> we can type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="m">10</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>1.5</li><li>2</li><li>2.5</li><li>3</li><li>3.5</li><li>4</li><li>4.5</li><li>5</li><li>5.5</li><li>6</li><li>6.5</li><li>7</li><li>7.5</li><li>8</li><li>8.5</li><li>9</li><li>9.5</li><li>10</li></ol>
+</div></div>
+</div>
+<p>Note that exactly the same can be achieved by passing the arguments without keywords <code class="docutils literal notranslate"><span class="pre">from</span></code>, <code class="docutils literal notranslate"><span class="pre">to</span></code> and <code class="docutils literal notranslate"><span class="pre">by</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>1</li><li>1.5</li><li>2</li><li>2.5</li><li>3</li><li>3.5</li><li>4</li><li>4.5</li><li>5</li><li>5.5</li><li>6</li><li>6.5</li><li>7</li><li>7.5</li><li>8</li><li>8.5</li><li>9</li><li>9.5</li><li>10</li></ol>
+</div></div>
+</div>
+<p>As discussed above we can use <code class="docutils literal notranslate"><span class="pre">length()</span></code> to check the number of elements, and can access specific elements by indexing with <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<p>For example, the number of elements of <code class="docutils literal notranslate"><span class="pre">a</span></code> defined above is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">19</div></div>
+</div>
+<p>The 12th element of <code class="docutils literal notranslate"><span class="pre">a</span></code> is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="m">12</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">6.5</div></div>
+</div>
+<div class="exercise admonition" id="ex-seq">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.3 </span></p>
+<section id="exercise-content">
+<p>Construct a vector, called <code class="docutils literal notranslate"><span class="pre">vec</span></code>, of evenly spaced numbers between -5 and 5 with distance 0.25 between consecutive elements.</p>
+<p>Find the number of elements of the vector.</p>
+<p>Find the 13th element of the vector.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="ch1Rbasics-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#ex-seq"> Exercise 1.3</a></p>
+<section id="solution-content">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vec</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span> <span class="c1"># constructing the vector</span>
+<span class="n">length</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>                          <span class="c1"># find the number of elements</span>
+<span class="n">vec</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>                              <span class="c1"># find the 13th element</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="constructing-vectors-of-evenly-spaced-numbers-using-the-operator">
+<h3><span class="section-number">1.4.3. </span>Constructing vectors of evenly spaced numbers using the <code class="docutils literal notranslate"><span class="pre">:</span></code> operator<a class="headerlink" href="#constructing-vectors-of-evenly-spaced-numbers-using-the-operator" title="Permalink to this headline">#</a></h3>
+<p>As seen above one way to construct a vector of evenly spaced numbers between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> with distance 1 between consecutive elements is to use <code class="docutils literal notranslate"><span class="pre">seq(from=a,</span> <span class="pre">to=b,</span> <span class="pre">by=1)</span></code></p>
+<p>However, when the distance between elements is 1, we can also use the shorthand notation <code class="docutils literal notranslate"><span class="pre">a:b</span></code> instead.</p>
+<p>For example, to construct the vector <span class="math notranslate nohighlight">\([-3,-2,-1,0,1,2,3]\)</span> and assign it to a variable <code class="docutils literal notranslate"><span class="pre">a</span></code> we can type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="m">-3</span><span class="o">:</span><span class="m">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>-3</li><li>-2</li><li>-1</li><li>0</li><li>1</li><li>2</li><li>3</li></ol>
+</div></div>
+</div>
+<p>Note that exactly the same vector can be constructed using the <code class="docutils literal notranslate"><span class="pre">seq()</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="o">=</span><span class="m">-3</span><span class="p">,</span><span class="n">to</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>-3</li><li>-2</li><li>-1</li><li>0</li><li>1</li><li>2</li><li>3</li></ol>
+</div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">seq()</span></code> function is more powerful because it also allows us to construct vectors where distance between elements is different from 1. For example, the vector constructed by <code class="docutils literal notranslate"><span class="pre">seq(from=0,</span> <span class="pre">to=2,</span> <span class="pre">by=0.25)</span></code> cannot be constructed using the <code class="docutils literal notranslate"><span class="pre">:</span></code> operator.</p>
+<p>Nonetheless, constructing equally spaced vectors with <code class="docutils literal notranslate"><span class="pre">:</span></code> is a useful shorthand notation in cases when we want all elements of the vector to be consecutive integers. We will encounter such cases during the course, so you should be aware of the syntax.</p>
+<p>This completes the chapter on <a class="reference internal" href="#chapter-basics-of-r"><span class="std std-ref">Basics of R</span></a>. In the next chapter we turn attention to using R for plotting functions of one variable.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Welcome to EC121’s lecture notes on numerical methods with R</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch2RPlotting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Plotting in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Emil Kostadinov<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+>>>>>>> Stashed changes
 </html>
