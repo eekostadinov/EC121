@@ -156,7 +156,7 @@ y <- x^3 - 4*x
 plot(x,y, type="l",
     main = "Plot of x^3 - 4x")
 
-install.packages("latex2exp")
+#install.packages("latex2exp")
 library(latex2exp)
 
 plot(x,y, type="l",
@@ -208,10 +208,10 @@ lines(x,y2,
 grid()
 
 legend(1,-10, 
-       legend=c(TeX(r"($x^3+2x$)"),TeX(r"($8x^2+3x$)")), 
-       lty=c(1,2), 
-       col=c("red", "blue"), 
-       bty="n") 
+       legend=c(TeX(r"($x^3+2x$)"),TeX(r"($8x^2+3x$)")), # assign first label to y1, second to y2
+       lty=c(1,2),                                       # assign line-type 1 to y1, and 2 to y2 (as this is how we plotted them)
+       col=c("red", "blue"),                             # assing red to y1 and blue to y2 as this is how we plotted them     
+       bty="n")                                          # disable the box around the legend (you can omit this to see what happens)
 
 
 options(repr.plot.width=4, repr.plot.height=4, repr.plot.res=250)

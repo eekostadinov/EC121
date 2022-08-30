@@ -57,6 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Writing your own functions in R" href="ch3Functions.html" />
     <link rel="prev" title="1. Basics of R" href="ch1Rbasics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -126,6 +127,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    2. Plotting in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch3Functions.html">
+   3. Writing your own functions in R
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch4Loops.html">
+   4. Title 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch5R3Dplotting.html">
+   5. Title 3
   </a>
  </li>
 </ul>
@@ -407,8 +423,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-latex-text">
-     2.2.2. Using LaTeX text
+    <a class="reference internal nav-link" href="#using-latex-for-labels-and-titles">
+     2.2.2. Using LaTeX for labels and titles
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -557,8 +573,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-latex-text">
-     2.2.2. Using LaTeX text
+    <a class="reference internal nav-link" href="#using-latex-for-labels-and-titles">
+     2.2.2. Using LaTeX for labels and titles
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -626,18 +642,19 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="plotting-in-r">
-<h1><span class="section-number">2. </span>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this headline">#</a></h1>
+<span id="section-plotting"></span><h1><span class="section-number">2. </span>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this headline">#</a></h1>
 <p>This chapter is a quick guide to plotting univariate functions in R. Following the discussion you should be able to plot any simple univariate function and customise your graph to look as intended.</p>
 <p>All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
-<p>It is intended that you go through the notebook by reading through the discussion and reproducing all codes in your own R/RStudio installation. For this</p>
-<ul class="simple">
-<li><p>just copy the sections of code from the notebook to your R script and run them there <strong>line by line</strong></p></li>
-<li><p>or run the code in the RStudio script provided on the Moodle page <strong>line by line</strong></p></li>
-</ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You may find it useful to refer to the official documentation of the R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package <a class="reference external" href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2">here</a>. In addition, you can always access R’s documentation regarding any particular function by typing <code class="docutils literal notranslate"><span class="pre">?</span></code> followed by the name of the function in the R command prompt. For example, <code class="docutils literal notranslate"><span class="pre">?plot</span></code> will return the documentation for the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function.</p>
 </div>
+<p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
+<ul class="simple">
+<li><p>copying code from this notebook to your R script and run it there</p></li>
+<li><p>running the codes in the RStudio script provided on the Moodle page</p></li>
+</ul>
+<p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
 <section id="the-basics-of-plotting-in-r">
 <h2><span class="section-number">2.1. </span>The basics of plotting in R<a class="headerlink" href="#the-basics-of-plotting-in-r" title="Permalink to this headline">#</a></h2>
 <section id="the-plot-function">
@@ -681,9 +698,9 @@ title="Print to PDF"
 </li>
 <li><p><em>axes labels</em> are assigned automatically based on the “names” with which the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> argument were given.</p>
 <ul>
-<li><p>In the above example these were 1 and 2 correspondingly, and this is also how the axes are labeled. Clearly, these are not good axes labels.</p></li>
+<li><p>In the above example these were <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code> correspondingly, and this is also how the axes are labeled. Clearly, these are not good axes labels.</p></li>
 <li><p>The axes labels can be set manually with the optional arguments <code class="docutils literal notranslate"><span class="pre">xlab</span></code> and <code class="docutils literal notranslate"><span class="pre">ylab</span></code> which take strings as values.</p></li>
-<li><p>For example, <code class="docutils literal notranslate"><span class="pre">xlab=&quot;x&quot;</span></code> will set the <span class="math notranslate nohighlight">\(x\)</span> to be x</p></li>
+<li><p>For example, <code class="docutils literal notranslate"><span class="pre">xlab=&quot;x&quot;</span></code> will set the <span class="math notranslate nohighlight">\(x\)</span>-axis label to the string <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
 </ul>
 </li>
 <li><p>the graph is enclosed in a box</p>
@@ -708,6 +725,7 @@ title="Print to PDF"
 </li>
 <li><p>other optional arguments can be used to set the size of the point (<code class="docutils literal notranslate"><span class="pre">cex</span></code>), shape of point (<code class="docutils literal notranslate"><span class="pre">pch</span></code>), etc.</p></li>
 </ul>
+<p>For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">,</span> 
@@ -744,11 +762,15 @@ title="Print to PDF"
 <img alt="_images/ch2RPlotting_8_0.png" src="_images/ch2RPlotting_8_0.png" />
 </div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You do not need to know all these optional arguments by heart - even if you learn them once you will likely forget them at some point. The important point is to understand how the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function works. When you need to produce a specific customized plot you can always check the rich documentation of R, as well as the many online resources, to help you customize your plot.</p>
+</div>
 <div class="exercise admonition" id="ex-point">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.1 </span></p>
 <section id="exercise-content">
-<p>Produce the plot below in your RStudio by setting appropriately <code class="docutils literal notranslate"><span class="pre">main</span></code>,<code class="docutils literal notranslate"><span class="pre">xlim</span></code>, <code class="docutils literal notranslate"><span class="pre">ylim</span></code>,<code class="docutils literal notranslate"><span class="pre">xlab</span></code>,<code class="docutils literal notranslate"><span class="pre">ylab</span></code>,<code class="docutils literal notranslate"><span class="pre">col</span></code> and <code class="docutils literal notranslate"><span class="pre">pch</span></code>.</p>
+<p>Reproduce the plot below in your RStudio by setting appropriately <code class="docutils literal notranslate"><span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">xlim</span></code>, <code class="docutils literal notranslate"><span class="pre">ylim</span></code>, <code class="docutils literal notranslate"><span class="pre">xlab</span></code>, <code class="docutils literal notranslate"><span class="pre">ylab</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code> and <code class="docutils literal notranslate"><span class="pre">pch</span></code>.</p>
 <img alt="_images/ex1.png" src="_images/ex1.png" />
 </section>
 </div>
@@ -756,6 +778,7 @@ title="Print to PDF"
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-point"> Exercise 2.1</a></p>
 <section id="solution-content">
+<p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> 
      <span class="n">frame</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span> 
      <span class="n">main</span><span class="o">=</span><span class="s2">&quot;Plot of a point&quot;</span><span class="p">,</span> 
@@ -773,7 +796,7 @@ title="Print to PDF"
 <section id="plotting-a-set-of-points">
 <span id="content-points"></span><h3><span class="section-number">2.1.3. </span>Plotting a set of points<a class="headerlink" href="#plotting-a-set-of-points" title="Permalink to this headline">#</a></h3>
 <p>We continue with a small step forward - plotting a set of points.</p>
-<p>To plot a set of points instead we again need to type</p>
+<p>To plot a set of points we again use</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code></p>
 <p>but now we need</p>
 <ul class="simple">
@@ -781,7 +804,7 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> to be a <strong>vector</strong> of the corresponding y-coordinates</p></li>
 <li><p><strong>Note</strong>: the vectors <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>should be of the same length (have the same number of elements)</p></li>
 </ul>
-<p>Also recall that a vector of specified numbers <span class="math notranslate nohighlight">\([x_1,x_2,...,x_n]\)</span> can be created in R by typing <code class="docutils literal notranslate"><span class="pre">c(x_1,x_2,...,x_n)</span></code>.</p>
+<p>Also recall (section <a class="reference internal" href="ch1Rbasics.html#section-vectors"><span class="std std-ref">Vectors</span></a> in the previous chapter) that a vector of specified numbers <span class="math notranslate nohighlight">\([x_1,x_2,...,x_n]\)</span> can be created in R by the code <code class="docutils literal notranslate"><span class="pre">c(x_1,x_2,...,x_n)</span></code>.</p>
 <p>For example, to plot the four points <span class="math notranslate nohighlight">\((x=2,y=3)\)</span>, <span class="math notranslate nohighlight">\((x=4,y=7)\)</span>, <span class="math notranslate nohighlight">\((x=6,y=6)\)</span>, <span class="math notranslate nohighlight">\((x=8,y=10)\)</span> simply type</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -790,7 +813,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_13_0.png" src="_images/ch2RPlotting_13_0.png" />
+<img alt="_images/ch2RPlotting_14_0.png" src="_images/ch2RPlotting_14_0.png" />
 </div>
 </div>
 <p>We can again customize the look of the plot by using optional arguments.</p>
@@ -817,7 +840,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_15_0.png" src="_images/ch2RPlotting_15_0.png" />
+<img alt="_images/ch2RPlotting_16_0.png" src="_images/ch2RPlotting_16_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -835,7 +858,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_16_0.png" src="_images/ch2RPlotting_16_0.png" />
+<img alt="_images/ch2RPlotting_17_0.png" src="_images/ch2RPlotting_17_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -852,7 +875,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_17_0.png" src="_images/ch2RPlotting_17_0.png" />
+<img alt="_images/ch2RPlotting_18_0.png" src="_images/ch2RPlotting_18_0.png" />
 </div>
 </div>
 <div class="exercise admonition" id="ex-points">
@@ -867,13 +890,14 @@ title="Print to PDF"
 <li><p>and with a title</p></li>
 </ul>
 <img alt="_images/ex2.png" src="_images/ex2.png" />
-<p>Produce this plot in your RStudio.</p>
+<p>Reproduce this plot in your RStudio.</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-points"> Exercise 2.2</a></p>
 <section id="solution-content">
+<p>The plot was produced using the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
 
@@ -893,7 +917,7 @@ title="Print to PDF"
 <p>The idea is as follows:</p>
 <section id="step-1">
 <h4><span class="section-number">2.1.4.1. </span>Step 1<a class="headerlink" href="#step-1" title="Permalink to this headline">#</a></h4>
-<p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of <strong>evenly spaced</strong> <span class="math notranslate nohighlight">\(x\)</span> coordinates over the domain on which you want to plot.</p>
+<p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of <strong>evenly spaced</strong> <span class="math notranslate nohighlight">\(x\)</span> coordinates over the domain on which you want to plot (recall the discussion in <a class="reference internal" href="ch1Rbasics.html#section-vectors"><span class="std std-ref">Vectors</span></a> for creating vectors of evenly spaced numbers).</p>
 <p>For example, to plot <span class="math notranslate nohighlight">\(y=5x+4\)</span> over the domain <span class="math notranslate nohighlight">\(x\in[-5,5]\)</span>, first define the <span class="math notranslate nohighlight">\(x\)</span> coordinates as</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -917,7 +941,7 @@ title="Print to PDF"
 </section>
 <section id="step-3">
 <h4><span class="section-number">2.1.4.3. </span>Step 3<a class="headerlink" href="#step-3" title="Permalink to this headline">#</a></h4>
-<p>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>, using the optional argument <code class="docutils literal notranslate"><span class="pre">type</span></code> and setting it to <code class="docutils literal notranslate"><span class="pre">&quot;l&quot;</span></code></p>
+<p>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>, using the optional argument <code class="docutils literal notranslate"><span class="pre">type</span></code> and setting it to <code class="docutils literal notranslate"><span class="pre">&quot;l&quot;</span></code> (for <em>line</em>)</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type=&quot;l&quot;)</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -926,7 +950,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_27_0.png" src="_images/ch2RPlotting_27_0.png" />
+<img alt="_images/ch2RPlotting_28_0.png" src="_images/ch2RPlotting_28_0.png" />
 </div>
 </div>
 <p>And this is it.</p>
@@ -939,7 +963,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_29_0.png" src="_images/ch2RPlotting_29_0.png" />
+<img alt="_images/ch2RPlotting_30_0.png" src="_images/ch2RPlotting_30_0.png" />
 </div>
 </div>
 <p>Instead, by using <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> R suppresses the plotting of the point circles at the coordinates, but instead draws line segments connecting the coordinates.</p>
@@ -951,7 +975,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_32_0.png" src="_images/ch2RPlotting_32_0.png" />
+<img alt="_images/ch2RPlotting_33_0.png" src="_images/ch2RPlotting_33_0.png" />
 </div>
 </div>
 <p>We can further customize the way the graph looks but we will return to this later.</p>
@@ -977,7 +1001,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_36_0.png" src="_images/ch2RPlotting_36_0.png" />
+<img alt="_images/ch2RPlotting_37_0.png" src="_images/ch2RPlotting_37_0.png" />
 </div>
 </div>
 <p>Notice the problem: when we set <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> what R actually does is draw line segments connecting the points on the graph of the function.</p>
@@ -990,7 +1014,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_38_0.png" src="_images/ch2RPlotting_38_0.png" />
+<img alt="_images/ch2RPlotting_39_0.png" src="_images/ch2RPlotting_39_0.png" />
 </div>
 </div>
 <p>The solution is very simple - we need a finer grid for the coordinates (basically, we want the distance between elements of the vector <code class="docutils literal notranslate"><span class="pre">x</span></code> to be smaller).</p>
@@ -1010,7 +1034,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_41_0.png" src="_images/ch2RPlotting_41_0.png" />
+<img alt="_images/ch2RPlotting_42_0.png" src="_images/ch2RPlotting_42_0.png" />
 </div>
 </div>
 <p>And now we have a smooth (to the eye) graph.</p>
@@ -1022,7 +1046,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_43_0.png" src="_images/ch2RPlotting_43_0.png" />
+<img alt="_images/ch2RPlotting_44_0.png" src="_images/ch2RPlotting_44_0.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1043,6 +1067,7 @@ title="Print to PDF"
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curve"> Exercise 2.3</a></p>
 <section id="solution-content">
+<p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
 
@@ -1055,18 +1080,18 @@ title="Print to PDF"
 </section>
 </section>
 <section id="customizing-the-look-of-a-simple-graph">
-<h2><span class="section-number">2.2. </span>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this headline">#</a></h2>
+<span id="content-plots-customization"></span><h2><span class="section-number">2.2. </span>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this headline">#</a></h2>
 <section id="using-optional-arguments">
 <span id="content-lines-optional"></span><h3><span class="section-number">2.2.1. </span>Using optional arguments<a class="headerlink" href="#using-optional-arguments" title="Permalink to this headline">#</a></h3>
 <p>As in <a class="reference internal" href="#content-points-optional"><span class="std std-ref">Using optional arguments to customize the point plot.</span></a> we can use optional arguments to customize the appearance of the line plot</p>
-<p>Optional arguments, as before for points, include</p>
+<p>Optional arguments, as before, include</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> for setting the plotting region</p>
 <ul>
-<li><p>altough this is usually unnecessary as the default plotting region is especially appropriate for showing the graph of the particular function on the specified domain.</p></li>
+<li><p>although this is usually unnecessary as the default plotting region is  typically especially appropriate for showing the graph of the particular function on the specified domain.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">xlab</span></code> and <code class="docutils literal notranslate"><span class="pre">ylab</span></code> for setting the axes labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xlab</span></code> and <code class="docutils literal notranslate"><span class="pre">ylab</span></code> for setting the axes labels.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">col</span></code> for setting the colour of the line.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">frame</span></code> to enable/disable to box.</p></li>
 </ul>
@@ -1102,7 +1127,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_52_0.png" src="_images/ch2RPlotting_52_0.png" />
+<img alt="_images/ch2RPlotting_53_0.png" src="_images/ch2RPlotting_53_0.png" />
 </div>
 </div>
 <p>If we use <code class="docutils literal notranslate"><span class="pre">type=b</span></code> plotting both lines and points, we can also set the graphical properties of the points with the familiar <code class="docutils literal notranslate"><span class="pre">cex</span></code>, <code class="docutils literal notranslate"><span class="pre">pch</span></code>, etc arguments.</p>
@@ -1120,14 +1145,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_54_0.png" src="_images/ch2RPlotting_54_0.png" />
+<img alt="_images/ch2RPlotting_55_0.png" src="_images/ch2RPlotting_55_0.png" />
 </div>
 </div>
 <div class="exercise admonition" id="ex-curvecustom">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.4 </span></p>
 <section id="exercise-content">
-<p>Given the graph of <span class="math notranslate nohighlight">\(y=x^2-4\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span> you plotted before, set graphical parameters appropriately to plot as below.</p>
+<p>Given the graph of <span class="math notranslate nohighlight">\(y=x^2-4\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span> you plotted in <a class="reference internal" href="#ex-curve"><span class="std std-numref">Exercise 2.3</span></a>, set graphical parameters appropriately to reproduce the plot below.</p>
 <img alt="_images/ex4.png" src="_images/ex4.png" />
 </section>
 </div>
@@ -1135,6 +1160,7 @@ title="Print to PDF"
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curvecustom"> Exercise 2.4</a></p>
 <section id="solution-content">
+<p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
 
@@ -1148,11 +1174,11 @@ title="Print to PDF"
 </section>
 </div>
 </section>
-<section id="using-latex-text">
-<h3><span class="section-number">2.2.2. </span>Using LaTeX text<a class="headerlink" href="#using-latex-text" title="Permalink to this headline">#</a></h3>
-<p>In some cases we would like to add mathematical text to our graphs, e.g. in titles, labels, text annotations, etc.</p>
+<section id="using-latex-for-labels-and-titles">
+<h3><span class="section-number">2.2.2. </span>Using LaTeX for labels and titles<a class="headerlink" href="#using-latex-for-labels-and-titles" title="Permalink to this headline">#</a></h3>
+<p>In some cases we may want to add mathematical text to our graphs, e.g. in titles, labels, text annotations, etc.</p>
 <p>However, by default, all text objects under the default functionality of <code class="docutils literal notranslate"><span class="pre">graphics</span></code> are set and visualized as strings.</p>
-<p>For example, if we want to add a title “Plot of x^3-4x” to the graph, the title string will be typeset as below.</p>
+<p>For example, if we add a title “Plot of x^3-4x” to the graph, the title string will be typeset as below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
@@ -1169,22 +1195,18 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_60_0.png" src="_images/ch2RPlotting_60_0.png" />
+<img alt="_images/ch2RPlotting_61_0.png" src="_images/ch2RPlotting_61_0.png" />
 </div>
 </div>
-<p>However, by using the additional R package <code class="docutils literal notranslate"><span class="pre">latex2exp</span></code> we can add mathematical text to our graphs.</p>
+<p>By using the additional R package <code class="docutils literal notranslate"><span class="pre">latex2exp</span></code> we can add mathematical text to our graphs.</p>
 <p>To install and load the package, type</p>
-<div class="cell tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;latex2exp&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s2">&quot;latex2exp&quot;</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>Then, to set any text object use the following syntax</p>
 <p><code class="docutils literal notranslate"><span class="pre">TeX(r&quot;(YOUR</span> <span class="pre">TEXT</span> <span class="pre">IN</span> <span class="pre">LATEX)&quot;)</span></code></p>
-<p>where <code class="docutils literal notranslate"><span class="pre">YOUR</span> <span class="pre">TEXT</span> <span class="pre">IN</span> <span class="pre">LATEX</span></code> is anything typed in LaTeX. Note that the string is inclosed in parentheses and brackets.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">YOUR</span> <span class="pre">TEXT</span> <span class="pre">IN</span> <span class="pre">LATEX</span></code> is anything typed in LaTeX. Note that the string is enclosed in parentheses and brackets and preceded by the letter <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span>
@@ -1194,32 +1216,37 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_64_0.png" src="_images/ch2RPlotting_64_0.png" />
+<img alt="_images/ch2RPlotting_66_0.png" src="_images/ch2RPlotting_66_0.png" />
 </div>
 </div>
 </section>
 <section id="adding-additional-plots-to-the-same-graph">
 <h3><span class="section-number">2.2.3. </span>Adding additional plots to the same graph<a class="headerlink" href="#adding-additional-plots-to-the-same-graph" title="Permalink to this headline">#</a></h3>
-<p>Once we have called <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and opened an initial graph we can add additional objects to the graph by additionally calling functions such as</p>
+<p>Once we have called <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and opened an initial plotting window we can add additional objects to the graph by additionally calling functions such as</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">points(x,y,...)</span></code> adds points at the specified (x,y)-coordinates of the initial plot (i.e. does the same as <code class="docutils literal notranslate"><span class="pre">plot(x,y,type=&quot;p&quot;)</span></code> but uses the plotting region set by the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> ).</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">points(x,y,...)</span></code> adds points at the specified (x,y)-coordinates of the initial plot</p>
 <ul>
+<li><p>this does the same as <code class="docutils literal notranslate"><span class="pre">plot(x,y,type=&quot;p&quot;)</span></code> but plots the point on top of the initial plot constructed by the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p></li>
 <li><p>all optional arguments related to plotting points from <a class="reference internal" href="#content-points-optional"><span class="std std-ref">Using optional arguments to customize the point plot.</span></a> can be used in the place of <code class="docutils literal notranslate"><span class="pre">...</span></code></p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lines(x,y,...)</span></code> adds “lines” (i.e. does the same as <code class="docutils literal notranslate"><span class="pre">plot(x,y,type=&quot;l&quot;)</span></code> but uses the plotting region set by the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>)</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">lines(x,y,...)</span></code> adds “lines”</p>
 <ul>
+<li><p>this does the same as <code class="docutils literal notranslate"><span class="pre">plot(x,y,type=&quot;l&quot;)</span></code> but plots on top of the initial plot constructed by the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code></p></li>
 <li><p>all optional arguments from <a class="reference internal" href="#content-lines-optional"><span class="std std-ref">Using optional arguments</span></a> can be used in the place of <code class="docutils literal notranslate"><span class="pre">...</span></code></p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">text(x,y,text,...)</span></code> which adds text annotations at the specified coordinates, with the specific text annotations set in <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">grid()</span></code> to add a grid</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">axis(side,...)</span></code> to add axes</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">legend()</span></code> to add legend</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">arrows(x0,y0,x1,x2,...)</span></code> to add an arrow pointing from (x0,y0) to (x1,y1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text(x,y,text,...)</span></code> adds text annotations at the specified coordinates, with the specific text annotations set in <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grid()</span></code> adds a grid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis(side,...)</span></code> adds axes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">legend()</span></code> adds legend</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrows(x0,y0,x1,x2,...)</span></code> adds an arrow pointing from (x0,y0) to (x1,y1)</p></li>
 <li><p>etc</p></li>
 </ul>
-<p>Always keep in mind that the plotting region is set with the call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and does not change when we add additional objects to the plot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Keep in mind that the plotting region is set with the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and does not change when we add additional objects to the plot.</p>
+</div>
 <section id="adding-a-grid">
 <h4><span class="section-number">2.2.3.1. </span>Adding a grid<a class="headerlink" href="#adding-a-grid" title="Permalink to this headline">#</a></h4>
 <p>For example, we can add a grid.</p>
@@ -1231,7 +1258,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_67_0.png" src="_images/ch2RPlotting_67_0.png" />
+<img alt="_images/ch2RPlotting_69_0.png" src="_images/ch2RPlotting_69_0.png" />
 </div>
 </div>
 </section>
@@ -1283,7 +1310,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_71_0.png" src="_images/ch2RPlotting_71_0.png" />
+<img alt="_images/ch2RPlotting_73_0.png" src="_images/ch2RPlotting_73_0.png" />
 </div>
 </div>
 <p>It is a good idea to plot the different functions with different graphical properties to make it easier to distinguish.</p>
@@ -1297,7 +1324,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_73_0.png" src="_images/ch2RPlotting_73_0.png" />
+<img alt="_images/ch2RPlotting_75_0.png" src="_images/ch2RPlotting_75_0.png" />
 </div>
 </div>
 <p>Or different line types</p>
@@ -1310,7 +1337,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_75_0.png" src="_images/ch2RPlotting_75_0.png" />
+<img alt="_images/ch2RPlotting_77_0.png" src="_images/ch2RPlotting_77_0.png" />
 </div>
 </div>
 <p>Or both</p>
@@ -1323,10 +1350,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_77_0.png" src="_images/ch2RPlotting_77_0.png" />
+<img alt="_images/ch2RPlotting_79_0.png" src="_images/ch2RPlotting_79_0.png" />
 </div>
 </div>
-<p>Note that the plotting region is defined at the point one calls <code class="docutils literal notranslate"><span class="pre">plot()</span></code>. Therefore, if we use defaults (that is, if we don’t set <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> manually) R will choose a plotting region which is more natural for the function used in <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
+<p>Note that the plotting region is defined at the point one calls <code class="docutils literal notranslate"><span class="pre">plot()</span></code>. Therefore, if we we don’t set <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> manually R will choose a plotting region which is more natural for the function plotted in the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
 <p>For example, if we first plotted the second function, and then the first, the graph would look like</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1336,7 +1363,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_79_0.png" src="_images/ch2RPlotting_79_0.png" />
+<img alt="_images/ch2RPlotting_81_0.png" src="_images/ch2RPlotting_81_0.png" />
 </div>
 </div>
 </section>
@@ -1349,7 +1376,7 @@ title="Print to PDF"
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">position</span></code> is</p>
 <ul>
-<li><p>either a pair of x and y coordinate for where the legend to appear</p></li>
+<li><p>either a pair of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinate for where the legend to appear</p></li>
 <li><p>or a keyword such as “topleft”, “topright”, “bottomleft”, “top”, etc</p></li>
 </ul>
 </li>
@@ -1369,15 +1396,15 @@ title="Print to PDF"
 <span class="nf">grid</span><span class="p">()</span>
 
 <span class="nf">legend</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">-10</span><span class="p">,</span> 
-       <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($x^3+2x$)&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($8x^2+3x$)&quot;</span><span class="p">)),</span> 
-       <span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> 
-       <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> 
-       <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span> 
+       <span class="n">legend</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($x^3+2x$)&quot;</span><span class="p">),</span><span class="nf">TeX</span><span class="p">(</span><span class="n">r</span><span class="s">&quot;($8x^2+3x$)&quot;</span><span class="p">)),</span> <span class="c1"># assign first label to y1, second to y2</span>
+       <span class="n">lty</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span>                                       <span class="c1"># assign line-type 1 to y1, and 2 to y2 (as this is how we plotted them)</span>
+       <span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span>                             <span class="c1"># assing red to y1 and blue to y2 as this is how we plotted them     </span>
+       <span class="n">bty</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">)</span>                                          <span class="c1"># disable the box around the legend (you can omit this to see what happens)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_82_0.png" src="_images/ch2RPlotting_82_0.png" />
+<img alt="_images/ch2RPlotting_84_0.png" src="_images/ch2RPlotting_84_0.png" />
 </div>
 </div>
 </section>
@@ -1403,7 +1430,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_85_0.png" src="_images/ch2RPlotting_85_0.png" />
+<img alt="_images/ch2RPlotting_87_0.png" src="_images/ch2RPlotting_87_0.png" />
 </div>
 </div>
 </section>
@@ -1415,8 +1442,8 @@ title="Print to PDF"
 </div>
 <p>to add annotation where</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the x and y coordinates for the location at which the text annotation is to appear</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> is the text to appear at these coordinates (note it should be included in parenthesis as it is a string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates for the location at which the text annotation is to appear</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> is the text to appear at these coordinates</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> are optional arguments</p></li>
 </ul>
 <p>An important optional argument is <code class="docutils literal notranslate"><span class="pre">pos</span></code> which determines where the text should appear relative to the specified coordinates.</p>
@@ -1447,14 +1474,21 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_87_0.png" src="_images/ch2RPlotting_87_0.png" />
+<img alt="_images/ch2RPlotting_89_0.png" src="_images/ch2RPlotting_89_0.png" />
 </div>
 </div>
 <div class="exercise admonition" id="ex-curves">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.5 </span></p>
 <section id="exercise-content">
-<p>The graph below plots <span class="math notranslate nohighlight">\(y=x^3\)</span> and <span class="math notranslate nohighlight">\(y=x^2\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span> in different colours, and adds a legend with TeX labels. In addition, it plots points at the intersections of the two graphs occurring at <span class="math notranslate nohighlight">\((x=0,y=0)\)</span> and <span class="math notranslate nohighlight">\((x=1,y=1)\)</span>, and adds some text below the points.</p>
+<p>The graph below plots <span class="math notranslate nohighlight">\(y=x^3\)</span> and <span class="math notranslate nohighlight">\(y=x^2\)</span></p>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span></p></li>
+<li><p>in different colours</p></li>
+<li><p>adds a legend with TeX labels</p></li>
+<li><p>plots points at the intersections of the two graphs occurring at <span class="math notranslate nohighlight">\((x=0,y=0)\)</span> and <span class="math notranslate nohighlight">\((x=1,y=1)\)</span></p></li>
+<li><p>and adds some text below the points.</p></li>
+</ul>
 <img alt="_images/ex5.png" src="_images/ex5.png" />
 <p>Reproduce this plot in your RStudio.</p>
 </section>
@@ -1463,6 +1497,7 @@ title="Print to PDF"
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curves"> Exercise 2.5</a></p>
 <section id="solution-content">
+<p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
@@ -1483,8 +1518,8 @@ title="Print to PDF"
 <section id="adding-vertical-and-horizontal-lines-to-your-plots">
 <h4><span class="section-number">2.2.3.6. </span>Adding vertical and horizontal lines to your plots<a class="headerlink" href="#adding-vertical-and-horizontal-lines-to-your-plots" title="Permalink to this headline">#</a></h4>
 <p>In general, lines can be added to a graph using the <code class="docutils literal notranslate"><span class="pre">abline()</span></code> function.</p>
-<p>To add a horizontal line at some value, c, of y, call <code class="docutils literal notranslate"><span class="pre">abline(h=c)</span></code></p>
-<p>To add a vertical line at some value, d, of x, call <code class="docutils literal notranslate"><span class="pre">abline(h=d)</span></code></p>
+<p>To add a horizontal line at some value, <code class="docutils literal notranslate"><span class="pre">c</span></code>, of <span class="math notranslate nohighlight">\(y\)</span>, call <code class="docutils literal notranslate"><span class="pre">abline(h=c)</span></code></p>
+<p>To add a vertical line at some value, <code class="docutils literal notranslate"><span class="pre">d</span></code>, of <span class="math notranslate nohighlight">\(x\)</span>, call <code class="docutils literal notranslate"><span class="pre">abline(h=d)</span></code></p>
 <p>For example, let’s add dashed vertical lines going through the points A and B above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1518,7 +1553,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_93_0.png" src="_images/ch2RPlotting_93_0.png" />
+<img alt="_images/ch2RPlotting_95_0.png" src="_images/ch2RPlotting_95_0.png" />
 </div>
 </div>
 <p>This is not necessarily a good use of lines, but the point is to demonstrate what is possible.</p>
@@ -1555,7 +1590,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_98_0.png" src="_images/ch2RPlotting_98_0.png" />
+<img alt="_images/ch2RPlotting_100_0.png" src="_images/ch2RPlotting_100_0.png" />
 </div>
 </div>
 <p>However, this is not what we want, as the original axes remain. To disable them, use option <code class="docutils literal notranslate"><span class="pre">axes=FALSE</span></code> inside the initial <code class="docutils literal notranslate"><span class="pre">plot()</span></code> command</p>
@@ -1569,7 +1604,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_100_0.png" src="_images/ch2RPlotting_100_0.png" />
+<img alt="_images/ch2RPlotting_102_0.png" src="_images/ch2RPlotting_102_0.png" />
 </div>
 </div>
 <p>We may want the tick labels on the vertical axes to be rotated. Use <code class="docutils literal notranslate"><span class="pre">las=2</span></code> argument inside <code class="docutils literal notranslate"><span class="pre">axis(2,...)</span></code></p>
@@ -1583,7 +1618,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_102_0.png" src="_images/ch2RPlotting_102_0.png" />
+<img alt="_images/ch2RPlotting_104_0.png" src="_images/ch2RPlotting_104_0.png" />
 </div>
 </div>
 <p>Perhaps we don’t want all these ticks. We can disable the ticks by setting their width to zero, and also turn off the labes.</p>
@@ -1597,7 +1632,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_104_0.png" src="_images/ch2RPlotting_104_0.png" />
+<img alt="_images/ch2RPlotting_106_0.png" src="_images/ch2RPlotting_106_0.png" />
 </div>
 </div>
 <p>Or we can add manual “ticks” (by plotting points) and labels (by using text annotation)</p>
@@ -1614,7 +1649,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_106_0.png" src="_images/ch2RPlotting_106_0.png" />
+<img alt="_images/ch2RPlotting_108_0.png" src="_images/ch2RPlotting_108_0.png" />
 </div>
 </div>
 <p>In more schematics graphs, axes are often plotted with arrows in the direction of increase.</p>
@@ -1632,7 +1667,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_108_0.png" src="_images/ch2RPlotting_108_0.png" />
+<img alt="_images/ch2RPlotting_110_0.png" src="_images/ch2RPlotting_110_0.png" />
 </div>
 </div>
 <p>To reduce the size of the arrows use the argument <code class="docutils literal notranslate"><span class="pre">length</span></code> which sets the length of the arrow head in inches</p>
@@ -1646,7 +1681,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_110_0.png" src="_images/ch2RPlotting_110_0.png" />
+<img alt="_images/ch2RPlotting_112_0.png" src="_images/ch2RPlotting_112_0.png" />
 </div>
 </div>
 <p>We can also “move” the axes labels to the arrows by using text annotation (while also disabling the original labels in the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function by setting them to empty strings)</p>
@@ -1664,7 +1699,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_112_0.png" src="_images/ch2RPlotting_112_0.png" />
+<img alt="_images/ch2RPlotting_114_0.png" src="_images/ch2RPlotting_114_0.png" />
 </div>
 </div>
 </section>
@@ -1704,7 +1739,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_116_0.png" src="_images/ch2RPlotting_116_0.png" />
+<img alt="_images/ch2RPlotting_118_0.png" src="_images/ch2RPlotting_118_0.png" />
 </div>
 </div>
 </section>
@@ -1735,7 +1770,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_119_0.png" src="_images/ch2RPlotting_119_0.png" />
+<img alt="_images/ch2RPlotting_121_0.png" src="_images/ch2RPlotting_121_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1761,7 +1796,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_121_0.png" src="_images/ch2RPlotting_121_0.png" />
+<img alt="_images/ch2RPlotting_123_0.png" src="_images/ch2RPlotting_123_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1817,7 +1852,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_123_0.png" src="_images/ch2RPlotting_123_0.png" />
+<img alt="_images/ch2RPlotting_125_0.png" src="_images/ch2RPlotting_125_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1867,9 +1902,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ch2RPlotting_124_0.png" src="_images/ch2RPlotting_124_0.png" />
+<img alt="_images/ch2RPlotting_126_0.png" src="_images/ch2RPlotting_126_0.png" />
 </div>
 </div>
+<p>This completes the chapter on <a class="reference internal" href="#section-plotting"><span class="std std-ref">Plotting in R</span></a>. In the next chapter we turn attention to using user-defined functions in R.</p>
 </section>
 </section>
 
@@ -1906,6 +1942,13 @@ title="Print to PDF"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title"><span class="section-number">1. </span>Basics of R</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch3Functions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Writing your own functions in R</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
