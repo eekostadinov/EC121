@@ -2,11 +2,8 @@ for (i in 1:10){
     print(i)
 }
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 x1 <- 1
 r <- 1.5
 X = c(x1)

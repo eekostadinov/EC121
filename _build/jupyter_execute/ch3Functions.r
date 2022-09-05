@@ -29,8 +29,6 @@ h <- function(x,y,z) {
 
 h(1,2,3)
 
-<<<<<<< Updated upstream
-=======
 newvar <- 5 # defines a new global variable
 
 newvar
@@ -52,7 +50,6 @@ f2 <- function(x) {
     return(out)
 }
 
->>>>>>> Stashed changes
 options(repr.plot.width=4, repr.plot.height=4, repr.plot.res=240)
 options(jupyter.plot_mimetypes = "image/png") 
 
