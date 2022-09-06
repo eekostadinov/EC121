@@ -149,6 +149,11 @@ const thebe_selector_output = ".output, .cell_output"
    6. Linear algebra in R
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch7Integrals.html">
+   7. Numerical integration in R
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -387,6 +392,17 @@ title="Print to PDF"
    5.2. Creating a contour plot for a function of two variables
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#so-what-does-outer-x-y-f-do">
+   5.3. So what does
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     outer(x,y,f)
+    </span>
+   </code>
+   do?
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -438,6 +454,17 @@ title="Print to PDF"
    5.2. Creating a contour plot for a function of two variables
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#so-what-does-outer-x-y-f-do">
+   5.3. So what does
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     outer(x,y,f)
+    </span>
+   </code>
+   do?
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -449,7 +476,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="plotting-bivariate-functions-in-r">
-<h1><span class="section-number">5. </span>Plotting bivariate functions in R<a class="headerlink" href="#plotting-bivariate-functions-in-r" title="Permalink to this headline">#</a></h1>
+<span id="chapter-3dploting"></span><h1><span class="section-number">5. </span>Plotting bivariate functions in R<a class="headerlink" href="#plotting-bivariate-functions-in-r" title="Permalink to this headline">#</a></h1>
 <p>This chapter is a quick guide to plotting 3D surface plots and contour plots for functions of two variables in R. Following the discussion you should be able to plot any simple bivariate function and customise your graph.</p>
 <p>All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
 <div class="admonition tip">
@@ -805,6 +832,169 @@ z=-x^2-y^2
 <img alt="_images/fig-contourplot.png" src="_images/fig-contourplot.png" />
 </section>
 </div>
+</section>
+<section id="so-what-does-outer-x-y-f-do">
+<h2><span class="section-number">5.3. </span>So what does <code class="docutils literal notranslate"><span class="pre">outer(x,y,f)</span></code> do?<a class="headerlink" href="#so-what-does-outer-x-y-f-do" title="Permalink to this headline">#</a></h2>
+<p>As seen above, a key step in producing plots of a bivariate functions is defining appropriate set of <span class="math notranslate nohighlight">\(z\)</span> coordinates corresponding to the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates. Further, whether we produce surface plots or contour plots, given vectors of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates and a specification of the function to be plotted <span class="math notranslate nohighlight">\(f\)</span>, these coordinates are defined consistently by the statement <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">&lt;-</span> <span class="pre">outer(x,y,f)</span></code>. In this section we turn attention to the <code class="docutils literal notranslate"><span class="pre">outer()</span></code> function and to understanding exactly what it does.</p>
+<p>To set the stage, consider first a plot of a univariate function in two dimensions. For example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">0.25</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span><span class="nf">return</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2-1</span><span class="p">)}</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch5R3Dplotting_57_0.png" src="_images/ch5R3Dplotting_57_0.png" />
+</div>
+</div>
+<p>Notice that in the case of a bivariate function both the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates are specified as vectors of the same number of elements</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>-2</li><li>-1.75</li><li>-1.5</li><li>-1.25</li><li>-1</li><li>-0.75</li><li>-0.5</li><li>-0.25</li><li>0</li><li>0.25</li><li>0.5</li><li>0.75</li><li>1</li><li>1.25</li><li>1.5</li><li>1.75</li><li>2</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">17</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>3</li><li>2.0625</li><li>1.25</li><li>0.5625</li><li>0</li><li>-0.4375</li><li>-0.75</li><li>-0.9375</li><li>-1</li><li>-0.9375</li><li>-0.75</li><li>-0.4375</li><li>0</li><li>0.5625</li><li>1.25</li><li>2.0625</li><li>3</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">17</div></div>
+</div>
+<p>because a univariate function maps a value of <span class="math notranslate nohighlight">\(x\)</span> into a unique value of <span class="math notranslate nohighlight">\(y\)</span>. For each <span class="math notranslate nohighlight">\(x\)</span> there is exactly one <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>However, in the case of plotting bivariate functions we use vectors of <span class="math notranslate nohighlight">\(x\)</span> coordinates and <span class="math notranslate nohighlight">\(y\)</span> coordinates to specify the values of the arguments at which to plot, and another set of <span class="math notranslate nohighlight">\(z\)</span> coordinates to specify the values of the function at each pair of combinations of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates. A bivariate function maps each combination of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> into a value for <span class="math notranslate nohighlight">\(z\)</span> and therefore we need to specify a <span class="math notranslate nohighlight">\(z\)</span> coordinate for each combination of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. For example, consider the plot below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set coordinates for the arguments</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-5</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="c1"># Assign corresponding z coordinates</span>
+<span class="n">f</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">){</span><span class="nf">return</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="m">2</span> <span class="o">-</span> <span class="n">y</span><span class="o">^</span><span class="m">2</span><span class="p">)}</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="nf">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">f</span><span class="p">);</span> 
+<span class="c1"># Plot</span>
+<span class="nf">persp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ch5R3Dplotting_65_0.png" src="_images/ch5R3Dplotting_65_0.png" />
+</div>
+</div>
+<p>The vectors <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> have 21 elements each.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>-5</li><li>-4</li><li>-3</li><li>-2</li><li>-1</li><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">11</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.list-inline {list-style: none; margin:0; padding: 0}
+.list-inline>li {display: inline-block}
+.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
+</style>
+<ol class=list-inline><li>-5</li><li>-4</li><li>-3</li><li>-2</li><li>-1</li><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ol>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">11</div></div>
+</div>
+<p>So an appropriate set of <span class="math notranslate nohighlight">\(z\)</span> coordinates will include one <span class="math notranslate nohighlight">\(z\)</span> coordinate for each combination of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. Since there are 11 values for <span class="math notranslate nohighlight">\(x\)</span> and 11 values for <span class="math notranslate nohighlight">\(y\)</span>, we need to have <span class="math notranslate nohighlight">\(11\times 11=121\)</span> <span class="math notranslate nohighlight">\(z\)</span> coordinates. Further, these coordinates need to be specified in a consistent way so that R knows which of the 121 <span class="math notranslate nohighlight">\(z\)</span> coordinates corresponds to which combination of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. This is exactly what <code class="docutils literal notranslate"><span class="pre">outer(x,y,f)</span></code> does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">&lt;-</span> <span class="nf">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
+ [1,]  -50  -41  -34  -29  -26  -25  -26  -29  -34   -41   -50
+ [2,]  -41  -32  -25  -20  -17  -16  -17  -20  -25   -32   -41
+ [3,]  -34  -25  -18  -13  -10   -9  -10  -13  -18   -25   -34
+ [4,]  -29  -20  -13   -8   -5   -4   -5   -8  -13   -20   -29
+ [5,]  -26  -17  -10   -5   -2   -1   -2   -5  -10   -17   -26
+ [6,]  -25  -16   -9   -4   -1    0   -1   -4   -9   -16   -25
+ [7,]  -26  -17  -10   -5   -2   -1   -2   -5  -10   -17   -26
+ [8,]  -29  -20  -13   -8   -5   -4   -5   -8  -13   -20   -29
+ [9,]  -34  -25  -18  -13  -10   -9  -10  -13  -18   -25   -34
+[10,]  -41  -32  -25  -20  -17  -16  -17  -20  -25   -32   -41
+[11,]  -50  -41  -34  -29  -26  -25  -26  -29  -34   -41   -50
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see <code class="docutils literal notranslate"><span class="pre">outer(x,y,f)</span></code> specifies the <span class="math notranslate nohighlight">\(z\)</span>-coordinates into a <em>matrix</em> (a two-dimensional array) where the element in (row <span class="math notranslate nohighlight">\(i\)</span>, column <span class="math notranslate nohighlight">\(j\)</span>) corresponds to the value of the function when <span class="math notranslate nohighlight">\(x\)</span> equals the <span class="math notranslate nohighlight">\(i\)</span>’th element of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <span class="math notranslate nohighlight">\(y\)</span> equals the <span class="math notranslate nohighlight">\(j\)</span>’th element to <code class="docutils literal notranslate"><span class="pre">y</span></code>. For example, the 3rd element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is -3 and the 4th element of <code class="docutils literal notranslate"><span class="pre">y</span></code> is -2. The value of the function when <span class="math notranslate nohighlight">\(x=-3\)</span> and <span class="math notranslate nohighlight">\(y=-2\)</span> is <span class="math notranslate nohighlight">\(f(-3,-2)=-(-3)^2-(-2)^2=-13\)</span>. As we can see the element of <code class="docutils literal notranslate"><span class="pre">z</span></code> in (row 3, column 4) is exactly -13.</p>
+<p>Hence, based on this orderly specification of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> coordinates, R knows exactly what value of <span class="math notranslate nohighlight">\(z\)</span> corresponds to each pair of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and is able to plot.</p>
+<p>This completes the discussion of <span class="xref std std-ref">chapter:3dplotting</span>. We next turn attention to using R for working with matrices.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
