@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Numerical methods for EC121
+title: Numerical methods for EC139
 author: Emil Kostadinov
 logo: logo.png
 
@@ -27,7 +27,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/eekostadinov/EC121  # Online location of your book
+  url: https://github.com/eekostadinov/EC139  # Online location of your book
 
 
 # Add GitHub buttons to your book

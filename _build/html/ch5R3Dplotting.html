@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Plotting bivariate functions in R &#8212; Numerical methods for EC121</title>
+    <title>5. Plotting bivariate functions in R &#8212; Numerical methods for EC139</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -102,7 +102,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Numerical methods for EC121</h1>
+      <h1 class="site-logo" id="site-title">Numerical methods for EC139</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -114,44 +114,44 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to EC121’s lecture notes on numerical methods with R
+                    Welcome to EC139’s lecture notes on numerical methods with R
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="ch1Rbasics.html">
-   1. Basics of R
+   1. Basics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch2RPlotting.html">
-   2. Plotting in R
+   2. 2D Plotting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch3Functions.html">
-   3. Writing your own functions in R
+   3. Functions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch4Loops.html">
-   4. Loops in R
+   4. Loops
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   5. Plotting bivariate functions in R
+   5. 3D Plotting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch6Matrices.html">
-   6. Linear algebra in R
+   6. Matrices
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="ch7Integrals.html">
-   7. Numerical integration in R
+   7. Integrals
   </a>
  </li>
 </ul>
@@ -213,7 +213,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/eekostadinov/EC121/master?urlpath=tree/ch5R3Dplotting.ipynb"
+        <a href="https://mybinder.org/v2/gh/eekostadinov/EC139/master?urlpath=tree/ch5R3Dplotting.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -256,7 +256,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/eekostadinov/EC121"
+        <a href="https://github.com/eekostadinov/EC139"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -273,7 +273,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/eekostadinov/EC121/issues/new?title=Issue%20on%20page%20%2Fch5R3Dplotting.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/eekostadinov/EC139/issues/new?title=Issue%20on%20page%20%2Fch5R3Dplotting.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -476,12 +476,12 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="plotting-bivariate-functions-in-r">
-<span id="chapter-3dploting"></span><h1><span class="section-number">5. </span>Plotting bivariate functions in R<a class="headerlink" href="#plotting-bivariate-functions-in-r" title="Permalink to this headline">#</a></h1>
+<span id="chapter-3dplotting"></span><h1><span class="section-number">5. </span>Plotting bivariate functions in R<a class="headerlink" href="#plotting-bivariate-functions-in-r" title="Permalink to this headline">#</a></h1>
 <p>This chapter is a quick guide to plotting 3D surface plots and contour plots for functions of two variables in R. Following the discussion you should be able to plot any simple bivariate function and customise your graph.</p>
 <p>All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The discussion builds upon the material from chapters <a class="reference internal" href="ch2RPlotting.html#section-plotting"><span class="std std-ref">Plotting in R</span></a> and <a class="reference internal" href="ch3Functions.html#chapter-functions"><span class="std std-ref">Writing your own functions in R</span></a>, so make sure that you have gone through these already.</p>
+<p>The discussion builds upon the material from chapters <a class="reference internal" href="ch2RPlotting.html#chapter-plotting"><span class="std std-ref">Plotting in R</span></a> and <a class="reference internal" href="ch3Functions.html#chapter-functions"><span class="std std-ref">Writing your own functions in R</span></a>, so make sure that you have gone through these already.</p>
 </div>
 <p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
 <ul class="simple">
@@ -491,7 +491,7 @@ title="Print to PDF"
 <p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
 <section id="creating-a-3d-surface-plot-for-a-function-of-two-variables">
 <h2><span class="section-number">5.1. </span>Creating a 3D surface plot for a function of two variables.<a class="headerlink" href="#creating-a-3d-surface-plot-for-a-function-of-two-variables" title="Permalink to this headline">#</a></h2>
-<p>Conceptually, the procedure for plotting bivariate functions in three dimensions is very similar to the procedure for plotting univariate functions in two dimensions, as discussed in <a class="reference internal" href="ch2RPlotting.html#section-plotting"><span class="std std-ref">Plotting in R</span></a>.</p>
+<p>Conceptually, the procedure for plotting bivariate functions in three dimensions is very similar to the procedure for plotting univariate functions in two dimensions, as discussed in <a class="reference internal" href="ch2RPlotting.html#chapter-plotting"><span class="std std-ref">Plotting in R</span></a>.</p>
 <p>In order to set the stage let’s revisit the procedure for plotting functions of one variable. For example, to plot <span class="math notranslate nohighlight">\(y=x^2-1\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span> we follow the following 3-step procedure:</p>
 <p><strong>Step 1</strong></p>
 <p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of evenly spaced <span class="math notranslate nohighlight">\(x\)</span> coordinates for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span>.</p>
@@ -994,7 +994,7 @@ z=-x^2-y^2
 </div>
 <p>As you can see <code class="docutils literal notranslate"><span class="pre">outer(x,y,f)</span></code> specifies the <span class="math notranslate nohighlight">\(z\)</span>-coordinates into a <em>matrix</em> (a two-dimensional array) where the element in (row <span class="math notranslate nohighlight">\(i\)</span>, column <span class="math notranslate nohighlight">\(j\)</span>) corresponds to the value of the function when <span class="math notranslate nohighlight">\(x\)</span> equals the <span class="math notranslate nohighlight">\(i\)</span>’th element of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <span class="math notranslate nohighlight">\(y\)</span> equals the <span class="math notranslate nohighlight">\(j\)</span>’th element to <code class="docutils literal notranslate"><span class="pre">y</span></code>. For example, the 3rd element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is -3 and the 4th element of <code class="docutils literal notranslate"><span class="pre">y</span></code> is -2. The value of the function when <span class="math notranslate nohighlight">\(x=-3\)</span> and <span class="math notranslate nohighlight">\(y=-2\)</span> is <span class="math notranslate nohighlight">\(f(-3,-2)=-(-3)^2-(-2)^2=-13\)</span>. As we can see the element of <code class="docutils literal notranslate"><span class="pre">z</span></code> in (row 3, column 4) is exactly -13.</p>
 <p>Hence, based on this orderly specification of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> coordinates, R knows exactly what value of <span class="math notranslate nohighlight">\(z\)</span> corresponds to each pair of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and is able to plot.</p>
-<p>This completes the discussion of <span class="xref std std-ref">chapter:3dplotting</span>. We next turn attention to using R for working with matrices.</p>
+<p>This completes the discussion of <a class="reference internal" href="#chapter-3dplotting"><span class="std std-ref">Plotting bivariate functions in R</span></a>. We next turn attention to using R for working with matrices.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
