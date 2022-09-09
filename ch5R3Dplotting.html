@@ -114,7 +114,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to EC139’s lecture notes on numerical methods with R
+                    <no title>
                 </a>
             </li>
         </ul>
@@ -483,12 +483,8 @@ title="Print to PDF"
 <p class="admonition-title">Tip</p>
 <p>The discussion builds upon the material from chapters <a class="reference internal" href="ch2RPlotting.html#chapter-plotting"><span class="std std-ref">Plotting in R</span></a> and <a class="reference internal" href="ch3Functions.html#chapter-functions"><span class="std std-ref">Writing your own functions in R</span></a>, so make sure that you have gone through these already.</p>
 </div>
-<p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
-<ul class="simple">
-<li><p>copying code from this notebook to your R script and run it there</p></li>
-<li><p>running the codes in the RStudio script provided on the Moodle page</p></li>
-</ul>
-<p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
+<p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
+<p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
 <section id="creating-a-3d-surface-plot-for-a-function-of-two-variables">
 <h2><span class="section-number">5.1. </span>Creating a 3D surface plot for a function of two variables.<a class="headerlink" href="#creating-a-3d-surface-plot-for-a-function-of-two-variables" title="Permalink to this headline">#</a></h2>
 <p>Conceptually, the procedure for plotting bivariate functions in three dimensions is very similar to the procedure for plotting univariate functions in two dimensions, as discussed in <a class="reference internal" href="ch2RPlotting.html#chapter-plotting"><span class="std std-ref">Plotting in R</span></a>.</p>
@@ -503,7 +499,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>Step 2</strong></p>
-<p>Assign the corresponding <span class="math notranslate nohighlight">\(y\)</span> coordinates to <code class="docutils literal notranslate"><span class="pre">y</span></code>. To emphasise the similarity with 3D plots, let’s do this by using a function <code class="docutils literal notranslate"><span class="pre">f</span></code> implementing <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p>Assign the corresponding <span class="math notranslate nohighlight">\(y\)</span> coordinates to <code class="docutils literal notranslate"><span class="pre">y</span></code>. To emphasise the similarity to the procedure for 3D plots, let’s do this by using a function <code class="docutils literal notranslate"><span class="pre">f</span></code> implementing <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span><span class="nf">return</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2-1</span><span class="p">)}</span>
@@ -574,7 +570,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Note that at this step the only difference with respect to <strong>Step 3</strong> for univariate functions is that we use <code class="docutils literal notranslate"><span class="pre">persp()</span></code> rather than <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
-<p>And that’s it. For clarity, let’s but back in everything in a single code block:</p>
+<p>And that’s it. For clarity, let’s palce everything in a single code block:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set coordinates for the arguments</span>
@@ -597,7 +593,7 @@ title="Print to PDF"
 <section id="customizing-the-look-of-the-surface-plot">
 <h3><span class="section-number">5.1.4. </span>Customizing the look of the surface plot<a class="headerlink" href="#customizing-the-look-of-the-surface-plot" title="Permalink to this headline">#</a></h3>
 <p>As with <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, when using <code class="docutils literal notranslate"><span class="pre">persp()</span></code> we can customize the look of the graph by using optional arguments.</p>
-<p>One important set of optional arguments that are specific to 3D plotting only are ones that allow us to specify the viewing direction - <code class="docutils literal notranslate"><span class="pre">theta</span></code> and <code class="docutils literal notranslate"><span class="pre">phi</span></code>. To understand how these work, imagine that you are on a sphere surrounding the graph and can move along the sphere to change your perspective. The argument <code class="docutils literal notranslate"><span class="pre">theta</span></code> allows you to move along longitudes of the sphere, while the argument <code class="docutils literal notranslate"><span class="pre">phi</span></code> allows you to move along latitudes of the sphere. The values of both <code class="docutils literal notranslate"><span class="pre">theta</span></code> and <code class="docutils literal notranslate"><span class="pre">phi</span></code> are set in terms of degrees of the angle with which you want to move.</p>
+<p>One important set of optional arguments that are specific to 3D plotting only are ones that allow us to specify the viewing direction - <code class="docutils literal notranslate"><span class="pre">theta</span></code> and <code class="docutils literal notranslate"><span class="pre">phi</span></code>. To understand how these work, imagine that you are on a sphere surrounding the graph and can move along the sphere to change your perspective. The argument <code class="docutils literal notranslate"><span class="pre">theta</span></code> allows you to move along “longitudes” of the sphere, while the argument <code class="docutils literal notranslate"><span class="pre">phi</span></code> allows you to move along “latitudes” of the sphere. The values of both <code class="docutils literal notranslate"><span class="pre">theta</span></code> and <code class="docutils literal notranslate"><span class="pre">phi</span></code> are set in terms of degrees of the angle by which you want to move.</p>
 <p>For example, to move your perspective as a viewer by 30 degrees along the longitude type</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -771,7 +767,7 @@ z=-x^2-y^2
 <img alt="_images/ch5R3Dplotting_44_0.png" src="_images/ch5R3Dplotting_44_0.png" />
 </div>
 </div>
-<p>An interesting (if a bit self-indulgent) feature is that with filled contours we can use color palettes (note that by default we have a lot of colors in such a plot so it is no longer sufficient to define the color, but the whole color palette). R has a number of in-built palettes which can be called as below (if you are interested check online how to do this).</p>
+<p>An interesting (if a bit indulgent) feature is that with filled contours we can use color palettes (note that by default we have a lot of colors in such a plot so it is no longer sufficient to define the color, but the whole “color palette”). R has a number of in-built palettes which can be called as below (if you are interested check online how to do this).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filled.contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">cm.colors</span><span class="p">(</span><span class="m">20</span><span class="p">))</span>
@@ -797,7 +793,7 @@ z=-x^2-y^2
 <span class="n">library</span><span class="p">(</span><span class="n">wesanderson</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And here is a filled contour with colors from the Wes Anderson’s Grand Budapest Hotel</p>
+<p>And here is a filled contour with colors from the Wes Anderson’s “Grand Budapest Hotel”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">filled.contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="nf">wes_palette</span><span class="p">(</span><span class="s">&quot;GrandBudapest2&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;continuous&quot;</span><span class="p">))</span>
@@ -971,26 +967,28 @@ z=-x^2-y^2
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">&lt;-</span> <span class="nf">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="n">z</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
- [1,]  -50  -41  -34  -29  -26  -25  -26  -29  -34   -41   -50
- [2,]  -41  -32  -25  -20  -17  -16  -17  -20  -25   -32   -41
- [3,]  -34  -25  -18  -13  -10   -9  -10  -13  -18   -25   -34
- [4,]  -29  -20  -13   -8   -5   -4   -5   -8  -13   -20   -29
- [5,]  -26  -17  -10   -5   -2   -1   -2   -5  -10   -17   -26
- [6,]  -25  -16   -9   -4   -1    0   -1   -4   -9   -16   -25
- [7,]  -26  -17  -10   -5   -2   -1   -2   -5  -10   -17   -26
- [8,]  -29  -20  -13   -8   -5   -4   -5   -8  -13   -20   -29
- [9,]  -34  -25  -18  -13  -10   -9  -10  -13  -18   -25   -34
-[10,]  -41  -32  -25  -20  -17  -16  -17  -20  -25   -32   -41
-[11,]  -50  -41  -34  -29  -26  -25  -26  -29  -34   -41   -50
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A matrix: 11 × 11 of type dbl</caption>
+<tbody>
+	<tr><td>-50</td><td>-41</td><td>-34</td><td>-29</td><td>-26</td><td>-25</td><td>-26</td><td>-29</td><td>-34</td><td>-41</td><td>-50</td></tr>
+	<tr><td>-41</td><td>-32</td><td>-25</td><td>-20</td><td>-17</td><td>-16</td><td>-17</td><td>-20</td><td>-25</td><td>-32</td><td>-41</td></tr>
+	<tr><td>-34</td><td>-25</td><td>-18</td><td>-13</td><td>-10</td><td> -9</td><td>-10</td><td>-13</td><td>-18</td><td>-25</td><td>-34</td></tr>
+	<tr><td>-29</td><td>-20</td><td>-13</td><td> -8</td><td> -5</td><td> -4</td><td> -5</td><td> -8</td><td>-13</td><td>-20</td><td>-29</td></tr>
+	<tr><td>-26</td><td>-17</td><td>-10</td><td> -5</td><td> -2</td><td> -1</td><td> -2</td><td> -5</td><td>-10</td><td>-17</td><td>-26</td></tr>
+	<tr><td>-25</td><td>-16</td><td> -9</td><td> -4</td><td> -1</td><td>  0</td><td> -1</td><td> -4</td><td> -9</td><td>-16</td><td>-25</td></tr>
+	<tr><td>-26</td><td>-17</td><td>-10</td><td> -5</td><td> -2</td><td> -1</td><td> -2</td><td> -5</td><td>-10</td><td>-17</td><td>-26</td></tr>
+	<tr><td>-29</td><td>-20</td><td>-13</td><td> -8</td><td> -5</td><td> -4</td><td> -5</td><td> -8</td><td>-13</td><td>-20</td><td>-29</td></tr>
+	<tr><td>-34</td><td>-25</td><td>-18</td><td>-13</td><td>-10</td><td> -9</td><td>-10</td><td>-13</td><td>-18</td><td>-25</td><td>-34</td></tr>
+	<tr><td>-41</td><td>-32</td><td>-25</td><td>-20</td><td>-17</td><td>-16</td><td>-17</td><td>-20</td><td>-25</td><td>-32</td><td>-41</td></tr>
+	<tr><td>-50</td><td>-41</td><td>-34</td><td>-29</td><td>-26</td><td>-25</td><td>-26</td><td>-29</td><td>-34</td><td>-41</td><td>-50</td></tr>
+</tbody>
+</table>
+</div></div>
 </div>
 <p>As you can see <code class="docutils literal notranslate"><span class="pre">outer(x,y,f)</span></code> specifies the <span class="math notranslate nohighlight">\(z\)</span>-coordinates into a <em>matrix</em> (a two-dimensional array) where the element in (row <span class="math notranslate nohighlight">\(i\)</span>, column <span class="math notranslate nohighlight">\(j\)</span>) corresponds to the value of the function when <span class="math notranslate nohighlight">\(x\)</span> equals the <span class="math notranslate nohighlight">\(i\)</span>’th element of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <span class="math notranslate nohighlight">\(y\)</span> equals the <span class="math notranslate nohighlight">\(j\)</span>’th element to <code class="docutils literal notranslate"><span class="pre">y</span></code>. For example, the 3rd element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is -3 and the 4th element of <code class="docutils literal notranslate"><span class="pre">y</span></code> is -2. The value of the function when <span class="math notranslate nohighlight">\(x=-3\)</span> and <span class="math notranslate nohighlight">\(y=-2\)</span> is <span class="math notranslate nohighlight">\(f(-3,-2)=-(-3)^2-(-2)^2=-13\)</span>. As we can see the element of <code class="docutils literal notranslate"><span class="pre">z</span></code> in (row 3, column 4) is exactly -13.</p>
 <p>Hence, based on this orderly specification of <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(z\)</span> coordinates, R knows exactly what value of <span class="math notranslate nohighlight">\(z\)</span> corresponds to each pair of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and is able to plot.</p>

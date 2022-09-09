@@ -114,7 +114,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to EC139’s lecture notes on numerical methods with R
+                    <no title>
                 </a>
             </li>
         </ul>
@@ -432,8 +432,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#systems-of-linear-equations">
-     6.3.2. Systems of linear equations
+    <a class="reference internal nav-link" href="#optional-systems-of-linear-equations">
+     6.3.2. (Optional) Systems of linear equations
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -444,8 +444,8 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-systems-of-linear-equations">
-     6.3.3. Solving systems of linear equations
+    <a class="reference internal nav-link" href="#optional-solving-systems-of-linear-equations">
+     6.3.3. (Optional) Solving systems of linear equations
     </a>
    </li>
   </ul>
@@ -541,8 +541,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#systems-of-linear-equations">
-     6.3.2. Systems of linear equations
+    <a class="reference internal nav-link" href="#optional-systems-of-linear-equations">
+     6.3.2. (Optional) Systems of linear equations
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -553,8 +553,8 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-systems-of-linear-equations">
-     6.3.3. Solving systems of linear equations
+    <a class="reference internal nav-link" href="#optional-solving-systems-of-linear-equations">
+     6.3.3. (Optional) Solving systems of linear equations
     </a>
    </li>
   </ul>
@@ -572,12 +572,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="linear-algebra-in-r">
 <span id="chapter-matrices"></span><h1><span class="section-number">6. </span>Linear algebra in R<a class="headerlink" href="#linear-algebra-in-r" title="Permalink to this headline">#</a></h1>
 <p>This chapter is a quick guide to working with matrices in R. Following the discussion you should be able to define and conduct basic operations with matrices.</p>
-<p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
-<ul class="simple">
-<li><p>copying code from this notebook to your R script and run it there</p></li>
-<li><p>running the codes in the RStudio script provided on the Moodle page</p></li>
-</ul>
-<p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
+<p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
+<p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
 <section id="defining-a-matrix">
 <h2><span class="section-number">6.1. </span>Defining a matrix<a class="headerlink" href="#defining-a-matrix" title="Permalink to this headline">#</a></h2>
 <p>To define a matrix use the <code class="docutils literal notranslate"><span class="pre">matrix()</span></code> function with usage</p>
@@ -667,7 +663,7 @@ A= \begin{bmatrix}
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The number of rows and columns specified should be consistent with the number of elements.</p>
+<p>Again, the number of rows or columns specified should be consistent with the number of elements.</p>
 <p>For example</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">&lt;-</span> <span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -679,20 +675,6 @@ A= \begin{bmatrix}
 </pre></div>
 </div>
 <p>as the number of elements in <code class="docutils literal notranslate"><span class="pre">c(1,</span> <span class="pre">4,</span> <span class="pre">7,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">3,</span> <span class="pre">6,</span> <span class="pre">9)</span></code> is not divisible by 4.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The number of rows and columns specified should be consistent with the number of elements.</p>
-<p>For example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">&lt;-</span> <span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">nrow</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>yields and error message</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Warning</span> <span class="n">message</span><span class="p">:</span>
-<span class="n">In</span> <span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">nrow</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">:</span>
-  <span class="n">data</span> <span class="n">length</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">sub</span><span class="o">-</span><span class="n">multiple</span> <span class="ow">or</span> <span class="n">multiple</span> <span class="n">of</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
 </div>
 <section id="arranging-the-elements-of-the-vector-into-a-matrix-by-rows">
 <h3><span class="section-number">6.1.1. </span>Arranging the elements of the vector into a matrix by rows<a class="headerlink" href="#arranging-the-elements-of-the-vector-into-a-matrix-by-rows" title="Permalink to this headline">#</a></h3>
@@ -1017,8 +999,7 @@ C= \begin{bmatrix}
               <span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>results in the error message</p>
-<p><code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">A</span> <span class="pre">+</span> <span class="pre">C:</span> <span class="pre">non-conformable</span> <span class="pre">arrays</span></code></p>
+<p>results in the error message <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">A</span> <span class="pre">+</span> <span class="pre">C:</span> <span class="pre">non-conformable</span> <span class="pre">arrays</span></code></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Just like we can’t add matrices of different orders, a matrix cannot be added to a scalar. For example, the expression</p>
@@ -1322,8 +1303,8 @@ A = \begin{bmatrix} 1&amp;5&amp;8\\2&amp;-3&amp;-5\end{bmatrix} \text{ and } B =
 </div>
 <p>returns the error <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">determinant.matrix(x,</span> <span class="pre">logarithm</span> <span class="pre">=</span> <span class="pre">TRUE,</span> <span class="pre">...):</span> <span class="pre">'x'</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">a</span> <span class="pre">square</span> <span class="pre">matrix</span></code> because the matrix <code class="docutils literal notranslate"><span class="pre">C</span></code> is not square matrix and has no determinant.</p>
 </section>
-<section id="systems-of-linear-equations">
-<h3><span class="section-number">6.3.2. </span>Systems of linear equations<a class="headerlink" href="#systems-of-linear-equations" title="Permalink to this headline">#</a></h3>
+<section id="optional-systems-of-linear-equations">
+<h3><span class="section-number">6.3.2. </span>(Optional) Systems of linear equations<a class="headerlink" href="#optional-systems-of-linear-equations" title="Permalink to this headline">#</a></h3>
 <p>Consider a system of <span class="math notranslate nohighlight">\(n\)</span> linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns written in matrix form as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1375,6 +1356,12 @@ I_{3\times3}=\begin{bmatrix}1&amp;0&amp;0\\0&amp;1&amp;0\\0&amp;0&amp;1 \end{bma
 A_{n\times n}\times I_{n\times n} = I_{n\times n}\times A_{n\times n} = A_{n\times n}  
 \]</div>
 <p>In words, multiplying a square matrix <span class="math notranslate nohighlight">\(A\)</span> by the identity matrix of the same order always yields the original matrix <span class="math notranslate nohighlight">\(A\)</span>. You can think that in the context of matrix multiplication the identity matrix has the same property as the number 1 has in the context of multiplying numbers.</p>
+<p>Similarly, given an <span class="math notranslate nohighlight">\(n\times1\)</span> column vector <span class="math notranslate nohighlight">\(a_{n\times1}\)</span>, and the identity matrix <span class="math notranslate nohighlight">\(I_{n\times n}\)</span> or order <span class="math notranslate nohighlight">\(n\times n\)</span> then</p>
+<div class="math notranslate nohighlight">
+\[
+I_{n\times n}\times a_{n\times 1} = a_{n\times n}  
+\]</div>
+<p>In words, multiplying a vector <span class="math notranslate nohighlight">\(a\)</span> by the comformable identity matrix always yields the original vector <span class="math notranslate nohighlight">\(a\)</span>. Again, you can think that in the context of matrix multiplication the identity matrix has the same property as the number 1 has in the context of multiplying numbers.</p>
 </div>
 <p>For example, it is easy to verify that</p>
 <div class="math notranslate nohighlight">
@@ -1454,9 +1441,9 @@ A^{-1}\times A = A\times A^{-1} = I_{n\times n}
 </div>
 </section>
 </section>
-<section id="solving-systems-of-linear-equations">
-<h3><span class="section-number">6.3.3. </span>Solving systems of linear equations<a class="headerlink" href="#solving-systems-of-linear-equations" title="Permalink to this headline">#</a></h3>
-<div class="admonition-solving-systems-of-equations-using-inverse-matrices admonition">
+<section id="optional-solving-systems-of-linear-equations">
+<h3><span class="section-number">6.3.3. </span>(Optional) Solving systems of linear equations<a class="headerlink" href="#optional-solving-systems-of-linear-equations" title="Permalink to this headline">#</a></h3>
+<div class="tip admonition">
 <p class="admonition-title">Solving systems of equations using inverse matrices</p>
 <p>Consider again a general system of <span class="math notranslate nohighlight">\(n\)</span> linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns written in matrix form as</p>
 <div class="math notranslate nohighlight">
@@ -1470,12 +1457,12 @@ Ax=b
 \[
 A^{-1}Ax=A^{-1}b
 \]</div>
-<p>Note that <span class="math notranslate nohighlight">\(A^{-1}A=I_{n\times n}\)</span> so we have</p>
+<p>Note that by the definition of an inverse of a matrix, <span class="math notranslate nohighlight">\(A^{-1}A=I\)</span> so we have</p>
 <div class="math notranslate nohighlight">
 \[
-I_{n\times n}x=A^{-1}b
+Ix=A^{-1}b
 \]</div>
-<p>Note that <span class="math notranslate nohighlight">\(I_{n\times n}x = x\)</span> by the proprerty of identity matrices so we have</p>
+<p>Further, by the proprerty of identity matrices <span class="math notranslate nohighlight">\(Ix = x\)</span>  so we have</p>
 <div class="math notranslate nohighlight">
 \[
 x=A^{-1}b
