@@ -108,4 +108,4 @@ y
 length(y)
 
 z <- outer(x,y,f)
-print(z)
+z

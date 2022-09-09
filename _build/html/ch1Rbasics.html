@@ -58,7 +58,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2. Plotting in R" href="ch2RPlotting.html" />
-    <link rel="prev" title="Welcome to EC139’s lecture notes on numerical methods with R" href="intro.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,7 +114,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to EC139’s lecture notes on numerical methods with R
+                    <no title>
                 </a>
             </li>
         </ul>
@@ -540,16 +540,12 @@ title="Print to PDF"
 <li><p>assign values to variables</p></li>
 <li><p>create vectors</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To explore the codes below yourself make sure you have a working R installation on your machine. In addition, it is recommended to run the codes in RStudio (rather than the R GUI).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To explore the codes below yourself you need a working R installation on your machine. Further, it is recommended to install and use RStudio (rather than the R GUI) for running the codes.</p>
 </div>
-<p>It is intended that you read through the notebook and reproduce all code in your own R/RStudio installation. You can do this by either</p>
-<ul class="simple">
-<li><p>copying code from this notebook to your R script and run it there</p></li>
-<li><p>running the codes in the RStudio script provided on the Moodle page</p></li>
-</ul>
-<p>The chapter includes some exercises that allow you to test your understanding. It is intended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
+<p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
+<p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
 <section id="using-r-as-a-calculator">
 <h2><span class="section-number">1.1. </span>Using R as a calculator<a class="headerlink" href="#using-r-as-a-calculator" title="Permalink to this headline">#</a></h2>
 <p>R can be used as a powerful calculator.</p>
@@ -699,24 +695,7 @@ title="Print to PDF"
 <li><p>For example, the square root of <span class="math notranslate nohighlight">\(x\)</span> can be equivalently stated as <span class="math notranslate nohighlight">\(x^{1/2}\)</span> and evaluated as <code class="docutils literal notranslate"><span class="pre">x^(1/2)</span></code>.</p></li>
 </ul>
 </li>
-<li><p><strong>Natural exponential:</strong> <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code> returns <span class="math notranslate nohighlight">\(e^x\)</span></p>
-<ul>
-<li><p>For exponential functions to a base different than <span class="math notranslate nohighlight">\(e\)</span> simply use power notation.</p></li>
-<li><p>For example, for <span class="math notranslate nohighlight">\(2^3\)</span> simply type <code class="docutils literal notranslate"><span class="pre">2^3</span></code>.</p></li>
 </ul>
-</li>
-<li><p><strong>Natural logarithm:</strong> <code class="docutils literal notranslate"><span class="pre">log(x)</span></code> returns <span class="math notranslate nohighlight">\(\ln(x)\)</span></p>
-<ul>
-<li><p>Note that R uses <code class="docutils literal notranslate"><span class="pre">log(...)</span></code> to call the natural logarithm, i.e. <span class="math notranslate nohighlight">\(\ln(...)\)</span> or the logarithm to the base <span class="math notranslate nohighlight">\(e\)</span></p></li>
-</ul>
-</li>
-<li><p><strong>Logarithms to other bases:</strong> <code class="docutils literal notranslate"><span class="pre">log(x,a)</span></code> returns <span class="math notranslate nohighlight">\(\log_a x\)</span>, the “logarithm to the base <span class="math notranslate nohighlight">\(a\)</span> of <span class="math notranslate nohighlight">\(x\)</span>.”</p>
-<ul>
-<li><p>For example, <code class="docutils literal notranslate"><span class="pre">log(8,2)</span></code> returns <span class="math notranslate nohighlight">\(\log_2 8 = 3\)</span>, the “logarithm to the base 2 of 8”.</p></li>
-</ul>
-</li>
-</ul>
-<p>For example</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="m">9</span><span class="p">)</span>
@@ -726,7 +705,14 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">3</div></div>
 </div>
-<p>as <span class="math notranslate nohighlight">\(\sqrt{9}=3\)</span></p>
+<ul class="simple">
+<li><p><strong>Natural exponential:</strong> <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code> returns <span class="math notranslate nohighlight">\(e^x\)</span></p>
+<ul>
+<li><p>For exponential functions to a base different than <span class="math notranslate nohighlight">\(e\)</span> simply use power notation.</p></li>
+<li><p>For example, for <span class="math notranslate nohighlight">\(2^3\)</span> simply type <code class="docutils literal notranslate"><span class="pre">2^3</span></code>.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
@@ -736,7 +722,13 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">20.0855369231877</div></div>
 </div>
-<p>as <span class="math notranslate nohighlight">\(e^3\approx 20.0855\)</span></p>
+<ul class="simple">
+<li><p><strong>Natural logarithm:</strong> <code class="docutils literal notranslate"><span class="pre">log(x)</span></code> returns <span class="math notranslate nohighlight">\(\ln(x)\)</span></p>
+<ul>
+<li><p>Note that R uses <code class="docutils literal notranslate"><span class="pre">log(...)</span></code> to call the natural logarithm, i.e. <span class="math notranslate nohighlight">\(\ln(...)\)</span> or the logarithm to the base <span class="math notranslate nohighlight">\(e\)</span></p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
@@ -746,7 +738,6 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">1.09861228866811</div></div>
 </div>
-<p>as <span class="math notranslate nohighlight">\(\ln 3 \approx 1.0986\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">))</span>
@@ -756,7 +747,13 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">3</div></div>
 </div>
-<p>as <span class="math notranslate nohighlight">\(\ln e^3 = \log_e e^3 = 3\log_e e = 3\)</span></p>
+<ul class="simple">
+<li><p><strong>Logarithms to other bases:</strong> <code class="docutils literal notranslate"><span class="pre">log(x,a)</span></code> returns <span class="math notranslate nohighlight">\(\log_a x\)</span>, the “logarithm to the base <span class="math notranslate nohighlight">\(a\)</span> of <span class="math notranslate nohighlight">\(x\)</span>.”</p>
+<ul>
+<li><p>For example, <code class="docutils literal notranslate"><span class="pre">log(8,2)</span></code> returns <span class="math notranslate nohighlight">\(\log_2 8 = 3\)</span>, the “logarithm to the base 2 of 8”.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
@@ -766,12 +763,11 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">3</div></div>
 </div>
-<p>as <span class="math notranslate nohighlight">\(\log_2 8 = 3\)</span> (we need to raise the <em>base</em> 2 to the power 3 to get 8)</p>
 </section>
 <section id="evaluating-complex-arithmetic-expressions">
 <h3><span class="section-number">1.1.4. </span>Evaluating complex arithmetic expressions<a class="headerlink" href="#evaluating-complex-arithmetic-expressions" title="Permalink to this headline">#</a></h3>
 <p>By using the above syntax correctly we can evaluate arbitrarily complex arithmetic expressions.</p>
-<p>For example,</p>
+<p>For example, to evaluate <span class="math notranslate nohighlight">\(\sqrt{3\times(4/2)^5} + \log_5 2 - e^5\)</span>, type</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">4</span><span class="o">/</span><span class="m">2</span><span class="p">)</span><span class="o">^</span><span class="m">5</span> <span class="o">+</span> <span class="nf">log</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">))</span> <span class="o">-</span> <span class="nf">exp</span><span class="p">(</span><span class="m">3</span><span class="p">)</span> 
@@ -781,7 +777,6 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">-10.2656246752053</div></div>
 </div>
-<p>evaluates <span class="math notranslate nohighlight">\(\sqrt{3\times(4/2)^5} + \log_5 2 - e^5\)</span></p>
 <div class="exercise admonition" id="ex-arithmetic">
 
 <p class="admonition-title"><span class="caption-number">Exercise 1.1 </span></p>
@@ -827,12 +822,12 @@ title="Print to PDF"
 </section>
 <section id="adding-comments-to-your-code">
 <h2><span class="section-number">1.2. </span>Adding comments to your code<a class="headerlink" href="#adding-comments-to-your-code" title="Permalink to this headline">#</a></h2>
-<p>As you progress with programming you will often have to write and work through long pieces of code. Unfortunately long codes can become very messy and it is useful to have a way to add comments to your code - pieces of text that are not executed but help the coder explain the code (often to herself) and make it more readable.</p>
+<p>In programming you will often have to write and work through long pieces of code. Long codes can be messy and it is useful to have a way to add comments to your code - pieces of text that are not executed but help the coder explain the code (often to herself) and make it more readable.</p>
 <p>To start a comment in R, type <code class="docutils literal notranslate"><span class="pre">#</span></code> somewhere on a line of code and anything that follows on the line will not be executed, but will remain on the script as a comment.</p>
 <p>For example, we can add a comment before a line of code. The comment in itself is not executed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># The below code evaluates the log to the base 2 of 8</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following code evaluates the log to the base 2 of 8</span>
 
 <span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
 </pre></div>
@@ -841,7 +836,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">3</div></div>
 </div>
-<p>The code can also be added on the end of a line of executable code</p>
+<p>A comment can also be added on the end of a line of executable code</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">2</span><span class="p">)</span> <span class="c1"># this evaluates the log to the base 2 of 8</span>
@@ -930,7 +925,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">5</div></div>
 </div>
-<p>Henceforth, any arithmetic expression involving <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> will use their values to evaluate.</p>
+<p>Henceforth, any arithmetic expression involving <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> will use thee values stired in <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> to evaluate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
@@ -962,7 +957,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="vectors">
-<span id="section-vectors"></span><h2><span class="section-number">1.4. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h2>
+<span id="section-basics-vectors"></span><h2><span class="section-number">1.4. </span>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">#</a></h2>
 <p>For the purpose of the following discussion think of a vector (naively) as a data structure representing an ordered list of numbers.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1230,7 +1225,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to EC139’s lecture notes on numerical methods with R</p>
+            <p class="prev-next-title">&lt;no title&gt;</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="ch2RPlotting.html" title="next page">

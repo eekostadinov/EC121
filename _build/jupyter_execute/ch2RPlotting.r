@@ -93,18 +93,14 @@ plot(x,y)
 
 plot(x,y, type="b")
 
-# Set the vectors of coordinates as before
-
 x <- -3:3
 y <- x^3 - 4*x
-
 plot(x,y,type="l")
 
 plot(x,y,type="b")
 
 x <- seq(-3, 3, by=0.25)
 y <- x^3 - 4*x
-
 plot(x,y, type="l")
 
 plot(x,y, type="b")

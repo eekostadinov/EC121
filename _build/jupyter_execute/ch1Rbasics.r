@@ -34,7 +34,7 @@ log(8,2)
 
 sqrt(3*(4/2)^5 + log(2,5)) - exp(3) 
 
-# The below code evaluates the log to the base 2 of 8
+# The following code evaluates the log to the base 2 of 8
 
 log(8,2)
 
