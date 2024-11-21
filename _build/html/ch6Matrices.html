@@ -3,67 +3,61 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6. Linear algebra in R &#8212; Numerical methods for EC139</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
-    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -81,28 +75,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -124,12 +113,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -144,9 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -156,12 +157,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Numerical methods for EC139 - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Numerical methods for EC139 - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -194,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -203,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -332,26 +344,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -407,14 +421,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="linear-algebra-in-r">
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-in-r">
 <span id="chapter-matrices"></span><h1><span class="section-number">6. </span>Linear algebra in R<a class="headerlink" href="#linear-algebra-in-r" title="Permalink to this heading">#</a></h1>
 <p>This chapter is a quick guide to working with matrices in R. Following the discussion you should be able to define and conduct basic operations with matrices.</p>
 <p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
 <p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
-<section id="defining-a-matrix">
+<div class="section" id="defining-a-matrix">
 <h2><span class="section-number">6.1. </span>Defining a matrix<a class="headerlink" href="#defining-a-matrix" title="Permalink to this heading">#</a></h2>
 <p>To define a matrix use the <code class="docutils literal notranslate"><span class="pre">matrix()</span></code> function with usage</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">an</span><span class="p">),</span> <span class="n">nrow</span><span class="o">=</span><span class="n">number</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="n">number</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
@@ -516,7 +530,7 @@ A= \begin{bmatrix}
 </div>
 <p>as the number of elements in <code class="docutils literal notranslate"><span class="pre">c(1,</span> <span class="pre">4,</span> <span class="pre">7,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">3,</span> <span class="pre">6,</span> <span class="pre">9)</span></code> is not divisible by 4.</p>
 </div>
-<section id="arranging-the-elements-of-the-vector-into-a-matrix-by-rows">
+<div class="section" id="arranging-the-elements-of-the-vector-into-a-matrix-by-rows">
 <h3><span class="section-number">6.1.1. </span>Arranging the elements of the vector into a matrix by rows<a class="headerlink" href="#arranging-the-elements-of-the-vector-into-a-matrix-by-rows" title="Permalink to this heading">#</a></h3>
 <p>As seen above, by default, the elements of the vector passed to <code class="docutils literal notranslate"><span class="pre">matrix()</span></code> are arranged into a matrix column-wise. However, it may be more convenient for writing to arrange the elements row-wise. To do so use the optional argument <code class="docutils literal notranslate"><span class="pre">byrow=TRUE</span></code>. For example, the same matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> as above can be equivalently defined by</p>
 <div class="cell docutils container">
@@ -559,8 +573,8 @@ A= \begin{bmatrix}
 <p>generates the same matrix but makes the code much more readable.</p>
 <p>For the purposes of readability, henceforth, this is how we will enter matrices in these notes.</p>
 <p>Now let’s continue with another example of entering a matrix.</p>
-</section>
-<section id="example">
+</div>
+<div class="section" id="example">
 <h3><span class="section-number">6.1.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
 <p>To define the <span class="math notranslate nohighlight">\(3\times2\)</span> matrix</p>
 <div class="math notranslate nohighlight">
@@ -593,7 +607,7 @@ B= \begin{bmatrix}
 <div class="exercise admonition" id="ex-defmat">
 
 <p class="admonition-title"><span class="caption-number">Exercise 6.1 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>Define the matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -603,22 +617,22 @@ C= \begin{bmatrix}
 1 &amp; 9 &amp; 7 &amp;  0 
 \end{bmatrix} 
 \end{split}\]</div>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch6Matrices-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-defmat"> Exercise 6.1</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>This can be done with the code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">&lt;-</span> <span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span>
               <span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span>
               <span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-<section id="defining-column-and-row-vectors">
+</div>
+</div>
+<div class="section" id="defining-column-and-row-vectors">
 <h3><span class="section-number">6.1.3. </span>Defining column and row vectors.<a class="headerlink" href="#defining-column-and-row-vectors" title="Permalink to this heading">#</a></h3>
 <p>Column and row vectors can be also specified by using the <code class="docutils literal notranslate"><span class="pre">matrix()</span></code> function, setting the number of columns and rows appropriately.</p>
 <p>For example, to define the <span class="math notranslate nohighlight">\(1\times9\)</span> vector <span class="math notranslate nohighlight">\(a= \begin{bmatrix}1,2,3,4,5,6,7,8,9\end{bmatrix}\)</span> type</p>
@@ -683,11 +697,11 @@ C= \begin{bmatrix}
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="working-with-matrices">
+</div>
+</div>
+<div class="section" id="working-with-matrices">
 <h2><span class="section-number">6.2. </span>Working with matrices<a class="headerlink" href="#working-with-matrices" title="Permalink to this heading">#</a></h2>
-<section id="checking-the-order-of-a-matrix">
+<div class="section" id="checking-the-order-of-a-matrix">
 <h3><span class="section-number">6.2.1. </span>Checking the order of a matrix<a class="headerlink" href="#checking-the-order-of-a-matrix" title="Permalink to this heading">#</a></h3>
 <p>Given a matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>, then <code class="docutils literal notranslate"><span class="pre">dim(A)</span></code> returns the order (or dimension) of the matrix. This can be used to query the order of a given matrix.</p>
 <p>For example,</p>
@@ -707,8 +721,8 @@ C= \begin{bmatrix}
 </div>
 </div>
 <p>as the defined matrix <code class="docutils literal notranslate"><span class="pre">B</span></code> is of order <span class="math notranslate nohighlight">\(3\times2\)</span>.</p>
-</section>
-<section id="transpose-of-a-matrix">
+</div>
+<div class="section" id="transpose-of-a-matrix">
 <h3><span class="section-number">6.2.2. </span>Transpose of a matrix<a class="headerlink" href="#transpose-of-a-matrix" title="Permalink to this heading">#</a></h3>
 <p>Given a matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>, then <code class="docutils literal notranslate"><span class="pre">t(A)</span></code> returns the transpose of the matrix.</p>
 <p>For example, given</p>
@@ -779,8 +793,8 @@ C= \begin{bmatrix}
 </div>
 </div>
 </div>
-</section>
-<section id="matrix-addition">
+</div>
+<div class="section" id="matrix-addition">
 <h3><span class="section-number">6.2.3. </span>Matrix addition<a class="headerlink" href="#matrix-addition" title="Permalink to this heading">#</a></h3>
 <p>Given matrices <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> <strong>of the same order</strong></p>
 <ul class="simple">
@@ -869,8 +883,8 @@ C= \begin{bmatrix}
 \end{split}\]</div>
 <p>The reason this is allowed in R is that it allows a convenient shortcut for the above operation, but you should be careful to recognise that, mathematically, this is not a sum of a scalar and a matrix (which is not defined mathematically).</p>
 </div>
-</section>
-<section id="scalar-multiplication-of-matrices">
+</div>
+<div class="section" id="scalar-multiplication-of-matrices">
 <h3><span class="section-number">6.2.4. </span>Scalar multiplication of matrices.<a class="headerlink" href="#scalar-multiplication-of-matrices" title="Permalink to this heading">#</a></h3>
 <p>Given a matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> and a scalar <code class="docutils literal notranslate"><span class="pre">b</span></code>, the product of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> can be obtained as <code class="docutils literal notranslate"><span class="pre">A*b</span></code> or <code class="docutils literal notranslate"><span class="pre">b*A</span></code>.</p>
 <div class="cell docutils container">
@@ -906,8 +920,8 @@ C= \begin{bmatrix}
 </div>
 </div>
 </div>
-</section>
-<section id="matrix-multiplication">
+</div>
+<div class="section" id="matrix-multiplication">
 <h3><span class="section-number">6.2.5. </span>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Permalink to this heading">#</a></h3>
 <p>Given conformable matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, implemented by <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>, the matrix product <span class="math notranslate nohighlight">\(A\times B\)</span> is obtained in R by <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">%*%</span> <span class="pre">B</span></code>.</p>
 <p>Note that the multiplication sign should be enclosed in <code class="docutils literal notranslate"><span class="pre">%</span></code> signs for R to recognise that what we want is a matrix product.</p>
@@ -995,7 +1009,7 @@ A\times B = \begin{bmatrix}1&amp;1\\1&amp;1\end{bmatrix}\times\begin{bmatrix}1&a
 </div>
 <p>You should be extra careful to use the correct operator <code class="docutils literal notranslate"><span class="pre">%*%</span></code> for matrix multiplication!</p>
 </div>
-<section id="another-example">
+<div class="section" id="another-example">
 <h4><span class="section-number">6.2.5.1. </span>Another example<a class="headerlink" href="#another-example" title="Permalink to this heading">#</a></h4>
 <p>Consider the matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> defined below</p>
 <div class="cell docutils container">
@@ -1066,7 +1080,7 @@ A = \begin{bmatrix} 1&amp;5&amp;7\\2&amp;-3&amp;-5\\5&amp;-9&amp;1 \end{bmatrix}
 <div class="exercise admonition" id="ex-matoper">
 
 <p class="admonition-title"><span class="caption-number">Exercise 6.2 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>Consider the matrices</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1077,12 +1091,12 @@ A = \begin{bmatrix} 1&amp;5&amp;8\\2&amp;-3&amp;-5\end{bmatrix} \text{ and } B =
 \[
 (A\times B)^T + B\times A^T - A^T
 \]</div>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch6Matrices-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-matoper"> Exercise 6.2</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The following code evaluates the expression</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span>
              <span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
@@ -1094,14 +1108,14 @@ A = \begin{bmatrix} 1&amp;5&amp;8\\2&amp;-3&amp;-5\end{bmatrix} \text{ and } B =
 <span class="n">t</span><span class="p">(</span><span class="n">A</span><span class="o">%*%</span><span class="n">B</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">%*%</span><span class="n">t</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="n">t</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-</section>
-</section>
-<section id="matrices-and-systems-of-linear-equations">
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="matrices-and-systems-of-linear-equations">
 <h2><span class="section-number">6.3. </span>Matrices and systems of linear equations<a class="headerlink" href="#matrices-and-systems-of-linear-equations" title="Permalink to this heading">#</a></h2>
-<section id="determinant-of-a-matrix">
+<div class="section" id="determinant-of-a-matrix">
 <h3><span class="section-number">6.3.1. </span>Determinant of a matrix<a class="headerlink" href="#determinant-of-a-matrix" title="Permalink to this heading">#</a></h3>
 <p>A determinant of a matrix can be calculated in R using the <code class="docutils literal notranslate"><span class="pre">det()</span></code> function.</p>
 <p>Given a square matrix <span class="math notranslate nohighlight">\(A\)</span>, its determinant is found by typing <code class="docutils literal notranslate"><span class="pre">det(A)</span></code>.</p>
@@ -1142,8 +1156,8 @@ A = \begin{bmatrix} 1&amp;5&amp;8\\2&amp;-3&amp;-5\end{bmatrix} \text{ and } B =
 </pre></div>
 </div>
 <p>returns the error <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">determinant.matrix(x,</span> <span class="pre">logarithm</span> <span class="pre">=</span> <span class="pre">TRUE,</span> <span class="pre">...):</span> <span class="pre">'x'</span> <span class="pre">must</span> <span class="pre">be</span> <span class="pre">a</span> <span class="pre">square</span> <span class="pre">matrix</span></code> because the matrix <code class="docutils literal notranslate"><span class="pre">C</span></code> is not square matrix and has no determinant.</p>
-</section>
-<section id="optional-systems-of-linear-equations">
+</div>
+<div class="section" id="optional-systems-of-linear-equations">
 <h3><span class="section-number">6.3.2. </span>(Optional) Systems of linear equations<a class="headerlink" href="#optional-systems-of-linear-equations" title="Permalink to this heading">#</a></h3>
 <p>Consider a system of <span class="math notranslate nohighlight">\(n\)</span> linear equations in <span class="math notranslate nohighlight">\(n\)</span> unknowns written in matrix form as</p>
 <div class="math notranslate nohighlight">
@@ -1163,7 +1177,7 @@ Ax=b
 <p class="admonition-title">Note</p>
 <p>The mathematical material in this section goes beyond the core material for the module. Do not worry if you find the discussion difficult to follow, and feel free to omit it if this is the case.</p>
 </div>
-<section id="inverse-of-a-matrix">
+<div class="section" id="inverse-of-a-matrix">
 <h4><span class="section-number">6.3.2.1. </span>Inverse of a matrix<a class="headerlink" href="#inverse-of-a-matrix" title="Permalink to this heading">#</a></h4>
 <p>First some mathematics.</p>
 <div class="hint admonition">
@@ -1279,9 +1293,9 @@ A^{-1}\times A = A\times A^{-1} = I_{n\times n}
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="optional-solving-systems-of-linear-equations">
+</div>
+</div>
+<div class="section" id="optional-solving-systems-of-linear-equations">
 <h3><span class="section-number">6.3.3. </span>(Optional) Solving systems of linear equations<a class="headerlink" href="#optional-solving-systems-of-linear-equations" title="Permalink to this heading">#</a></h3>
 <div class="tip admonition">
 <p class="admonition-title">Solving systems of equations using inverse matrices</p>
@@ -1432,9 +1446,9 @@ x=\begin{bmatrix}
 \end{split}\]</div>
 <p>In this simple way we can solve arbitrarily complex systems of linear equations.</p>
 <p>This completes the discussion of <a class="reference internal" href="#chapter-matrices"><span class="std std-ref">Linear algebra in R</span></a>. We next turn attention to numerical integration in R.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1463,8 +1477,8 @@ x=\begin{bmatrix}
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="ch5R3Dplotting.html"
@@ -1492,6 +1506,7 @@ x=\begin{bmatrix}
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1546,9 +1561,10 @@ By Emil Kostadinov
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1572,8 +1588,8 @@ By Emil Kostadinov
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

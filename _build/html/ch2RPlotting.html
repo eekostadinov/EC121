@@ -3,67 +3,61 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>2. Plotting in R &#8212; Numerical methods for EC139</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
-    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -81,28 +75,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -124,12 +113,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -144,9 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -156,12 +157,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Numerical methods for EC139 - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Numerical methods for EC139 - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -194,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -203,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -332,26 +344,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -414,9 +428,9 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="plotting-in-r">
+  <div class="tex2jax_ignore mathjax_ignore section" id="plotting-in-r">
 <span id="chapter-plotting"></span><h1><span class="section-number">2. </span>Plotting in R<a class="headerlink" href="#plotting-in-r" title="Permalink to this heading">#</a></h1>
 <p>This chapter is a quick guide to plotting univariate functions in R. Following the discussion you should be able to plot any simple univariate function and customise your graph to look as intended.</p>
 <p>All the examples below only use the core functionality of R (available with any installation through the in-built R <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package) and do not require the installation of additional packages.</p>
@@ -426,9 +440,9 @@ document.write(`
 </div>
 <p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
 <p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
-<section id="the-basics-of-plotting-in-r">
+<div class="section" id="the-basics-of-plotting-in-r">
 <h2><span class="section-number">2.1. </span>The basics of plotting in R<a class="headerlink" href="#the-basics-of-plotting-in-r" title="Permalink to this heading">#</a></h2>
-<section id="the-plot-function">
+<div class="section" id="the-plot-function">
 <h3><span class="section-number">2.1.1. </span>The <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function<a class="headerlink" href="#the-plot-function" title="Permalink to this heading">#</a></h3>
 <p>The most generic (but powerful) function for plotting in R is the function <code class="docutils literal notranslate"><span class="pre">plot()</span></code> which is invoked by typing</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,y,...)</span></code></p>
@@ -438,8 +452,8 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">y</span></code> is the corresponding <span class="math notranslate nohighlight">\(y\)</span>-coordinate (or corresponding vector of <span class="math notranslate nohighlight">\(y\)</span>-coordinates)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">...</span></code> are additional <strong>optional</strong> arguments, discussed below.</p></li>
 </ul>
-</section>
-<section id="plotting-a-point">
+</div>
+<div class="section" id="plotting-a-point">
 <h3><span class="section-number">2.1.2. </span>Plotting a point<a class="headerlink" href="#plotting-a-point" title="Permalink to this heading">#</a></h3>
 <p>We start with something very simple - plotting a point.</p>
 <p>To plot a point simply type</p>
@@ -453,10 +467,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b07dba4eda4733c819d6d558ebb3ff3e92f2d533321014428f0d9462947f828e.png" src="_images/b07dba4eda4733c819d6d558ebb3ff3e92f2d533321014428f0d9462947f828e.png" />
+<a class="reference internal image-reference" href="_images/2e8f79537e71b8f304509efe1c99a74cad631f6c441f6f5c568842dd9776ff38.png"><img alt="_images/2e8f79537e71b8f304509efe1c99a74cad631f6c441f6f5c568842dd9776ff38.png" src="_images/2e8f79537e71b8f304509efe1c99a74cad631f6c441f6f5c568842dd9776ff38.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
-<section id="using-optional-arguments-to-customize-the-point-plot">
+<div class="section" id="using-optional-arguments-to-customize-the-point-plot">
 <span id="content-points-optional"></span><h4><span class="section-number">2.1.2.1. </span>Using optional arguments to customize the point plot<a class="headerlink" href="#using-optional-arguments-to-customize-the-point-plot" title="Permalink to this heading">#</a></h4>
 <p>Notice that when <code class="docutils literal notranslate"><span class="pre">plot()</span></code> is called without optional arguments</p>
 <ul class="simple">
@@ -512,7 +526,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6cfeac58003aabc7583f43b5215e706750b1884a7b672fd3bd1e88f416eff80f.png" src="_images/6cfeac58003aabc7583f43b5215e706750b1884a7b672fd3bd1e88f416eff80f.png" />
+<a class="reference internal image-reference" href="_images/1526f864dacf779fd639eb9d90dbf3759e1b75a3d17aef9e7d1b172867bdf0c5.png"><img alt="_images/1526f864dacf779fd639eb9d90dbf3759e1b75a3d17aef9e7d1b172867bdf0c5.png" src="_images/1526f864dacf779fd639eb9d90dbf3759e1b75a3d17aef9e7d1b172867bdf0c5.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -530,7 +544,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f24b5c57d73daca0d62a7c76a97fa9b720c76f6d491c99b0a12c13c913e99dd1.png" src="_images/f24b5c57d73daca0d62a7c76a97fa9b720c76f6d491c99b0a12c13c913e99dd1.png" />
+<a class="reference internal image-reference" href="_images/50b80cd11e884a85cf58b79e6a2977ef6f0ad2493fc2ad55d24e6fd7134b3c2a.png"><img alt="_images/50b80cd11e884a85cf58b79e6a2977ef6f0ad2493fc2ad55d24e6fd7134b3c2a.png" src="_images/50b80cd11e884a85cf58b79e6a2977ef6f0ad2493fc2ad55d24e6fd7134b3c2a.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="admonition tip">
@@ -540,15 +554,15 @@ document.write(`
 <div class="exercise admonition" id="ex-point">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.1 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>Reproduce the plot below in your RStudio by setting appropriately <code class="docutils literal notranslate"><span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">xlim</span></code>, <code class="docutils literal notranslate"><span class="pre">ylim</span></code>, <code class="docutils literal notranslate"><span class="pre">xlab</span></code>, <code class="docutils literal notranslate"><span class="pre">ylab</span></code>, <code class="docutils literal notranslate"><span class="pre">col</span></code> and <code class="docutils literal notranslate"><span class="pre">pch</span></code>.</p>
 <img alt="_images/ex1.png" src="_images/ex1.png" />
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-point"> Exercise 2.1</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> 
      <span class="n">frame</span><span class="o">=</span><span class="n">FALSE</span><span class="p">,</span> 
@@ -560,11 +574,11 @@ document.write(`
     <span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-</section>
-<section id="plotting-a-set-of-points">
+</div>
+</div>
+</div>
+<div class="section" id="plotting-a-set-of-points">
 <span id="content-points"></span><h3><span class="section-number">2.1.3. </span>Plotting a set of points<a class="headerlink" href="#plotting-a-set-of-points" title="Permalink to this heading">#</a></h3>
 <p>We continue with a small step forward - plotting a set of points.</p>
 <p>To plot a set of points we again use</p>
@@ -584,7 +598,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5fffd98fcca4006871f358d37b9750dac667906b265d690205cf7855cacbf349.png" src="_images/5fffd98fcca4006871f358d37b9750dac667906b265d690205cf7855cacbf349.png" />
+<a class="reference internal image-reference" href="_images/a55a728f8b6e5ff7784590cd8b101bc5567e8748ba798af87b087e23bf9ff085.png"><img alt="_images/a55a728f8b6e5ff7784590cd8b101bc5567e8748ba798af87b087e23bf9ff085.png" src="_images/a55a728f8b6e5ff7784590cd8b101bc5567e8748ba798af87b087e23bf9ff085.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>We can again customize the look of the plot by using optional arguments.</p>
@@ -611,7 +625,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1ebb4c51f352f28b6359a68ee0d9c8ba5429b92d7bb2c4875ed8808bc1af8008.png" src="_images/1ebb4c51f352f28b6359a68ee0d9c8ba5429b92d7bb2c4875ed8808bc1af8008.png" />
+<a class="reference internal image-reference" href="_images/b5e2bb97a2f9aaabb3d74467d4eee3487a7fb6094479fa6770eba385a6c378ce.png"><img alt="_images/b5e2bb97a2f9aaabb3d74467d4eee3487a7fb6094479fa6770eba385a6c378ce.png" src="_images/b5e2bb97a2f9aaabb3d74467d4eee3487a7fb6094479fa6770eba385a6c378ce.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -629,7 +643,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/545c4ba258d44d8b0bb0b2326aaa0b4ab8bb3fbaea0cb49e53486744b3a3753d.png" src="_images/545c4ba258d44d8b0bb0b2326aaa0b4ab8bb3fbaea0cb49e53486744b3a3753d.png" />
+<a class="reference internal image-reference" href="_images/5f9d71a6810bb4c1484db51cf1177063104009e698a24d6579e1ce29d31047b1.png"><img alt="_images/5f9d71a6810bb4c1484db51cf1177063104009e698a24d6579e1ce29d31047b1.png" src="_images/5f9d71a6810bb4c1484db51cf1177063104009e698a24d6579e1ce29d31047b1.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -646,13 +660,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/53d64cd71b4c2021e39ef08688427876bce67a88b26bbfd6d0388923833646c2.png" src="_images/53d64cd71b4c2021e39ef08688427876bce67a88b26bbfd6d0388923833646c2.png" />
+<a class="reference internal image-reference" href="_images/a017d08d3d8582c21d898d7052cd3fe2ce44caa5bed4391ef66d08769de3f5c1.png"><img alt="_images/a017d08d3d8582c21d898d7052cd3fe2ce44caa5bed4391ef66d08769de3f5c1.png" src="_images/a017d08d3d8582c21d898d7052cd3fe2ce44caa5bed4391ef66d08769de3f5c1.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="exercise admonition" id="ex-points">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.2 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>The figure below</p>
 <ul class="simple">
 <li><p>plots the points <span class="math notranslate nohighlight">\((x=1,y=3)\)</span>, <span class="math notranslate nohighlight">\((x=2,y=2)\)</span>, <span class="math notranslate nohighlight">\((x=3,y=5)\)</span>, <span class="math notranslate nohighlight">\((x=4,y=3)\)</span> and <span class="math notranslate nohighlight">\((x=5,y=7)\)</span>.</p></li>
@@ -663,12 +677,12 @@ document.write(`
 </ul>
 <img alt="_images/ex2.png" src="_images/ex2.png" />
 <p>Reproduce this plot in your RStudio.</p>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-points"> Exercise 2.2</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The plot was produced using the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
@@ -680,14 +694,14 @@ document.write(`
     <span class="n">pch</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-<section id="plotting-a-function-of-one-variable">
+</div>
+</div>
+<div class="section" id="plotting-a-function-of-one-variable">
 <h3><span class="section-number">2.1.4. </span>Plotting a function of one variable<a class="headerlink" href="#plotting-a-function-of-one-variable" title="Permalink to this heading">#</a></h3>
 <p>Once we know how to plot individual points, we are conceptually ready to extend the idea to the context of graphs of functions. This turns out to be very easy in R and conceptually very similar to plotting points.</p>
 <p>The idea is as follows:</p>
-<section id="step-1">
+<div class="section" id="step-1">
 <h4><span class="section-number">2.1.4.1. </span>Step 1<a class="headerlink" href="#step-1" title="Permalink to this heading">#</a></h4>
 <p>Define a vector, <code class="docutils literal notranslate"><span class="pre">x</span></code>, of <strong>evenly spaced</strong> <span class="math notranslate nohighlight">\(x\)</span> coordinates over the domain on which you want to plot (recall the discussion in <a class="reference internal" href="ch1Rbasics.html#section-basics-vectors"><span class="std std-ref">Vectors</span></a> for creating vectors of evenly spaced numbers).</p>
 <p>For example, to plot <span class="math notranslate nohighlight">\(y=5x+4\)</span> over the domain <span class="math notranslate nohighlight">\(x\in[-5,5]\)</span>, first define the <span class="math notranslate nohighlight">\(x\)</span> coordinates as</p>
@@ -698,8 +712,8 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="step-2">
+</div>
+<div class="section" id="step-2">
 <h4><span class="section-number">2.1.4.2. </span>Step 2<a class="headerlink" href="#step-2" title="Permalink to this heading">#</a></h4>
 <p>Define a vector, <code class="docutils literal notranslate"><span class="pre">y</span></code>, of the corresponding <span class="math notranslate nohighlight">\(y\)</span> coordinates.</p>
 <p>For example, given <span class="math notranslate nohighlight">\(y=5x+4\)</span> and the already defined vector <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
@@ -721,8 +735,8 @@ document.write(`
 <p>This allows us to easily define <span class="math notranslate nohighlight">\(y\)</span> coordinates given a vector of <span class="math notranslate nohighlight">\(x\)</span> coordinates.</p>
 <p>However, notice that this is not how arithmetic operations for vectors are defined in mathematics. We will learn about how arithmetic operations on vectors work mathematically (and how the mathematically consistent arithmetic operations on vectors are implemented in R) later in the course. For now just keep in mind that this is one instance of the distinct meanings of the word <em>vector</em> in programming and mathematics.</p>
 </div>
-</section>
-<section id="step-3">
+</div>
+<div class="section" id="step-3">
 <h4><span class="section-number">2.1.4.3. </span>Step 3<a class="headerlink" href="#step-3" title="Permalink to this heading">#</a></h4>
 <p>Plot <code class="docutils literal notranslate"><span class="pre">x</span></code> against <code class="docutils literal notranslate"><span class="pre">y</span></code>, using the optional argument <code class="docutils literal notranslate"><span class="pre">type</span></code> and setting it to <code class="docutils literal notranslate"><span class="pre">&quot;l&quot;</span></code> (for <em>line</em>)</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">type=&quot;l&quot;)</span></code></p>
@@ -733,7 +747,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b821c528fe3831349aa6851e79dda0157e6d83feb523638b4117de241fb1af42.png" src="_images/b821c528fe3831349aa6851e79dda0157e6d83feb523638b4117de241fb1af42.png" />
+<a class="reference internal image-reference" href="_images/4a876ef014152a26795d9d0f6e80724b2aa9ca6d3c5800ed3de44ddde80f3658.png"><img alt="_images/4a876ef014152a26795d9d0f6e80724b2aa9ca6d3c5800ed3de44ddde80f3658.png" src="_images/4a876ef014152a26795d9d0f6e80724b2aa9ca6d3c5800ed3de44ddde80f3658.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>And this is it.</p>
@@ -746,7 +760,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9e5355b7e035a826feb974fd58efaf25191756e2328b3cf54ff5f110885f2012.png" src="_images/9e5355b7e035a826feb974fd58efaf25191756e2328b3cf54ff5f110885f2012.png" />
+<a class="reference internal image-reference" href="_images/93f9260f85e9fbe9ae1edf06427dd816d974266ad807f8e06554e7a9f5807cd9.png"><img alt="_images/93f9260f85e9fbe9ae1edf06427dd816d974266ad807f8e06554e7a9f5807cd9.png" src="_images/93f9260f85e9fbe9ae1edf06427dd816d974266ad807f8e06554e7a9f5807cd9.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>Instead, by using <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> R suppresses the plotting of the point circles at the coordinates, but instead draws line segments connecting the coordinates.</p>
@@ -758,13 +772,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4c50aa3f85e473ac13f568d10a32e11e03a11281ac2607593564e4e27554f09b.png" src="_images/4c50aa3f85e473ac13f568d10a32e11e03a11281ac2607593564e4e27554f09b.png" />
+<a class="reference internal image-reference" href="_images/9f74f6607276036eb50bc70b7b4c231b06bc708c069a295e65b5e2c7bbf534cc.png"><img alt="_images/9f74f6607276036eb50bc70b7b4c231b06bc708c069a295e65b5e2c7bbf534cc.png" src="_images/9f74f6607276036eb50bc70b7b4c231b06bc708c069a295e65b5e2c7bbf534cc.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>We can further customize the way the graph looks but we will return to this later.</p>
 <p>Now instead let’s consider plotting a more interesting function.</p>
-</section>
-<section id="example-a-cubic-function">
+</div>
+<div class="section" id="example-a-cubic-function">
 <h4><span class="section-number">2.1.4.4. </span>Example: A cubic function<a class="headerlink" href="#example-a-cubic-function" title="Permalink to this heading">#</a></h4>
 <p>Plot <span class="math notranslate nohighlight">\(y=x^3-4x\)</span> for <span class="math notranslate nohighlight">\(x\in[-3,3]\)</span></p>
 <div class="cell docutils container">
@@ -776,7 +790,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/18b8f463c9caf832b8ea8651889d6a2cbb629a85d6a1cdca537b903a8530fe6a.png" src="_images/18b8f463c9caf832b8ea8651889d6a2cbb629a85d6a1cdca537b903a8530fe6a.png" />
+<a class="reference internal image-reference" href="_images/15bfcf735b0120a662b1becebd82ebd6575eb4c2075294ed3e199537eaa7734f.png"><img alt="_images/15bfcf735b0120a662b1becebd82ebd6575eb4c2075294ed3e199537eaa7734f.png" src="_images/15bfcf735b0120a662b1becebd82ebd6575eb4c2075294ed3e199537eaa7734f.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>Notice the problem: when we set <code class="docutils literal notranslate"><span class="pre">type=&quot;l&quot;</span></code> what R actually does is draw line segments connecting the points on the graph of the function.</p>
@@ -789,7 +803,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52b172414b94be2e6a1f16994c0b9e8f3a09752d7b53208bab56e183512b3bd9.png" src="_images/52b172414b94be2e6a1f16994c0b9e8f3a09752d7b53208bab56e183512b3bd9.png" />
+<a class="reference internal image-reference" href="_images/48f2214adf3b2221a4f7486e3ce5add76e0d05b3618735028fa8b37996974a52.png"><img alt="_images/48f2214adf3b2221a4f7486e3ce5add76e0d05b3618735028fa8b37996974a52.png" src="_images/48f2214adf3b2221a4f7486e3ce5add76e0d05b3618735028fa8b37996974a52.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>The solution is very simple - we need a finer grid for the coordinates (basically, we want the distance between elements of the vector <code class="docutils literal notranslate"><span class="pre">x</span></code> to be smaller).</p>
@@ -803,7 +817,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2755af2df047ce8f51d4a793b1eda765617c885e0194d415c2c2144583489c37.png" src="_images/2755af2df047ce8f51d4a793b1eda765617c885e0194d415c2c2144583489c37.png" />
+<a class="reference internal image-reference" href="_images/2573883667b2499fb545666e9dcceeffe5e8d621b685530bed62b36b136895a8.png"><img alt="_images/2573883667b2499fb545666e9dcceeffe5e8d621b685530bed62b36b136895a8.png" src="_images/2573883667b2499fb545666e9dcceeffe5e8d621b685530bed62b36b136895a8.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>And now we have a smooth (to the eye) graph.</p>
@@ -815,7 +829,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/544db1e167488d46be57948547422ca2b0dca3a608318caed701ffa7ba2eb98e.png" src="_images/544db1e167488d46be57948547422ca2b0dca3a608318caed701ffa7ba2eb98e.png" />
+<a class="reference internal image-reference" href="_images/b9ad52f8571fad56521120d4aa8ce542e7b68cd4e4c50203d285bcfaad08ad60.png"><img alt="_images/b9ad52f8571fad56521120d4aa8ce542e7b68cd4e4c50203d285bcfaad08ad60.png" src="_images/b9ad52f8571fad56521120d4aa8ce542e7b68cd4e4c50203d285bcfaad08ad60.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="admonition note">
@@ -826,16 +840,16 @@ document.write(`
 <div class="exercise admonition" id="ex-curve">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.3 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>The graph below plots the function <span class="math notranslate nohighlight">\(y=x^2-4\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span>.</p>
 <img alt="_images/ex3.png" src="_images/ex3.png" />
 <p>Reproduce this graph in your RStudio.</p>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-5">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curve"> Exercise 2.3</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
@@ -843,14 +857,14 @@ document.write(`
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;l&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-</section>
-</section>
-<section id="customizing-the-look-of-a-simple-graph">
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="customizing-the-look-of-a-simple-graph">
 <span id="content-plots-customization"></span><h2><span class="section-number">2.2. </span>Customizing the look of a simple graph<a class="headerlink" href="#customizing-the-look-of-a-simple-graph" title="Permalink to this heading">#</a></h2>
-<section id="using-optional-arguments">
+<div class="section" id="using-optional-arguments">
 <span id="content-lines-optional"></span><h3><span class="section-number">2.2.1. </span>Using optional arguments<a class="headerlink" href="#using-optional-arguments" title="Permalink to this heading">#</a></h3>
 <p>As in <a class="reference internal" href="#content-points-optional"><span class="std std-ref">Using optional arguments to customize the point plot</span></a> we can use optional arguments to customize the appearance of the line plot</p>
 <p>Optional arguments, as before, include</p>
@@ -896,7 +910,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5f92abb31d7a1acc95510c08fa22c74f6f64114246eb3b8ed748664af4c26ecc.png" src="_images/5f92abb31d7a1acc95510c08fa22c74f6f64114246eb3b8ed748664af4c26ecc.png" />
+<a class="reference internal image-reference" href="_images/40cd85a0184b01fb6fbb567368e33ac8a06fe9f3b143d418b99d50cdc8b0b27f.png"><img alt="_images/40cd85a0184b01fb6fbb567368e33ac8a06fe9f3b143d418b99d50cdc8b0b27f.png" src="_images/40cd85a0184b01fb6fbb567368e33ac8a06fe9f3b143d418b99d50cdc8b0b27f.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>If we use <code class="docutils literal notranslate"><span class="pre">type=b</span></code> plotting both lines and points, we can also set the graphical properties of the points with the familiar <code class="docutils literal notranslate"><span class="pre">cex</span></code>, <code class="docutils literal notranslate"><span class="pre">pch</span></code>, etc arguments.</p>
@@ -914,21 +928,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/be3b783ff1b5a66ac36be5763e17f1b90a927db1c823c536bc4af8cbc539b9bf.png" src="_images/be3b783ff1b5a66ac36be5763e17f1b90a927db1c823c536bc4af8cbc539b9bf.png" />
+<a class="reference internal image-reference" href="_images/ccedc89f77fa175958ad2b21f5a15e15bbdc556b48cdea783eb52170c7d56933.png"><img alt="_images/ccedc89f77fa175958ad2b21f5a15e15bbdc556b48cdea783eb52170c7d56933.png" src="_images/ccedc89f77fa175958ad2b21f5a15e15bbdc556b48cdea783eb52170c7d56933.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <div class="exercise admonition" id="ex-curvecustom">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.4 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>Given the graph of <span class="math notranslate nohighlight">\(y=x^2-4\)</span> for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span> you plotted in <a class="reference internal" href="#ex-curve"><span class="std std-numref">Exercise 2.3</span></a>, set graphical parameters appropriately to reproduce the plot below.</p>
 <img alt="_images/ex4.png" src="_images/ex4.png" />
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-7">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curvecustom"> Exercise 2.4</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
@@ -940,10 +954,10 @@ document.write(`
     <span class="n">lwd</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-<section id="using-latex-for-labels-and-titles">
+</div>
+</div>
+<div class="section" id="using-latex-for-labels-and-titles">
 <h3><span class="section-number">2.2.2. </span>Using LaTeX for labels and titles<a class="headerlink" href="#using-latex-for-labels-and-titles" title="Permalink to this heading">#</a></h3>
 <p>In some cases we may want to add mathematical text to our graphs, e.g. in titles, labels, text annotations, etc.</p>
 <p>However, by default, all text objects under the default functionality of <code class="docutils literal notranslate"><span class="pre">graphics</span></code> are set and visualized as strings.</p>
@@ -959,7 +973,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9c7cdf65558867200ceeeae9add84df0551f3fc4d12fc120f46b244fca005b0e.png" src="_images/9c7cdf65558867200ceeeae9add84df0551f3fc4d12fc120f46b244fca005b0e.png" />
+<a class="reference internal image-reference" href="_images/63d3e5fff958fda8ad4cbdd406b4a549bbd78ffa13aecbc1e8345fa27463513a.png"><img alt="_images/63d3e5fff958fda8ad4cbdd406b4a549bbd78ffa13aecbc1e8345fa27463513a.png" src="_images/63d3e5fff958fda8ad4cbdd406b4a549bbd78ffa13aecbc1e8345fa27463513a.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>By using the additional R package <code class="docutils literal notranslate"><span class="pre">latex2exp</span></code> we can add mathematical text to our graphs.</p>
@@ -980,11 +994,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6261e5283deb4ff66b50bc60d1a5aa31bc9c2e2aa476d9bebafb8b1d82037062.png" src="_images/6261e5283deb4ff66b50bc60d1a5aa31bc9c2e2aa476d9bebafb8b1d82037062.png" />
+<a class="reference internal image-reference" href="_images/0557cdf4a797bc939581b930b461421960ad321abf58ffef10720c1273b9da61.png"><img alt="_images/0557cdf4a797bc939581b930b461421960ad321abf58ffef10720c1273b9da61.png" src="_images/0557cdf4a797bc939581b930b461421960ad321abf58ffef10720c1273b9da61.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
-</section>
-<section id="adding-additional-plots-to-the-same-graph">
+</div>
+<div class="section" id="adding-additional-plots-to-the-same-graph">
 <h3><span class="section-number">2.2.3. </span>Adding additional plots to the same graph<a class="headerlink" href="#adding-additional-plots-to-the-same-graph" title="Permalink to this heading">#</a></h3>
 <p>Once we have called <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and opened an initial plotting window we can add additional objects to the graph by additionally calling functions such as</p>
 <ul class="simple">
@@ -1011,7 +1025,7 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>Keep in mind that the plotting region is set with the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> and does not change when we add additional objects to the plot.</p>
 </div>
-<section id="adding-a-grid">
+<div class="section" id="adding-a-grid">
 <h4><span class="section-number">2.2.3.1. </span>Adding a grid<a class="headerlink" href="#adding-a-grid" title="Permalink to this heading">#</a></h4>
 <p>For example, we can add a grid.</p>
 <div class="cell docutils container">
@@ -1022,11 +1036,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2bcbf2a977b5d6a9903c44bb2347a5423c5dac845048bbe8f6bd1e45c53d9757.png" src="_images/2bcbf2a977b5d6a9903c44bb2347a5423c5dac845048bbe8f6bd1e45c53d9757.png" />
+<a class="reference internal image-reference" href="_images/a8d2f8be9ebadb0e35a85999733e4f13c92c376d8ed9abf3e4e172d0a7c400cc.png"><img alt="_images/a8d2f8be9ebadb0e35a85999733e4f13c92c376d8ed9abf3e4e172d0a7c400cc.png" src="_images/a8d2f8be9ebadb0e35a85999733e4f13c92c376d8ed9abf3e4e172d0a7c400cc.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
-</section>
-<section id="plotting-several-functions-on-the-same-graph">
+</div>
+<div class="section" id="plotting-several-functions-on-the-same-graph">
 <h4><span class="section-number">2.2.3.2. </span>Plotting several functions on the same graph<a class="headerlink" href="#plotting-several-functions-on-the-same-graph" title="Permalink to this heading">#</a></h4>
 <p>It is straightforward to plot more than one functions on the same graph.</p>
 <p>First, given a vector of <code class="docutils literal notranslate"><span class="pre">x</span></code> coordinates, define one new vector of <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates for each additional function, say <code class="docutils literal notranslate"><span class="pre">y1</span></code>, <code class="docutils literal notranslate"><span class="pre">y2</span></code>, <code class="docutils literal notranslate"><span class="pre">y3</span></code>, etc.</p>
@@ -1074,7 +1088,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2e1933e8a09805822a99abe064c86bb0d1e3c880cee81cbc6232cc283164b9ff.png" src="_images/2e1933e8a09805822a99abe064c86bb0d1e3c880cee81cbc6232cc283164b9ff.png" />
+<a class="reference internal image-reference" href="_images/d9b791e44cac880bec043b002e81762da97aefb65a0a389128a6ea40b6b4e40e.png"><img alt="_images/d9b791e44cac880bec043b002e81762da97aefb65a0a389128a6ea40b6b4e40e.png" src="_images/d9b791e44cac880bec043b002e81762da97aefb65a0a389128a6ea40b6b4e40e.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>It is a good idea to plot the different functions with different graphical properties to make it easier to distinguish.</p>
@@ -1088,7 +1102,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dd611b464088729c025931fd264d8f4bf7e36b8e968faf4852a55a790c970062.png" src="_images/dd611b464088729c025931fd264d8f4bf7e36b8e968faf4852a55a790c970062.png" />
+<a class="reference internal image-reference" href="_images/62265abbe666d2e2af2fdc6fcb4e6a6241b8cacbcc7595cc8867d6ce649560bb.png"><img alt="_images/62265abbe666d2e2af2fdc6fcb4e6a6241b8cacbcc7595cc8867d6ce649560bb.png" src="_images/62265abbe666d2e2af2fdc6fcb4e6a6241b8cacbcc7595cc8867d6ce649560bb.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>Or different line types</p>
@@ -1101,7 +1115,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bba3064b6babab5986e4340d4ccc0be01168e3039e6b6c7fc4dd3a894568d4f4.png" src="_images/bba3064b6babab5986e4340d4ccc0be01168e3039e6b6c7fc4dd3a894568d4f4.png" />
+<a class="reference internal image-reference" href="_images/002c1b92cffca34198f0c24cdc1b60d78cd8d4f2178895156b7014e82e7c849e.png"><img alt="_images/002c1b92cffca34198f0c24cdc1b60d78cd8d4f2178895156b7014e82e7c849e.png" src="_images/002c1b92cffca34198f0c24cdc1b60d78cd8d4f2178895156b7014e82e7c849e.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>Or both</p>
@@ -1114,7 +1128,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40cc044ab9f6271eab46c9986fff102dedeae23babcf47714d7f3a792fc39bf7.png" src="_images/40cc044ab9f6271eab46c9986fff102dedeae23babcf47714d7f3a792fc39bf7.png" />
+<a class="reference internal image-reference" href="_images/9d361b620fc96163f23a4e90020ada5c667cfd45921300159321c5b0e239caff.png"><img alt="_images/9d361b620fc96163f23a4e90020ada5c667cfd45921300159321c5b0e239caff.png" src="_images/9d361b620fc96163f23a4e90020ada5c667cfd45921300159321c5b0e239caff.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
 <p>Note that the plotting region is defined at the point one calls <code class="docutils literal notranslate"><span class="pre">plot()</span></code>. Therefore, if we we don’t set <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> manually R will choose a plotting region which is more natural for the function plotted in the initial call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
@@ -1127,11 +1141,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1f48a34dcc74b3196b5895b7d3d2b798f1baf761cbfd7955e0464384fca03f29.png" src="_images/1f48a34dcc74b3196b5895b7d3d2b798f1baf761cbfd7955e0464384fca03f29.png" />
+<a class="reference internal image-reference" href="_images/f7e25ba01be1daab104133ae90b03e52f5888995a62add278054e3a23df29739.png"><img alt="_images/f7e25ba01be1daab104133ae90b03e52f5888995a62add278054e3a23df29739.png" src="_images/f7e25ba01be1daab104133ae90b03e52f5888995a62add278054e3a23df29739.png" style="width: 480px; height: 480px;" /></a>
 </div>
 </div>
-</section>
-<section id="adding-a-legend">
+</div>
+<div class="section" id="adding-a-legend">
 <h4><span class="section-number">2.2.3.3. </span>Adding a legend<a class="headerlink" href="#adding-a-legend" title="Permalink to this heading">#</a></h4>
 <p>When we plot more than one function it makes sense to use a legend to show which curve is which function. This can be achieved by using the function <code class="docutils literal notranslate"><span class="pre">legend()</span></code>.</p>
 <p>The usage is as follows</p>
@@ -1168,11 +1182,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b33b397a0809c292a2bb2f91f0b2a85d28e28396fa6f34ffde7fbaf235fb5692.png" src="_images/b33b397a0809c292a2bb2f91f0b2a85d28e28396fa6f34ffde7fbaf235fb5692.png" />
+<a class="reference internal image-reference" href="_images/f50074c73cf66e26c6d704802a3b75fe2999657306e0015a4c3e8f497a918c80.png"><img alt="_images/f50074c73cf66e26c6d704802a3b75fe2999657306e0015a4c3e8f497a918c80.png" src="_images/f50074c73cf66e26c6d704802a3b75fe2999657306e0015a4c3e8f497a918c80.png" style="width: 625px; height: 625px;" /></a>
 </div>
 </div>
-</section>
-<section id="adding-additional-points-to-the-graph">
+</div>
+<div class="section" id="adding-additional-points-to-the-graph">
 <h4><span class="section-number">2.2.3.4. </span>Adding additional points to the graph<a class="headerlink" href="#adding-additional-points-to-the-graph" title="Permalink to this heading">#</a></h4>
 <p>We can add points to the graph by using the <code class="docutils literal notranslate"><span class="pre">points()</span></code> function. It’s usage is the same as the usage of <code class="docutils literal notranslate"><span class="pre">plot()</span></code> in the context of plotting points (<a class="reference internal" href="#content-points"><span class="std std-ref">Plotting a set of points</span></a>) but the only difference is that now the plot region and an initial plot are defined by the original call of <code class="docutils literal notranslate"><span class="pre">plot()</span></code>.</p>
 <p>For example, we can add points at the intersections of the two curves above which occur at <span class="math notranslate nohighlight">\((x=-2, y=0)\)</span> and <span class="math notranslate nohighlight">\((x=0, y=0)\)</span></p>
@@ -1194,11 +1208,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/522269f74045abfc4fdde5387c402507ba51ca1f958c51bd19eff0b7629ee362.png" src="_images/522269f74045abfc4fdde5387c402507ba51ca1f958c51bd19eff0b7629ee362.png" />
+<a class="reference internal image-reference" href="_images/d47d146bc90e1ac8945723f41fc02faaed65c2832b279cbfeb4aea266b2ee020.png"><img alt="_images/d47d146bc90e1ac8945723f41fc02faaed65c2832b279cbfeb4aea266b2ee020.png" src="_images/d47d146bc90e1ac8945723f41fc02faaed65c2832b279cbfeb4aea266b2ee020.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
-</section>
-<section id="adding-text-annotations-to-a-graph">
+</div>
+<div class="section" id="adding-text-annotations-to-a-graph">
 <h4><span class="section-number">2.2.3.5. </span>Adding text annotations to a graph<a class="headerlink" href="#adding-text-annotations-to-a-graph" title="Permalink to this heading">#</a></h4>
 <p>We can use</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
@@ -1238,13 +1252,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a5cc6392c1ded45d89cfd99f5e4f77cc86af86021e01c1496ccd157242798242.png" src="_images/a5cc6392c1ded45d89cfd99f5e4f77cc86af86021e01c1496ccd157242798242.png" />
+<a class="reference internal image-reference" href="_images/f30672405067d27f214565c1afc54c1fa3c121e2f43e1025326f977b9ece8dd0.png"><img alt="_images/f30672405067d27f214565c1afc54c1fa3c121e2f43e1025326f977b9ece8dd0.png" src="_images/f30672405067d27f214565c1afc54c1fa3c121e2f43e1025326f977b9ece8dd0.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <div class="exercise admonition" id="ex-curves">
 
 <p class="admonition-title"><span class="caption-number">Exercise 2.5 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>The graph below plots <span class="math notranslate nohighlight">\(y=x^3\)</span> and <span class="math notranslate nohighlight">\(y=x^2\)</span></p>
 <ul class="simple">
 <li><p>for <span class="math notranslate nohighlight">\(x\in[-2,2]\)</span></p></li>
@@ -1255,12 +1269,12 @@ document.write(`
 </ul>
 <img alt="_images/ex5.png" src="_images/ex5.png" />
 <p>Reproduce this plot in your RStudio.</p>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch2RPlotting-solution-9">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-curves"> Exercise 2.5</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The plot was produced with the following code</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">latex2exp</span><span class="p">)</span>
 
@@ -1276,10 +1290,10 @@ document.write(`
 <span class="n">legend</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">TeX</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;($x^3$)&quot;</span><span class="p">),</span> <span class="n">TeX</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;($x^2$)&quot;</span><span class="p">)),</span> <span class="n">lty</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">),</span> <span class="n">bty</span><span class="o">=</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-<section id="adding-vertical-and-horizontal-lines-to-your-plots">
+</div>
+</div>
+<div class="section" id="adding-vertical-and-horizontal-lines-to-your-plots">
 <h4><span class="section-number">2.2.3.6. </span>Adding vertical and horizontal lines to your plots<a class="headerlink" href="#adding-vertical-and-horizontal-lines-to-your-plots" title="Permalink to this heading">#</a></h4>
 <p>In general, lines can be added to a graph using the <code class="docutils literal notranslate"><span class="pre">abline()</span></code> function.</p>
 <p>To add a horizontal line at some value, <code class="docutils literal notranslate"><span class="pre">c</span></code>, of <span class="math notranslate nohighlight">\(y\)</span>, call <code class="docutils literal notranslate"><span class="pre">abline(h=c)</span></code></p>
@@ -1317,12 +1331,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bfc3c826ed4a53af245b33d732a2c76e4dbfc662e4457fad775b931382087815.png" src="_images/bfc3c826ed4a53af245b33d732a2c76e4dbfc662e4457fad775b931382087815.png" />
+<a class="reference internal image-reference" href="_images/fef7895e6b2d2e69e6c68f50ba0b610bcf88fbe393a215a3bf2e74f49e7cbcf1.png"><img alt="_images/fef7895e6b2d2e69e6c68f50ba0b610bcf88fbe393a215a3bf2e74f49e7cbcf1.png" src="_images/fef7895e6b2d2e69e6c68f50ba0b610bcf88fbe393a215a3bf2e74f49e7cbcf1.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>This is not necessarily a good use of lines, but the point is to demonstrate what is possible.</p>
-</section>
-<section id="optional-customizing-the-axes">
+</div>
+<div class="section" id="optional-customizing-the-axes">
 <h4><span class="section-number">2.2.3.7. </span>(Optional) Customizing the axes<a class="headerlink" href="#optional-customizing-the-axes" title="Permalink to this heading">#</a></h4>
 <p>By default axes are plotted at the edges of the plotting region.</p>
 <p>In some cases we might want to have them plotted elsewhere. For example, we might want axes to pass through the origin <span class="math notranslate nohighlight">\((x=0,y=0)\)</span>.</p>
@@ -1354,7 +1368,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1c17acb4d7dd843ab335d815e1575ac8fc1a914da86a74ff0553f5b9cea9e5ca.png" src="_images/1c17acb4d7dd843ab335d815e1575ac8fc1a914da86a74ff0553f5b9cea9e5ca.png" />
+<a class="reference internal image-reference" href="_images/037a95202abf488db123bbf3a960252b232a46815a6c32a63561b79d662101cd.png"><img alt="_images/037a95202abf488db123bbf3a960252b232a46815a6c32a63561b79d662101cd.png" src="_images/037a95202abf488db123bbf3a960252b232a46815a6c32a63561b79d662101cd.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>However, this is not what we want, as the original axes remain. To disable them, use option <code class="docutils literal notranslate"><span class="pre">axes=FALSE</span></code> inside the initial <code class="docutils literal notranslate"><span class="pre">plot()</span></code> command</p>
@@ -1368,7 +1382,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/510ba6620bbe6b91f0bf2cf1e1f2026567b5ece87a6525d1a4774d47d896beb9.png" src="_images/510ba6620bbe6b91f0bf2cf1e1f2026567b5ece87a6525d1a4774d47d896beb9.png" />
+<a class="reference internal image-reference" href="_images/2ee937628729951280712f37eb065735736f9b06f3806e693e737a11dc2d401c.png"><img alt="_images/2ee937628729951280712f37eb065735736f9b06f3806e693e737a11dc2d401c.png" src="_images/2ee937628729951280712f37eb065735736f9b06f3806e693e737a11dc2d401c.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>We may want the tick labels on the vertical axes to be rotated. Use <code class="docutils literal notranslate"><span class="pre">las=2</span></code> argument inside <code class="docutils literal notranslate"><span class="pre">axis(2,...)</span></code></p>
@@ -1382,7 +1396,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc61d75043f85213eb44cf286f626e0f71cb82557c5d8864911883e9a4aae70b.png" src="_images/cc61d75043f85213eb44cf286f626e0f71cb82557c5d8864911883e9a4aae70b.png" />
+<a class="reference internal image-reference" href="_images/5f6ac79cb510643970587c8c6880fb788d5f3c1f84212ab181466d90fcb294be.png"><img alt="_images/5f6ac79cb510643970587c8c6880fb788d5f3c1f84212ab181466d90fcb294be.png" src="_images/5f6ac79cb510643970587c8c6880fb788d5f3c1f84212ab181466d90fcb294be.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>Perhaps we don’t want all these ticks. We can disable the ticks by setting their width to zero, and also turn off the labes.</p>
@@ -1396,7 +1410,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f70ddd671c33c2a21e1e0146bd7c7786b17f78a1447c705f9e758adee1e099b9.png" src="_images/f70ddd671c33c2a21e1e0146bd7c7786b17f78a1447c705f9e758adee1e099b9.png" />
+<a class="reference internal image-reference" href="_images/8a3f837a4e3c5e915a67c0800ad26db8e86b8f9544b7e5a8cf444d2ab6201956.png"><img alt="_images/8a3f837a4e3c5e915a67c0800ad26db8e86b8f9544b7e5a8cf444d2ab6201956.png" src="_images/8a3f837a4e3c5e915a67c0800ad26db8e86b8f9544b7e5a8cf444d2ab6201956.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>Or we can add manual “ticks” (by plotting points) and labels (by using text annotation)</p>
@@ -1413,7 +1427,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e5a107d2d5521aa5df760231b1328ab3b38163948645b685970cd9c7dc5cdb61.png" src="_images/e5a107d2d5521aa5df760231b1328ab3b38163948645b685970cd9c7dc5cdb61.png" />
+<a class="reference internal image-reference" href="_images/8132fee485c437e83bef07889b67aee56d7dc6afeee974f6446b76d955f943f0.png"><img alt="_images/8132fee485c437e83bef07889b67aee56d7dc6afeee974f6446b76d955f943f0.png" src="_images/8132fee485c437e83bef07889b67aee56d7dc6afeee974f6446b76d955f943f0.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>In more schematics graphs, axes are often plotted with arrows in the direction of increase.</p>
@@ -1431,7 +1445,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1ac07317a42b7428bd96996e26ca49928bfe32002fd7946acf212a0a74023a09.png" src="_images/1ac07317a42b7428bd96996e26ca49928bfe32002fd7946acf212a0a74023a09.png" />
+<a class="reference internal image-reference" href="_images/d56dff20e89ee39a495aedc4f76f60367dc33c243e7e6e3a9e7c46dff478da7a.png"><img alt="_images/d56dff20e89ee39a495aedc4f76f60367dc33c243e7e6e3a9e7c46dff478da7a.png" src="_images/d56dff20e89ee39a495aedc4f76f60367dc33c243e7e6e3a9e7c46dff478da7a.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>To reduce the size of the arrows use the argument <code class="docutils literal notranslate"><span class="pre">length</span></code> which sets the length of the arrow head in inches</p>
@@ -1445,7 +1459,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0d91b0452c7e8f9b4bbad2bb3c4fcf8b2c1d4a2f8bcc8d8e1f7cc18766b91304.png" src="_images/0d91b0452c7e8f9b4bbad2bb3c4fcf8b2c1d4a2f8bcc8d8e1f7cc18766b91304.png" />
+<a class="reference internal image-reference" href="_images/78f16415347c216cb3d64b025c1e30f502d6a61dbcfec8aa0f472c10dbc3b1d7.png"><img alt="_images/78f16415347c216cb3d64b025c1e30f502d6a61dbcfec8aa0f472c10dbc3b1d7.png" src="_images/78f16415347c216cb3d64b025c1e30f502d6a61dbcfec8aa0f472c10dbc3b1d7.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
 <p>We can also “move” the axes labels to the arrows by using text annotation (while also disabling the original labels in the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function by setting them to empty strings)</p>
@@ -1463,12 +1477,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1e2143bf5c549e5fa997988d008db9a607cd45f382b985c34624a5efd0a9131a.png" src="_images/1e2143bf5c549e5fa997988d008db9a607cd45f382b985c34624a5efd0a9131a.png" />
+<a class="reference internal image-reference" href="_images/5378a481b6ce67df3558eb45cd6d25785d824e1df82de389ae46277ca64f86b6.png"><img alt="_images/5378a481b6ce67df3558eb45cd6d25785d824e1df82de389ae46277ca64f86b6.png" src="_images/5378a481b6ce67df3558eb45cd6d25785d824e1df82de389ae46277ca64f86b6.png" style="width: 500px; height: 500px;" /></a>
 </div>
 </div>
-</section>
-</section>
-<section id="optional-combining-multiple-graphs-into-a-single-figure">
+</div>
+</div>
+<div class="section" id="optional-combining-multiple-graphs-into-a-single-figure">
 <h3><span class="section-number">2.2.4. </span>(Optional) Combining multiple graphs into a single figure<a class="headerlink" href="#optional-combining-multiple-graphs-into-a-single-figure" title="Permalink to this heading">#</a></h3>
 <p>We can cobine multiple graphs into a single figure.</p>
 <p>First, tell R that the next figure should be a “plotting matrix” of plots with <code class="docutils literal notranslate"><span class="pre">number_of_rows</span></code> rows and <code class="docutils literal notranslate"><span class="pre">number_of_columns</span></code> columns</p>
@@ -1503,12 +1517,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/003ef78bb841f6c57c531f0b868c97b9cb921eb395fec53ab1a2d3b97547df7d.png" src="_images/003ef78bb841f6c57c531f0b868c97b9cb921eb395fec53ab1a2d3b97547df7d.png" />
+<a class="reference internal image-reference" href="_images/9e83cf95ccc0d9a329032d495151e85dfec9c0d70b5aa0a3f5460de19214bbf7.png"><img alt="_images/9e83cf95ccc0d9a329032d495151e85dfec9c0d70b5aa0a3f5460de19214bbf7.png" src="_images/9e83cf95ccc0d9a329032d495151e85dfec9c0d70b5aa0a3f5460de19214bbf7.png" style="width: 1000px; height: 500px;" /></a>
 </div>
 </div>
-</section>
-</section>
-<section id="optional-additional-examples">
+</div>
+</div>
+<div class="section" id="optional-additional-examples">
 <h2><span class="section-number">2.3. </span>(Optional) Additional examples<a class="headerlink" href="#optional-additional-examples" title="Permalink to this heading">#</a></h2>
 <p>Below is a list of some more complicated examples without explanation.</p>
 <p>You can reproduce these as an exercise.</p>
@@ -1534,7 +1548,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bbf1a33a64852b33ffd458d3346be7b94eadf0a4715d22ec6f39d4d815fbcc0b.png" src="_images/bbf1a33a64852b33ffd458d3346be7b94eadf0a4715d22ec6f39d4d815fbcc0b.png" />
+<a class="reference internal image-reference" href="_images/707e4809875dda3abf4d2784b855b61dc788eef2951bfdb64cbde975bbd1a1c4.png"><img alt="_images/707e4809875dda3abf4d2784b855b61dc788eef2951bfdb64cbde975bbd1a1c4.png" src="_images/707e4809875dda3abf4d2784b855b61dc788eef2951bfdb64cbde975bbd1a1c4.png" style="width: 1000px; height: 750px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1560,7 +1574,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/45b4581ca477aac65637c6fa2e93e4a02ce918f34b841eba127afee923256ea8.png" src="_images/45b4581ca477aac65637c6fa2e93e4a02ce918f34b841eba127afee923256ea8.png" />
+<a class="reference internal image-reference" href="_images/a54fa0cef4120969933da55f6668d5cedf8cb21d41fac73d89f0622861bd6ae6.png"><img alt="_images/a54fa0cef4120969933da55f6668d5cedf8cb21d41fac73d89f0622861bd6ae6.png" src="_images/a54fa0cef4120969933da55f6668d5cedf8cb21d41fac73d89f0622861bd6ae6.png" style="width: 750px; height: 750px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1616,7 +1630,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/da4e45a3ecf00435e3da79999084abbec18ed58c43fc40f8a8725839d8664249.png" src="_images/da4e45a3ecf00435e3da79999084abbec18ed58c43fc40f8a8725839d8664249.png" />
+<a class="reference internal image-reference" href="_images/4c37536cb84ace445912b3712e31e8463a601232ac6206d07a27d5df6375303d.png"><img alt="_images/4c37536cb84ace445912b3712e31e8463a601232ac6206d07a27d5df6375303d.png" src="_images/4c37536cb84ace445912b3712e31e8463a601232ac6206d07a27d5df6375303d.png" style="width: 750px; height: 625px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1666,12 +1680,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/372ff9a0d9febe04687d5413a398d0e4086b14e55f926786d574fb22f6784742.png" src="_images/372ff9a0d9febe04687d5413a398d0e4086b14e55f926786d574fb22f6784742.png" />
+<a class="reference internal image-reference" href="_images/4e67ce4d7b58ff2a40267c42e31dd74d8d21b40678474e78376a36e21e268ff3.png"><img alt="_images/4e67ce4d7b58ff2a40267c42e31dd74d8d21b40678474e78376a36e21e268ff3.png" src="_images/4e67ce4d7b58ff2a40267c42e31dd74d8d21b40678474e78376a36e21e268ff3.png" style="width: 750px; height: 625px;" /></a>
 </div>
 </div>
 <p>This completes the chapter on <a class="reference internal" href="#chapter-plotting"><span class="std std-ref">Plotting in R</span></a>. In the next chapter we turn attention to using user-defined functions in R.</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1700,8 +1714,8 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="ch1Rbasics.html"
@@ -1729,6 +1743,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1790,9 +1805,10 @@ By Emil Kostadinov
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1816,8 +1832,8 @@ By Emil Kostadinov
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

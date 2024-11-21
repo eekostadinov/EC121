@@ -3,67 +3,61 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4. Loops in R &#8212; Numerical methods for EC139</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
-    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -81,28 +75,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -124,12 +113,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -144,9 +141,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -156,12 +157,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Numerical methods for EC139 - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Numerical methods for EC139 - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -194,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -203,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -332,26 +344,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -391,9 +405,9 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="loops-in-r">
+  <div class="tex2jax_ignore mathjax_ignore section" id="loops-in-r">
 <span id="chapter-loops"></span><h1><span class="section-number">4. </span>Loops in R<a class="headerlink" href="#loops-in-r" title="Permalink to this heading">#</a></h1>
 <p>This chapter is a quick introduction to loops. Following the discussion you should understand what loops are, and be able to use <em>for loop</em> in R.</p>
 <div class="admonition tip">
@@ -402,7 +416,7 @@ document.write(`
 </div>
 <p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
 <p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
-<section id="what-is-a-loop">
+<div class="section" id="what-is-a-loop">
 <h2><span class="section-number">4.1. </span>What is a loop?<a class="headerlink" href="#what-is-a-loop" title="Permalink to this heading">#</a></h2>
 <p>In programming a <strong>loop</strong> is a sequence of statements which is specified only once (in the code inside the body of the loop) but is carried out several times in a succession. Loops provide a convenient way to execute operations which can be carried out by a sequential application of the same procedure.</p>
 <p>There are several types of loops but in these notes we will only make a use of <strong>for loops</strong> (other types of loops work in a similar way). A <em>for loop</em> specifies a fixed number of <em>iterations</em> over which the code inside the body of the loop will be executed.</p>
@@ -420,7 +434,7 @@ statements (body of the loop)
 <li><p>… and so forth until <code class="docutils literal notranslate"><span class="pre">index</span></code> has taken the value of all the elements in <code class="docutils literal notranslate"><span class="pre">sequence</span></code></p></li>
 </ul>
 <p>This might appear a bit difficult to follow but will become clear after a few examples.</p>
-<section id="example-1">
+<div class="section" id="example-1">
 <h3><span class="section-number">4.1.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -522,8 +536,8 @@ statements (body of the loop)
 <li><p>At the second iteration <code class="docutils literal notranslate"><span class="pre">i</span></code> takes the value of 2. Then the program executes the statement <code class="docutils literal notranslate"><span class="pre">print(2)</span></code></p></li>
 <li><p>and so forth until the tenth and final iteration.</p></li>
 </ul>
-</section>
-<section id="example-2">
+</div>
+<div class="section" id="example-2">
 <span id="section-loops-example2"></span><h3><span class="section-number">4.1.2. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
 <p>As another example, suppose that you want to print the first 15 elements of the geometric progression</p>
 <div class="math notranslate nohighlight">
@@ -626,8 +640,8 @@ statements (body of the loop)
 <div class="cell_output docutils container">
 <div class="output text_html">0.00030517578125</div></div>
 </div>
-</section>
-<section id="example-3">
+</div>
+<div class="section" id="example-3">
 <h3><span class="section-number">4.1.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
 <p>Given the geometric progression above, suppose that we are not interested in printing all these numbers but simply in finding the value of the 125th element of the progression. This can be easily done with effectively the same code except for removing the <code class="docutils literal notranslate"><span class="pre">print()</span></code> statements and making the loop iterate 124 times:</p>
 <div class="cell docutils container">
@@ -668,7 +682,7 @@ statements (body of the loop)
 <div class="exercise admonition" id="ex-fibonacci">
 
 <p class="admonition-title"><span class="caption-number">Exercise 4.1 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p><strong>Note: This exercise is relatively difficult. Don’t worry if you can’t solve it on your own but give it a try.</strong></p>
 <p>The Fibonacci sequence is a sequence of numbers, <span class="math notranslate nohighlight">\(\{F_1, F_2, F_3,...\}\)</span>, such that</p>
 <ul class="simple">
@@ -680,7 +694,7 @@ statements (body of the loop)
 F_n = F_{n-1} + F_{n-2}
 \]</div>
 <p>Write a for loop which finds the 37th Fibonacci number, <span class="math notranslate nohighlight">\(F_{37}\)</span>.</p>
-</section>
+</div>
 </div>
 <div class="dropdown admonition hint">
 <p class="admonition-title">Hint</p>
@@ -707,7 +721,7 @@ F_n = F_{n-1} + F_{n-2}
 <div class="solution dropdown admonition" id="ch4Loops-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#ex-fibonacci"> Exercise 4.1</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The code below provides a solution to the exercise</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_1</span> <span class="o">&lt;-</span> <span class="mi">0</span>
 <span class="n">f_2</span> <span class="o">&lt;-</span> <span class="mi">1</span>
@@ -725,14 +739,14 @@ F_n = F_{n-1} + F_{n-2}
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">14930352</span>
 </pre></div>
 </div>
-</section>
 </div>
-</section>
-</section>
-<section id="some-further-examples">
+</div>
+</div>
+</div>
+<div class="section" id="some-further-examples">
 <h2><span class="section-number">4.2. </span>Some further examples<a class="headerlink" href="#some-further-examples" title="Permalink to this heading">#</a></h2>
 <p>In what follows we consider some further examples of using <em>for loops</em> to make calculations in the context of geometric series (mathematics) and present values (economics).</p>
-<section id="evaluating-geometric-series">
+<div class="section" id="evaluating-geometric-series">
 <h3><span class="section-number">4.2.1. </span>Evaluating geometric series<a class="headerlink" href="#evaluating-geometric-series" title="Permalink to this heading">#</a></h3>
 <p>In the lectures we have seen that the geometric series (sum of elements of geometric progressions) can be evaluated analytically based on the following:</p>
 <div class="admonition-geometric-series-formula admonition">
@@ -805,16 +819,16 @@ F_n = F_{n-1} + F_{n-2}
 <div class="exercise admonition" id="bond-pricing">
 
 <p class="admonition-title"><span class="caption-number">Exercise 4.2 </span></p>
-<section id="exercise-content">
+<div class="section" id="exercise-content">
 <p>Consider an annuity bond which pays £100 each year for 20 years with the first payment occurring today.</p>
 <p>The discount rate is 5%.</p>
 <p>Use a for loop to calculate the fair price of the bond.</p>
-</section>
+</div>
 </div>
 <div class="solution dropdown admonition" id="ch4Loops-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#bond-pricing"> Exercise 4.2</a></p>
-<section id="solution-content">
+<div class="section" id="solution-content">
 <p>The fair price of the bond is simply the present value of all its payments</p>
 <div class="math notranslate nohighlight">
 \[
@@ -841,12 +855,12 @@ F_n = F_{n-1} + F_{n-2}
 \[
 100 + 100\frac{1}{1.05} + 100\left(\frac{1}{1.05}\right)^2 + ... + 100\left(\frac{1}{1.05}\right)^{19} = 100\frac{1-(1/1.05)^20}{1-(1/1.05)} = 1308.5320859667
 \]</div>
-</section>
+</div>
 </div>
 <p>This completes the discussion of <a class="reference internal" href="#chapter-loops"><span class="std std-ref">Loops in R</span></a>. We next turn attention to <a class="reference internal" href="ch5R3Dplotting.html#chapter-3dplotting"><span class="std std-ref">Plotting bivariate functions in R</span></a>.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -875,8 +889,8 @@ F_n = F_{n-1} + F_{n-2}
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="ch3Functions.html"
@@ -904,6 +918,7 @@ F_n = F_{n-1} + F_{n-2}
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -942,9 +957,10 @@ By Emil Kostadinov
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -968,8 +984,8 @@ By Emil Kostadinov
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

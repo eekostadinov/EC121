@@ -3,67 +3,61 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7. Numerical integration in R &#8212; Numerical methods for EC139</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/myfile.css" />
-    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.4cbf315f70debaebd550c87a6162cf0f.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -80,28 +74,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -123,12 +112,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -143,9 +140,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="intro.html">
+  
   
   
   
@@ -155,12 +156,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Numerical methods for EC139 - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Numerical methods for EC139 - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -193,7 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -202,14 +214,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -331,26 +343,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -387,9 +401,9 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="numerical-integration-in-r">
+  <div class="tex2jax_ignore mathjax_ignore section" id="numerical-integration-in-r">
 <span id="chapter-integrals"></span><h1><span class="section-number">7. </span>Numerical integration in R<a class="headerlink" href="#numerical-integration-in-r" title="Permalink to this heading">#</a></h1>
 <p>This chapter is a quick guide to numerical integration in R. Following the discussion you should understand how numerical integration works and be able to use R to compute numerically definite integrals of univariate functions.</p>
 <div class="admonition tip">
@@ -398,30 +412,30 @@ document.write(`
 </div>
 <p>The best way to work through the chapter is to read the discussion and then reproduce all code in your own R/RStudio installation. You can do this by copying code from a notebook cell to your R script and run the code line by line.</p>
 <p>The chapter includes some exercises that allow you to test your understanding. It is recommended that you try these exercises on your own before choosing the option to reveal the solutions.</p>
-<section id="numerical-integration-primer">
+<div class="section" id="numerical-integration-primer">
 <h2><span class="section-number">7.1. </span>Numerical integration - primer<a class="headerlink" href="#numerical-integration-primer" title="Permalink to this heading">#</a></h2>
 <p>Consider a function of one variable, <span class="math notranslate nohighlight">\(f(x)\)</span>, and its definite integral from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span> denoted</p>
 <div class="math notranslate nohighlight" id="equation-def-int">
 <span class="eqno">(7.1)<a class="headerlink" href="#equation-def-int" title="Permalink to this equation">#</a></span>\[\int_{a}^{b} f(x) dx\]</div>
 <p>which corresponds geometrically to the signed area between the graph of of the function and the horizontal axis.</p>
-<section id="what-is-numerical-integration">
+<div class="section" id="what-is-numerical-integration">
 <h3><span class="section-number">7.1.1. </span>What is numerical integration?<a class="headerlink" href="#what-is-numerical-integration" title="Permalink to this heading">#</a></h3>
 <p>We have seen that the analytical approach to evaluating <a class="reference internal" href="#equation-def-int">(7.1)</a> is to find an anti-derivative of <span class="math notranslate nohighlight">\(f\)</span>, say <span class="math notranslate nohighlight">\(F\)</span>, and then evaluate the integral as</p>
 <div class="math notranslate nohighlight">
 \[\int_{a}^{b} f(x) dx = F(b) - F(a)\]</div>
 <p>By using the analytical approach we can find the exact value of  <a class="reference internal" href="#equation-def-int">(7.1)</a>.</p>
 <p>On the other hand numerical integration is the use of computational techniques for <strong>approximately</strong> evaluating <a class="reference internal" href="#equation-def-int">(7.1)</a> without needing to find anti-derivatives. Numerical integration is especially useful when we have to integrate functions who do not have closed-form anti-derivatives (or if we don’t know the anti-derivative), but also in many cases where we are satisfied by using an approximate solution.</p>
-</section>
-<section id="how-does-numerical-integration-work">
+</div>
+<div class="section" id="how-does-numerical-integration-work">
 <h3><span class="section-number">7.1.2. </span>How does numerical integration work?<a class="headerlink" href="#how-does-numerical-integration-work" title="Permalink to this heading">#</a></h3>
 <p>We have seen in the lectures, that formally the definite integral</p>
 <div class="math notranslate nohighlight">
 \[\int_{a}^{b} f(x) dx\]</div>
 <p>can be defined as the limit of the sum of the areas of rectangles fitted <em>“just under”</em> (or <em>“just over”</em>) the graph of the function between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> when the number of these rectangles converges to infinity (or equivalently when the <em>width</em> of a rectangle converges to zero).</p>
 <p>While numerical integration can be done in many different ways, in general it involves evaluating <a class="reference internal" href="#equation-def-int">(7.1)</a> by calculating the are of rectangles fitted <em>“just under”</em> (or <em>“just over”</em>) the graph of the function between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> when the number of these rectangles is specified as a “sufficiently” large (but not infinite - computers can’t deal with infinity). The idea of numerical integration therefore draws on the formal definition of integration above, but since the number of used rectangles cannot be infinite, it leads to an approximate, rather than exact solution. However, by varying the number of rectangles fitted we can control the absolute value of the numerical error.</p>
-</section>
-</section>
-<section id="numerical-integration-in-r-from-first-principles">
+</div>
+</div>
+<div class="section" id="numerical-integration-in-r-from-first-principles">
 <span id="section-integrals-byhand"></span><h2><span class="section-number">7.2. </span>Numerical integration in R from first principles<a class="headerlink" href="#numerical-integration-in-r-from-first-principles" title="Permalink to this heading">#</a></h2>
 <p>While R has in-built functions for calculating definite integrals numerically to high precision (discussed in section <a class="reference internal" href="#section-integrals-integrate"><span class="std std-ref">Numerical integration in R using integrate()</span></a>), we will start by conducting numerical integration “by hand” in the sense of only by using basic R functions and numerical methods. The purpose of this section is to illustrate the idea of numerical integration and build intuition about how the result of numerical integration functions should be understood and interpreted.</p>
 <p>We will do this for a specific function, and specific limits, but the same procedure can be applied to most basic functions with known functional form and any integration limits.</p>
@@ -471,7 +485,7 @@ One anti-derivative of <span class="math notranslate nohighlight">\(f\)</span> i
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/8eca294601b66dcac12298da7c3677ba09216948395db400ead7b9143d254267.png" src="_images/8eca294601b66dcac12298da7c3677ba09216948395db400ead7b9143d254267.png" />
+<a class="reference internal image-reference" href="_images/b49190e01bf0fa90ab5ed2db5acafa4916dcd21831b9a51516edd0e64faf53f5.png"><img alt="_images/b49190e01bf0fa90ab5ed2db5acafa4916dcd21831b9a51516edd0e64faf53f5.png" src="_images/b49190e01bf0fa90ab5ed2db5acafa4916dcd21831b9a51516edd0e64faf53f5.png" style="width: 600px; height: 480px;" /></a>
 </div>
 </div>
 <p>Now let’s start computing this definite integral numerically.</p>
@@ -507,7 +521,7 @@ One anti-derivative of <span class="math notranslate nohighlight">\(f\)</span> i
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/6a25fca0c6ab724fc30c2ed88db65a2e28d19d5b3bbc9ee2d7110f9b85a26701.png" src="_images/6a25fca0c6ab724fc30c2ed88db65a2e28d19d5b3bbc9ee2d7110f9b85a26701.png" />
+<a class="reference internal image-reference" href="_images/ac292359759aeb7da1e6d180014e51ef48d87c6b6c56e79d025d474e237603c4.png"><img alt="_images/ac292359759aeb7da1e6d180014e51ef48d87c6b6c56e79d025d474e237603c4.png" src="_images/ac292359759aeb7da1e6d180014e51ef48d87c6b6c56e79d025d474e237603c4.png" style="width: 600px; height: 480px;" /></a>
 </div>
 </div>
 <p>You may find that in the case of two rectangles you may find it is easier to do the below calculation by hand rather than by using a computer. However, the beauty of numerical methods is that once you do the code carefully, you can easily customize it to work in situations where doing it by hand will be much less efficient. In what follows we will write the code for computing the area of the two rectangles above which will be easy to customize to use any number of rectangles.</p>
@@ -691,7 +705,7 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/6bd551ac51a3021f608b79e24717c90274b5b316a7a1a2082d9198cdc1d23170.png" src="_images/6bd551ac51a3021f608b79e24717c90274b5b316a7a1a2082d9198cdc1d23170.png" />
+<a class="reference internal image-reference" href="_images/7543d4bd467f8a8b1df5673551b3df0d618c5e6ee779478d8e19dcd73ddc86c7.png"><img alt="_images/7543d4bd467f8a8b1df5673551b3df0d618c5e6ee779478d8e19dcd73ddc86c7.png" src="_images/7543d4bd467f8a8b1df5673551b3df0d618c5e6ee779478d8e19dcd73ddc86c7.png" style="width: 600px; height: 480px;" /></a>
 </div>
 </div>
 <p>Now in order to calculate this area we can use exactly the same code as bofore but we need to set the number of rectangles to 5.</p>
@@ -750,7 +764,7 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/9e02106b66132e3f335556d442e522a93a6437d24a00547b75c8ff77d66ccf84.png" src="_images/9e02106b66132e3f335556d442e522a93a6437d24a00547b75c8ff77d66ccf84.png" />
+<a class="reference internal image-reference" href="_images/34e0c04b8e9f5e6ec81cf5130e53b8272ca31b896267f53f135069c8af2df50c.png"><img alt="_images/34e0c04b8e9f5e6ec81cf5130e53b8272ca31b896267f53f135069c8af2df50c.png" src="_images/34e0c04b8e9f5e6ec81cf5130e53b8272ca31b896267f53f135069c8af2df50c.png" style="width: 600px; height: 480px;" /></a>
 </div>
 </div>
 <p>Use exactly the same code but set <code class="docutils literal notranslate"><span class="pre">number_of_rectangles</span> <span class="pre">&lt;-</span> <span class="pre">100</span></code></p>
@@ -808,7 +822,7 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/fc5e4db76aa2492c5739db3ccebef6050b14c37d99b40b96946ba21e941f7315.png" src="_images/fc5e4db76aa2492c5739db3ccebef6050b14c37d99b40b96946ba21e941f7315.png" />
+<a class="reference internal image-reference" href="_images/7e386654b092f1340b94eafff0d62548310b0964c840be4dc5e90d4bfbc2cf6a.png"><img alt="_images/7e386654b092f1340b94eafff0d62548310b0964c840be4dc5e90d4bfbc2cf6a.png" src="_images/7e386654b092f1340b94eafff0d62548310b0964c840be4dc5e90d4bfbc2cf6a.png" style="width: 600px; height: 480px;" /></a>
 </div>
 </div>
 <p>Set <code class="docutils literal notranslate"><span class="pre">number_of_rectangles</span> <span class="pre">&lt;-</span> <span class="pre">10000</span></code></p>
@@ -835,8 +849,8 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
 </div>
 <p>And the numerical error is now only about 0.006.</p>
 <p>This is the idea of numerical integration. There are different methods used to improve the accuracy beyond using more rectangles (e.g. using trapezoids rather than rectangles) but in all cases numerical integration works by approximating area under a curve by sums of areas of rectangles (or trapezoids, etc) and uses further methods to control the approximation error.</p>
-</section>
-<section id="numerical-integration-in-r-using-integrate">
+</div>
+<div class="section" id="numerical-integration-in-r-using-integrate">
 <span id="section-integrals-integrate"></span><h2><span class="section-number">7.3. </span>Numerical integration in R using <code class="docutils literal notranslate"><span class="pre">integrate()</span></code><a class="headerlink" href="#numerical-integration-in-r-using-integrate" title="Permalink to this heading">#</a></h2>
 <p>I hope that you found the discussion in <a class="reference internal" href="#section-integrals-byhand"><span class="std std-ref">Numerical integration in R from first principles</span></a> interesting and useful and now understand what numerical integration means and how it works, as well as you have an intuition about why it works and why is an approximate method.</p>
 <p>However, in reality we rarely implement numerical integration from first principles and can instead use in-built functions that implement numerical integration efficiently and with high accuracy.</p>
@@ -876,8 +890,8 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
 <p>Using the <code class="docutils literal notranslate"><span class="pre">integrate()</span></code> function you are able to quickly evaluate definite integrals for any univariate function that you can define through an expression.</p>
 <p>This completes the discussion of <a class="reference internal" href="#chapter-integrals"><span class="std std-ref">Numerical integration in R</span></a> as well as this set of notes on numerical methods. I hope that you have enjoyed it.</p>
 <p>Thank you for reading and all the best!</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -906,8 +920,8 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="ch6Matrices.html"
@@ -926,6 +940,7 @@ f(0)\Delta x + f(2.5)\Delta x = (f(0)+f(2.5)) \Delta x
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -961,9 +976,10 @@ By Emil Kostadinov
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -987,8 +1003,8 @@ By Emil Kostadinov
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
